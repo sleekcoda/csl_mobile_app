@@ -1,0 +1,72 @@
+<!--
+  Generated template for the PortfoliosPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Portfolios</ion-title>
+  </ion-toolbar>
+</ion-header>
+<!--
+  {
+    "": "100496650001",
+    "": "049665",
+    "": "Adelowo Tolulope",
+    "productDescription": "Customers Regular Portfolios",
+    "": "0079917429",
+    "marketCustometId": "049665",
+    "": "000496650001"
+  }
+-->
+
+<ion-content padding>
+  <ion-card
+    *ngFor="let portfolio of portfolios; let i = index;"
+    (click)="getPortfolio(portfolio)"
+  >
+    <ion-card-content>
+      <ion-row>
+        <ion-col size="2"
+          ><ion-item class="no-padding">
+            <ion-icon
+              color="secondary"
+              name="ios-briefcase-outline"
+            ></ion-icon> </ion-item
+        ></ion-col>
+        <ion-col size="8"
+          ><ion-item> {{portfolio[0].portfolioDescription}}</ion-item></ion-col
+        >
+        <ion-col size="2"
+          ><ion-item class="no-padding">
+            <ion-icon name="ios-arrow-forward"></ion-icon> </ion-item
+        ></ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+<ion-footer color="primary">
+  <ion-row>
+    <ion-col size="6">
+      <ion-button
+        color="success"
+       
+        class="csl-button"
+        (click)="buyStocks()"
+      >
+        <ion-icon name="add"></ion-icon>&nbsp; Buy Stocks
+      </ion-button>
+    </ion-col>
+    <ion-col size="6" text-right>
+      <ion-button
+        color="danger"
+       
+        class="csl-button"
+        (click)="sellStocks()"
+      >
+        <ion-icon name="remove"></ion-icon>&nbsp; Sell Stocks
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

@@ -1,0 +1,46 @@
+<!--
+  Generated template for the PayAtBankPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pay at Bank</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="dashboard-grid">
+    <div class="dashboard-row">
+      <p padding>
+        You can pay into any of the accounts below by putting your customer ID
+        as reference
+      </p>
+
+      <div
+        padding-left
+        class="primary-color border-bottom"
+        *ngFor="let portfolio of portfolios"
+        style="margin:5px 0;"
+      >
+        <div>{{portfolio.customerId}}</div>
+        <div><small>{{portfolio.portfolioDescription}}</small></div>
+      </div>
+    </div>
+  </div>
+
+  <ion-grid class="dashboard-grid">
+    <ion-row class="dashboard-row" padding>
+      <ion-col size="1" 2><h5 class="primary-color">FCMB</h5></ion-col>
+      <ion-col size="6"
+        ><p>Account number</p>
+        <h5 class="primary-color">0000098011</h5></ion-col
+      >
+      <ion-col size="6"
+        ><p>Account name</p>
+        <h5 class="primary-color">CSL Stockbroker</h5></ion-col
+      >
+    </ion-row>
+  </ion-grid>
+</ion-content>

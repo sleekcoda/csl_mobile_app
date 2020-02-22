@@ -1,0 +1,92 @@
+<!--
+  Generated template for the AddWatchlistPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add To Watchlist</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (onSubmit)="addToWishlist()">
+    <div><p class="success-color" padding-left>Stock</p></div>
+    <ion-card>
+      <ion-card-content>
+        <select
+          [(ngModel)]="addWatchlist.symbol"
+          class="csl-form"
+          name="stock"
+          (change)="changeSymbol(selectStock.value)"
+          #selectStock
+        >
+          <option *ngIf="preSelectedSymbol" [value]="preSelectedSymbol"
+            >{{preSelectedSymbol}}</option
+          >
+          <option *ngFor="let stock of availableStocks" [value]="stock.symbol">
+            {{stock.symbol}} ({{stock.stockName}})</option
+          >
+        </select>
+      </ion-card-content>
+      <p padding-left float-left class="success-color">Current Price</p>
+      <p float-right padding-right>({{currentPrice}})</p>
+    </ion-card>
+
+    <div><p class="primary-color" padding-left>Variance (%)</p></div>
+    <ion-card>
+      <ion-card-content>
+        <input
+          type="number"
+          placeholder="Ex 7.6 "
+          name="margin"
+          [(ngModel)]="addWatchlist.margin"
+          class="csl-form"
+          #margin
+        />
+      </ion-card-content>
+    </ion-card>
+
+    <div><p class="primary-color" padding-left>Target Price</p></div>
+    <ion-card>
+      <ion-card-content>
+        <input
+          type="number"
+          placeholder="Ex 10.6 "
+          name="variance"
+          [(ngModel)]="addWatchlist.targetPrice"
+          class="csl-form"
+          #target
+        />
+      </ion-card-content>
+    </ion-card>
+
+    <div><p class="primary-color" padding-left>Expiry Date</p></div>
+    <ion-card>
+      <ion-card-content>
+        <ion-item>
+          <ion-label></ion-label>
+          <ion-datetime
+            (ngModelChange)="validateDate()"
+            [max]="year"
+            placeholder="07 Oct, 2000"
+            displayFormat="DD MMM, YYYY HH:mm"
+            pickerFormat="DD MMM , YYYY HH:mm"
+            name="expiry_date"
+            [(ngModel)]="addWatchlist.expiry"
+            class="csl-form"
+          ></ion-datetime>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    <ion-button
+      [disabled]="( dateValidated == false || target.value <= '0' || margin.value <= '0' || selectStock.value == '' ) ? true : false "
+      (click)="addToWishlist()"
+      expand="block"
+      class="csl-button"
+      color="secondary"
+      >&nbsp;Add To Watchlist</ion-button
+    >
+  </form>
+</ion-content>

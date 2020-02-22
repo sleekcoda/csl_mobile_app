@@ -1,0 +1,209 @@
+<!--
+  Generated template for the EnterCardDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Enter card details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div [innerHTML]="secure_link"></div>
+  <form [formGroup]="cardDetails" (ngSubmit)="ravePay()">
+    <ion-row>
+      <ion-col size="6">
+        <label padding-left class="secondary-color" for="firstname"
+          >First name</label
+        >
+        <ion-card>
+          <ion-card-content>
+            <input
+              id="firstname"
+              class="csl-form"
+              formControlName="firstname"
+              placeholder="Michael"
+            />
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <label padding-left class="secondary-color" for="lastname"
+          >Last name
+        </label>
+        <ion-card>
+          <ion-card-content>
+            <input
+              id="lastname"
+              class="csl-form"
+              formControlName="lastname"
+              placeholder="Jackson"
+            />
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <label padding-left class="secondary-color" for="amount"
+      >Enter Amount (Naira)</label
+    >
+    <ion-card>
+      <ion-card-content>
+        <input
+          id="amount"
+          class="csl-form"
+          formControlName="amount"
+          placeholder="ex 1,000"
+          type="number"
+        />
+        <!-- <div [hidden]="amount.invalid" class="success-color">Total deduction ({{(amount.value * 0.035) + (amount.value)| currency : 'NGN':'symbol'}})</div> -->
+      </ion-card-content>
+    </ion-card>
+    <!-- Phone number and email -->
+    <ion-row>
+      <!-- Email address -->
+      <ion-col size="6">
+        <label padding-left class="secondary-color" for="email">Email</label>
+        <ion-card>
+          <ion-card-content>
+            <input
+              class="csl-form"
+              type="email"
+              formControlName="email"
+              placeholder="user@mail.com"
+            />
+            <div
+              class="danger-color"
+              *ngIf="email.invalid && email.dirty && email.touched"
+            >
+              Invalid email address
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <!-- Phone -->
+      <ion-col size="6">
+        <label padding-left class="secondary-color" for="phone">Phone</label>
+        <ion-card>
+          <ion-card-content>
+            <input
+              class="csl-form"
+              minlength="11"
+              formControlName="phonenumber"
+              placeholder="08030000001"
+              type="phone"
+            />
+            <div
+              class="danger-color"
+              *ngIf="phonenumber.invalid && phonenumber.dirty && phonenumber.touched"
+            >
+              Invalid phone number
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <!--    -->
+
+    <label padding-left class="secondary-color" for="cardno">Card Number</label>
+    <ion-card>
+      <ion-card-content>
+        <input
+          type="text"
+          class="csl-form"
+          formControlName="cardno"
+          placeholder="0000 1111 5555 4747"
+        />
+        <div
+          class="danger-color"
+          *ngIf="cardno.invalid && cardno.dirty && cardno.touched"
+        >
+          Invalid card number
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-row>
+      <!-- CVV number -->
+      <ion-col size="4">
+        <label padding-left class="secondary-color" for="cvv">CVV</label>
+        <ion-card>
+          <ion-card-content style="padding: 11px 16px;">
+            <input
+              class="csl-form"
+              formControlName="cvv"
+              placeholder="123"
+              minlength="3"
+            />
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="8">
+        <!-- Card Expiry Date MM/YYYY -->
+        <label padding-left class="secondary-color" for="email"
+          >Expiry Date</label
+        >
+        <ion-card>
+          <ion-card-content class="no-padding">
+            <ion-row>
+              <ion-col size="6" class="no-padding">
+                <ion-item>
+                  <input
+                    type="text"
+                    minlength="2"
+                    class="csl-form"
+                    formControlName="expirymonth"
+                    placeholder="01"
+                  />
+                </ion-item>
+              </ion-col>
+              <ion-col size="6" class="no-padding"
+                ><ion-item>
+                  <ion-label></ion-label>
+                  <input
+                    type="text"
+                    minlength="2"
+                    class="csl-form"
+                    formControlName="expiryyear"
+                    placeholder="19"
+                  /> </ion-item
+              ></ion-col>
+            </ion-row>
+            <div
+              class="danger-color"
+              *ngIf="expiryyear.invalid && expiryyear.dirty && expiryyear.touched"
+            >
+              Invalid year
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <!-- Pin code-->
+    <ion-row>
+      <ion-card>
+        <ion-card-content>
+          <input
+            type="password"
+            class="csl-form"
+            formControlName="pin"
+            placeholder="Enter PIN"
+            required
+          />
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+    <ion-button
+      [disabled]="cardDetails.invalid"
+      class="csl-button"
+      type="submit"
+      (submit)="ravePay()"
+      color="secondary"
+      expand="block"
+    >
+      Proceed
+    </ion-button>
+  </form>
+</ion-content>

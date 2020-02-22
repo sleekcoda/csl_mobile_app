@@ -1,0 +1,94 @@
+<!--
+  Generated template for the PriceListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+   {
+            "symbol": "CONFDINS",
+            "stockName": "CONFDINS",
+            "openingPrice": 0.61,
+            "currentPrice": 0.61,
+            "changeInPrice": 0,
+            "percentageChange": 0,
+            "high": 0,
+            "low": 0,
+            "open": 0,
+            "prevClose": 0,
+            "priceDate": 0,
+            "volume": 0
+        }
+-->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Price List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="loading-gif" [hidden]="priceList"></div>
+
+  <ion-grid>
+    <ion-card *ngFor="let stock of priceList" (click)="viewStock(stock)">
+      <ion-card-content>
+        <ion-row>
+          <ion-col size="6">
+            <h5>{{stock.symbol}}</h5>
+          </ion-col>
+          <ion-col size="6" text-right
+            >{{stock.currentPrice}}
+            <ion-icon name="ios-arrow-forward"></ion-icon>
+          </ion-col>
+          <ion-col size="9"><small>{{stock.stockName}}</small></ion-col>
+          <ion-col
+            size="3"
+            [class]="(stock.currentPrice < stock.openingPrice) ? 'danger-color' : 'success-color'"
+            text-right
+            ><small
+              >{{ (stock.currentPrice - stock.openingPrice) | number:'1.0-2' }}
+              <span
+                *ngIf="stock.currentPrice >= stock.openingPrice"
+                class="success-color"
+              >
+                <ion-icon name="md-arrow-up" class="success-color"></ion-icon>{{
+                ((stock.currentPrice - stock.openingPrice)/stock.currentPrice) *
+                100 | number:'1.0-2' }} %
+              </span>
+              <span
+                *ngIf="stock.currentPrice < stock.openingPrice"
+                class="danger-color"
+              >
+                <ion-icon name="md-arrow-down" class="danger-color"></ion-icon
+                >{{ ((stock.currentPrice -
+                stock.openingPrice)/stock.currentPrice) * 100 | number:'1.0-2'
+                }} %
+              </span></small
+            >
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ion-grid>
+</ion-content>
+<ion-footer color="light">
+  <ul class="stocksMarquee marquee">
+    <li *ngFor="let stock of priceList">
+      {{stock.symbol}}
+      <span
+        *ngIf="stock.currentPrice >= stock.openingPrice"
+        class="success-color"
+      >
+        <ion-icon name="md-arrow-up" color="success"></ion-icon>{{
+        ((stock.currentPrice - stock.openingPrice)/stock.currentPrice) * 100 |
+        number:'1.0-2' }} %
+      </span>
+      <span
+        *ngIf="stock.currentPrice < stock.openingPrice"
+        class="danger-color"
+      >
+        <ion-icon name="md-arrow-down" color="danger"></ion-icon>{{
+        ((stock.currentPrice - stock.openingPrice)/stock.currentPrice) * 100 |
+        number:'1.0-2' }} %
+      </span>
+    </li>
+  </ul>
+</ion-footer>

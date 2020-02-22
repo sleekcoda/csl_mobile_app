@@ -1,0 +1,95 @@
+<!--
+  Generated template for the ConfirmBuyOrderPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+   {
+      "cscsno": "0079917429",
+      "market_account_Id": "0079917429",
+      "symbol": "UBA",
+      "quantity": 2,
+      "ordertype": "00",
+      "pricetype": "00",
+      "price": 10.55,
+      "expires": "22-DEC-2018",
+      "reference": "test_buy"
+    }
+-->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Confirm {{actions}} order</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-content>
+      <table>
+        <tbody>
+          <tr>
+            <th>Portfolio</th>
+            <td>{{portfolioDesc}}</td>
+          </tr>
+
+          <tr>
+            <th>Cscs Number</th>
+            <td>{{order.cscsno}}</td>
+          </tr>
+
+          <tr>
+            <th>Stock</th>
+            <td>{{order.symbol}}</td>
+          </tr>
+
+          <tr>
+            <th>Quantity</th>
+            <td>{{order.quantity}}</td>
+          </tr>
+
+          <tr>
+            <th>Price type</th>
+            <td *ngIf="order.pricetype == '00'">Market Price</td>
+            <td *ngIf="order.pricetype == '01'">Limit Price</td>
+          </tr>
+
+          <tr>
+            <th *ngIf="order.pricetype == '00'">Market Price</th>
+            <th *ngIf="order.pricetype == '01'">Limit Price</th>
+            <td>{{order.price | currency : "NGN" : 2}}</td>
+          </tr>
+
+          <tr>
+            <th>Estimated price</th>
+            <td>{{order.price * order.quantity | currency : "NGN" : 2}}</td>
+          </tr>
+
+          <tr>
+            <th>Order Type</th>
+            <td *ngIf="order.ordertype == '00'">Day</td>
+            <td *ngIf="order.ordertype == '01'">Good Till Date</td>
+          </tr>
+
+          <tr>
+            <th>Expiry</th>
+            <td>{{order.expires | date: 'dd MMM, yyyy'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button
+    *ngIf="actions == 'buy'"
+    expand="block"
+    color="success"
+    (click)="buyStock()"
+    >Confirm Buy</ion-button
+  >
+  <ion-button
+    *ngIf="actions == 'sell'"
+    expand="block"
+    color="success"
+    (click)="sellStock()"
+    >Confirm Sell</ion-button
+  >
+</ion-content>

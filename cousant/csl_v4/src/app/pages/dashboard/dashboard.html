@@ -1,0 +1,143 @@
+<!--
+  Generated template for the DashboardPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar color="transparent">
+    <ion-menu-toggle>
+<ion-button>
+      <ion-icon name="menu"></ion-icon>
+    </ion-button>
+</ion-menu-toggle>
+    <ion-title>Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="body" padding>
+  <h4 class="top" padding [hidden]="!portfolioDescription">
+    Welcome {{portfolioDescription}}
+  </h4>
+  <div class="loading-gif" [hidden]="portfolioDescription" margin-top></div>
+  <h5
+    margin-left
+    margin-right
+    class="primary-color border-bottom"
+    [hidden]="!portfolioDescription"
+  >
+    Portfolio(s)
+  </h5>
+
+  <ion-card
+    (click)="openPortfolio()"
+    *ngFor="let investments of porfolioInvestment; let i = index"
+    class="dashboard-row"
+    padding
+    margin-top
+    style="margin-top:1.2em;"
+  >
+    <ion-card-content>
+      <ion-row class="border-bottom">
+        <ion-col size="1" 1
+          ><h3 class="primary-color">
+            <strong
+              >{{portfolioObject[customerIdList[i]][0].portfolioDescription}}
+              <br />
+              (<small>{{portfolioObject[customerIdList[i]][0].productDescription}}</small>)
+            </strong>
+          </h3>
+        </ion-col>
+        <ion-col size="1"
+          ><h5 class="primary-color" text-right>
+            <ion-icon name="ios-arrow-forward"></ion-icon></h5
+        ></ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6"><strong>Current value</strong></ion-col>
+        <ion-col size="6" text-right> <strong>Gain/ Loss</strong></ion-col>
+        <ion-col size="8">
+          <h3>
+            {{sumInvestments(investments) | currency : "NGN" : 2 }}
+          </h3></ion-col
+        >
+        <ion-col size="4">
+          <h4 class="success-color" text-right>{{0 | percent}}</h4></ion-col
+        >
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  <h5
+    class="primary-color border-bottom"
+    margin-right
+    margin-left
+    [hidden]="!portfolioDescription"
+  >
+    Cash Account(s)
+  </h5>
+  <ion-card
+    (click)="openCashAccount(cashAccountCustomerId[i], account)"
+    *ngFor="let account of cashAccountBalance; let i = index;"
+    padding
+    margin-top
+  >
+    <ion-card-content>
+      <ion-row class="border-bottom primary-color">
+        <ion-col size="1" 0
+          ><h6 class="primary-color">
+            {{account[0].accountName}} <br />
+            (Cash Account)
+          </h6></ion-col
+        >
+        <ion-col size="1">
+          <h6 class="to-right primary-color">
+            <ion-icon name="ios-arrow-forward" class="primary-color"></ion-icon>
+          </h6>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6"><strong>Current balance</strong></ion-col>
+        <ion-col size="6" text-right
+          ><strong>Available balance</strong></ion-col
+        >
+
+        <ion-col size="6"
+          ><h4>
+            {{sumAccountBalance(account, 'available') | currency : "NGN" : 2 }}
+          </h4></ion-col
+        >
+        <ion-col size="6"
+          ><h4 class="to-right success-color">
+            {{sumAccountBalance(account, 'current') | currency : "NGN" : 2 }}
+          </h4></ion-col
+        >
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+<ion-footer color="primary">
+  <ion-row>
+    <ion-col size="6">
+      <ion-button
+        color="success"
+       
+        class="csl-button"
+        (click)="buyStocks()"
+      >
+        <ion-icon name="add"></ion-icon>&nbsp; Buy Stocks
+      </ion-button>
+    </ion-col>
+    <ion-col size="6" text-right>
+      <ion-button
+        color="danger"
+       
+        class="csl-button"
+        (click)="sellStocks()"
+      >
+        <ion-icon name="remove"></ion-icon>&nbsp; Sell Stocks
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

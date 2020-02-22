@@ -1,0 +1,7 @@
+{
+  "name": "csl_v4",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,25 @@
+page-view-stock {
+    table{
+        width:100%;
+        background-color: #fff;
+    }
+    table td {
+        padding: 10px;
+    }
+    .sell tbody, .sell thead{
+        background: rgb(253, 225, 225);
+    }
+    .buy tbody,.buy thead{
+        background: rgb(198, 255, 216);
+    }
+    .buy p{color:map-get($colors, success)}
+    .sell p{color:map-get($colors, danger)}
+    .sell tr:nth-of-type(odd){
+        color:#fff;
+        background-color: map-get($colors, danger);
+    }
+    .buy tr:nth-of-type(odd){
+        color:#fff;
+        background-color: map-get($colors, success);
+    }
+}

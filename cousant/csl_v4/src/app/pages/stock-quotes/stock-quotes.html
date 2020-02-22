@@ -1,0 +1,57 @@
+<!--
+  Generated template for the StockQuotesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar>
+    <ion-menu-toggle>
+<ion-button>
+      <ion-icon name="menu"></ion-icon>
+    </ion-button>
+</ion-menu-toggle>
+    <ion-title>Stock Quotes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item (click)="openMarketList()">
+      <ion-row>
+        <ion-col size="2"
+          ><ion-icon name="md-arrow-up" class="success-color"></ion-icon>
+          <ion-icon class="danger-color" name="md-arrow-down"></ion-icon>
+        </ion-col>
+        <ion-col size="8">Price List</ion-col>
+        <ion-col size="2" class="space-left border-left primary-color"
+          ><ion-icon name="ios-arrow-forward"></ion-icon
+        ></ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-item (click)="openTopGainers()">
+      <ion-row>
+        <ion-col size="2"
+          ><ion-icon name="md-arrow-up" class="success-color"></ion-icon>
+        </ion-col>
+        <ion-col size="8">Top Gainers</ion-col>
+        <ion-col size="2" class="space-left border-left primary-color "
+          ><ion-icon name="ios-arrow-forward"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-item (click)="openTopLosers()">
+      <ion-row>
+        <ion-col size="2"
+          ><ion-icon class="danger-color" name="md-arrow-down"></ion-icon
+        ></ion-col>
+        <ion-col size="8">Top Losers</ion-col>
+        <ion-col size="2" class="space-left border-left primary-color"
+          ><ion-icon name="ios-arrow-forward"></ion-icon
+        ></ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>
