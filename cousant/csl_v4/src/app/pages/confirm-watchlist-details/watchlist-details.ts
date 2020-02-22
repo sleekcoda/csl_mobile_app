@@ -16,7 +16,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 @Component({
   selector: "page-watchlist-details",
   templateUrl: "./watchlist-details.html",
-  styleUrls: [""]
+  styleUrls: ["./watchlist-details.scss"]
 })
 export class WatchlistDetailsPage {
   currentPrice: any | null;

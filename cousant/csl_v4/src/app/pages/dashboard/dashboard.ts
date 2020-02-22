@@ -1,11 +1,8 @@
-import { SellAndBuyStocksPage } from "./../sell-and-buy-stocks/sell-and-buy-stocks";
-import { PortfoliosPage } from "./../portfolios/portfolios";
 import { DashboardProvider } from "./../../services/dashboard/dashboard";
 
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { LoadingController } from "@ionic/angular";
 import { NoticeHandlerProvider } from "../../services/notice-handler/notice-handler";
-import { MyCashAccountsPage } from "../my-cash-accounts/my-cash-accounts";
 import {
   RequestResponse,
   RequestResponseError
@@ -22,7 +19,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 @Component({
   selector: "page-dashboard",
   templateUrl: "./dashboard.html",
-  styleUrls: [""]
+  styleUrls: ["./dashboard.scss"]
 })
 export class DashboardPage implements OnInit {
   public customerId: string;
@@ -32,7 +29,7 @@ export class DashboardPage implements OnInit {
   public portfolioInvestments: number | null;
   public spinner: any;
 
-  public portfolioObject: Object;
+  public portfolioObject: any;
   public porfolioInvestment: any | null;
   public customerIdList: any | null;
   public cashAccountCustomerId: any | null;
@@ -117,7 +114,7 @@ export class DashboardPage implements OnInit {
         });
       })
       .catch();
-  } //app:userAuthenticateToken
+  } // app:userAuthenticateToken
   async getPorfolioInvestmentStatement(customerId) {
     await this.portfolioObject[customerId].forEach(portfolio => {
       this._dashboardService
@@ -149,8 +146,8 @@ export class DashboardPage implements OnInit {
         resp => {
           const response = resp as RequestResponse;
           if (response.status == "success") {
-            this.cashAccountBalance = Object["values"](response.data);
-            this.cashAccountCustomerId = Object["entries"](response.data);
+            this.cashAccountBalance = Object.values(response.data);
+            this.cashAccountCustomerId = Object.entries(response.data);
             localStorage.setItem("account_statement", response.data);
           } else {
             this._alert.notifyError(JSON.stringify(response.message));

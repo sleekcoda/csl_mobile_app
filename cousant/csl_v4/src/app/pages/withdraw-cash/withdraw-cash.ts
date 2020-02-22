@@ -1,11 +1,9 @@
-import { LoginPage } from "./../login/login";
-import { ConfirmationPage } from "./../confirmation/confirmation";
 import { NoticeHandlerProvider } from "./../../services/notice-handler/notice-handler";
 import { DashboardProvider } from "./../../services/dashboard/dashboard";
 import { Component, OnInit } from "@angular/core";
 import { LoadingController } from "@ionic/angular";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router } from "@angular/router";
 
 /**
  * Generated class for the WithdrawCashPage page.
@@ -17,7 +15,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 @Component({
   selector: "page-withdraw-cash",
   templateUrl: "./withdraw-cash.html",
-  styleUrls: [""]
+  styleUrls: ["./withdraw-cash.scss"]
 })
 export class WithdrawCashPage implements OnInit {
   banks: any;
@@ -39,11 +37,11 @@ export class WithdrawCashPage implements OnInit {
       this.banks = localStorage.getItem("banks");
     }
 
-    const portfolios = Object["values"](localStorage.getItem("portfolio"));
+    const portfolios = Object.values(localStorage.getItem("portfolio"));
     portfolios.forEach(portfolioarr => {
-      portfolioarr.map(e => {
-        this.portfolioArray.push(e);
-      }); // #map function
+      // portfolioarr.map(e => {
+      //   this.portfolioArray.push(e);
+      // }); // #map function
     }); // #foreach
     // console.log(this.portfolioArray);
   }
@@ -103,12 +101,12 @@ export class WithdrawCashPage implements OnInit {
   }
 
   get maxYear() {
-    let today = new Date();
+    const today = new Date();
 
     return new Date(today.getFullYear() + 5, today.getMonth(), today.getDate());
   }
   get minYear() {
-    let today = new Date();
+    const today = new Date();
     return new Date(today.getFullYear(), today.getMonth(), today.getDate());
   }
 
@@ -117,7 +115,7 @@ export class WithdrawCashPage implements OnInit {
       message: "Initializing withdraw..."
     });
     await loading.present();
-    let path =
+    const path =
       this.withdrawForm.get("bankId").value == "214"
         ? `cashaccount/withdrawal/${this.withdrawalPortfolio[0].customerId}/request`
         : `cashaccount/withdrawal/${this.withdrawalPortfolio[0].customerId}/thirdparty/request`;
@@ -127,8 +125,10 @@ export class WithdrawCashPage implements OnInit {
       .then(
         response => {
           if (response.status == "success") {
-            this.route.navigateByUrl(ConfirmationPage, {
-              action: "withdrawal"
+            this.route.navigate(["ConfirmationPage"], {
+              queryParams: {
+                action: "withdrawal"
+              }
             });
           } else {
             this._alert.notifyError(JSON.stringify(response.message));
@@ -154,7 +154,7 @@ export class WithdrawCashPage implements OnInit {
         response => {
           if (response.status == "success") {
             this.banks = response.data;
-            this._storage.set("banks", response.data);
+            localStorage.setItem("banks", response.data);
           } else {
             this._alert.notifyError(JSON.stringify(response.message));
           }
@@ -177,7 +177,7 @@ export class WithdrawCashPage implements OnInit {
         response => {
           if (response.status == "success") {
             this.availableBalance = response.data.availableBalance;
-            this.amount.setAsyncValidators;
+            // this.amount.setAsyncValidators;
           } else {
             this.availableBalance = 0;
             this._alert.notifyError("Failed to get your account balance");

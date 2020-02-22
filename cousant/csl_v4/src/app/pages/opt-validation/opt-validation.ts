@@ -1,4 +1,3 @@
-import { SetPasswordPage } from "./../set-password/set-password";
 import {
   RequestResponse,
   RequestResponseError
@@ -19,7 +18,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 @Component({
   selector: "page-opt-validation",
   templateUrl: "./opt-validation.html",
-  styleUrls: [""]
+  styleUrls: ["./opt-validation.scss"]
 })
 export class OptValidationPage {
   otpCode: string;

@@ -1,6 +1,3 @@
-import { ViewWatchlistDetailsPage } from "./../view-watchlist-details/view-watchlist-details";
-import { LoginPage } from "./../login/login";
-import { AddWatchlistPage } from "./../add-watchlist/add-watchlist";
 import { NoticeHandlerProvider } from "./../../services/notice-handler/notice-handler";
 import { DashboardProvider } from "./../../services/dashboard/dashboard";
 import { Component, OnInit, OnDestroy } from "@angular/core";
@@ -17,7 +14,7 @@ import { Router } from "@angular/router";
 @Component({
   selector: "page-my-watchlist",
   templateUrl: "./my-watchlist.html",
-  styleUrls: [""]
+  styleUrls: ["./my-watchlist.scss"]
 })
 export class MyWatchlistPage implements OnInit, OnDestroy {
   public watchlists: any | null;

@@ -14,7 +14,7 @@ import { Router } from "@angular/router";
 @Component({
   selector: "page-news-head-lines",
   templateUrl: "./news-head-lines.html",
-  styleUrls: [""]
+  styleUrls: ["./news-head-lines.scss"]
 })
 export class NewsHeadLinesPage {
   news: any | null;

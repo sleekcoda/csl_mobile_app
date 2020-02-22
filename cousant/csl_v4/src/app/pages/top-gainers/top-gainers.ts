@@ -1,9 +1,8 @@
-import { LoginPage } from "./../login/login";
 import { ViewStockPage } from "./../view-stock/view-stock";
 import { DashboardProvider } from "./../../services/dashboard/dashboard";
 import { Component, OnInit } from "@angular/core";
-import { NavController } from "@ionic/angular";
 import { NoticeHandlerProvider } from "../../services/notice-handler/notice-handler";
+import { Router } from "@angular/router";
 
 /**
  * Generated class for the TopGainersPage page.
@@ -15,7 +14,7 @@ import { NoticeHandlerProvider } from "../../services/notice-handler/notice-hand
 @Component({
   selector: "page-top-gainers",
   templateUrl: "./top-gainers.html",
-  styleUrls: [""]
+  styleUrls: ["./top-gainers.scss"]
 })
 export class TopGainersPage implements OnInit {
   topGainers: any;
@@ -42,7 +41,7 @@ export class TopGainersPage implements OnInit {
       .then(
         response => {
           if (response.status == "success") {
-            let resp = response.data;
+            const resp = response.data;
             this.topGainers = resp.sort((a, b) =>
               a && b && a.currentPrice < b.currentPrice
                 ? 1
@@ -77,7 +76,7 @@ export class TopGainersPage implements OnInit {
       });
   }
   viewStock(symbol: any) {
-    this.route.navigateByUrl(ViewStockPage, symbol);
+    this.route.navigate(["ViewStockPage"], { queryParams: symbol });
   }
   isEven(n) {
     return n % 2 == 0;

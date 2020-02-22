@@ -1,21 +1,20 @@
-page-confirm-buy-order, page-portfolio-investment-details {
-    table th {
-        text-align: left;
-        color: map-get($colors, primary);
+page-confirm-buy-order,
+page-portfolio-investment-details {
+  table th {
+    text-align: left;
+    color: #5c2684;
+  }
+  table tr:not(:last-of-type) {
+    border-bottom: 1px solid #c78d19;
+  }
 
-    }
-    table tr:not(:last-of-type) {
-        border-bottom: 1px solid map-get($colors, secondary);
-    }
-    
-    table td {
-        padding-left: 15px;
-        padding: .5em;
-        text-align: right;
-    }
-    table {
-        text-align: left;
-        font-size: 1.2em;
-
-    }
+  table td {
+    padding-left: 15px;
+    padding: 0.5em;
+    text-align: right;
+  }
+  table {
+    text-align: left;
+    font-size: 1.2em;
+  }
 }

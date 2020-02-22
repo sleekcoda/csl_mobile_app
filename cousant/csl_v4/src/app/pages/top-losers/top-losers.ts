@@ -2,9 +2,8 @@ import { LoginPage } from "./../login/login";
 import { ViewStockPage } from "./../view-stock/view-stock";
 import { DashboardProvider } from "./../../services/dashboard/dashboard";
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@ionic/angular";
 import { NoticeHandlerProvider } from "../../services/notice-handler/notice-handler";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 /**
  * Generated class for the TopLosersPage page.
@@ -16,7 +15,7 @@ import { Router } from "@angular/router";
 @Component({
   selector: "page-top-losers",
   templateUrl: "./top-losers.html",
-  styleUrls: [""]
+  styleUrls: ["./top-losers.scss"]
 })
 export class TopLosersPage implements OnInit {
   topLossers: any;
@@ -41,7 +40,7 @@ export class TopLosersPage implements OnInit {
       .then(
         response => {
           if (response.status == "success") {
-            let resp = response.data;
+            const resp = response.data;
             this.topLossers = resp.sort((a, b) =>
               a.currentPrice < b.currentPrice
                 ? 1
@@ -76,6 +75,6 @@ export class TopLosersPage implements OnInit {
       });
   }
   viewStock(symbol: any) {
-    this.route.navigateByUrl(ViewStockPage, symbol);
+    this.route.navigate(["ViewStockPage"], { queryParams: symbol });
   }
 }

@@ -15,7 +15,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 @Component({
   selector: "page-price-list",
   templateUrl: "./price-list.html",
-  styleUrls: [""]
+  styleUrls: ["./price-list.scss"]
 })
 export class PriceListPage {
   priceList: any;
@@ -32,7 +32,7 @@ export class PriceListPage {
       .then(
         response => {
           if (response.status == "success") {
-            let resp = response.data;
+            const resp = response.data;
             this.priceList = resp.sort((a, b) =>
               a.symbol > b.symbol ? 1 : b.symbol > a.symbol ? -1 : 0
             );

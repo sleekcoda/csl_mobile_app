@@ -12,7 +12,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 @Component({
   selector: "page-my-cash-accounts",
   templateUrl: "./my-cash-accounts.html",
-  styleUrls: [""]
+  styleUrls: ["./my-cash-accounts.scss"]
 })
 export class MyCashAccountsPage implements OnInit {
   usersAccounts: any;

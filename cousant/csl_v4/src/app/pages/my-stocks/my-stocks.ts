@@ -1,9 +1,5 @@
-import { PortfoliosPage } from "./../portfolios/portfolios";
 import { Component } from "@angular/core";
-import { NavController } from "@ionic/angular";
-import { OpenExecutedOrdersPage } from "../open-executed-orders/open-executed-orders";
-import { SellAndBuyStocksPage } from "../sell-and-buy-stocks/sell-and-buy-stocks";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router } from "@angular/router";
 
 /**
  * Generated class for the MyStocksPage page.
@@ -15,7 +11,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 @Component({
   selector: "page-my-stocks",
   templateUrl: "./my-stocks.html",
-  styleUrls: [""]
+  styleUrls: ["./my-stocks.scss"]
 })
 export class MyStocksPage {
   constructor(public route: Router) {}

@@ -1,4 +1,3 @@
-import { ConfirmBuyOrderPage } from "./../confirm-buy-order/confirm-buy-order";
 import { NoticeHandlerProvider } from "./../../services/notice-handler/notice-handler";
 import { DashboardProvider } from "./../../services/dashboard/dashboard";
 import { Component, Input } from "@angular/core";
@@ -14,7 +13,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 @Component({
   selector: "page-orders",
   templateUrl: "./orders.html",
-  styleUrls: [""]
+  styleUrls: ["./orders.scss"]
 })
 export class OrdersPage {
   portfolioDesc: string;
@@ -30,7 +29,6 @@ export class OrdersPage {
     public _modalCtrl: ModalController,
     private route: Router,
     private navParams: ActivatedRoute,
-    private _dashboard: DashboardProvider,
     private _spin: LoadingController,
     private _http: DashboardProvider,
     private _alert: NoticeHandlerProvider

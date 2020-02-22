@@ -18,7 +18,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 @Component({
   selector: "page-enter-card-details",
   templateUrl: "./enter-card-details.html",
-  styleUrls: [""],
+  styleUrls: ["./enter-card-details.scss"],
   providers: [DatePipe]
 })
 export class EnterCardDetailsPage implements OnInit {

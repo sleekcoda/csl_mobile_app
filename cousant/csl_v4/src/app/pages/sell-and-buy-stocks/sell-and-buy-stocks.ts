@@ -15,7 +15,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 @Component({
   selector: "page-sell-and-buy-stocks",
   templateUrl: "./sell-and-buy-stocks.html",
-  styleUrls: [""]
+  styleUrls: ["./sell-and-buy-stocks.scss"]
 })
 export class SellAndBuyStocksPage {
   portfolio: any;
@@ -77,25 +77,23 @@ export class SellAndBuyStocksPage {
   async setupPortfolio() {
     const portfolios = Object.values(localStorage.getItem("portfolio"));
     portfolios.forEach(portfolioarr => {
-      portfolioarr.map(e => {
-        this.portfolioArray.push(e);
-      }); // #map function
-
-      if (this.actions === "sell") {
-        this.getPorfolioInvestments(
-          this.portfolioArray[0].customerId,
-          this.portfolioArray[0].marketAccountId
-        );
-      } // #if user want's to sell stock
-      if (this.actions === "buy") {
-        this.getStock(
-          this.portfolioArray[0].customerId,
-          this.portfolioArray[0].marketAccountId
-        );
-      } // #if user want's to buy stock
-
-      // Set default portfolio from dropdown
-      this.selectPorfolioInvestments(0);
+      // portfolioarr.map(e => {
+      //   this.portfolioArray.push(e);
+      // }); // #map function
+      // if (this.actions === "sell") {
+      //   this.getPorfolioInvestments(
+      //     this.portfolioArray[0].customerId,
+      //     this.portfolioArray[0].marketAccountId
+      //   );
+      // } // #if user want's to sell stock
+      // if (this.actions === "buy") {
+      //   this.getStock(
+      //     this.portfolioArray[0].customerId,
+      //     this.portfolioArray[0].marketAccountId
+      //   );
+      // } // #if user want's to buy stock
+      // // Set default portfolio from dropdown
+      // this.selectPorfolioInvestments(0);
     }); // #get portfolios from memory
   }
 

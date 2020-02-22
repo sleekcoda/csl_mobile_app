@@ -4,8 +4,7 @@ import { LoginPage } from "./../login/login";
 import { NoticeHandlerProvider } from "./../../services/notice-handler/notice-handler";
 import { DashboardProvider } from "./../../services/dashboard/dashboard";
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@ionic/angular";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 /**
  * Generated class for the ViewStockPage page.
@@ -17,7 +16,7 @@ import { Router } from "@angular/router";
 @Component({
   selector: "page-view-stock",
   templateUrl: "./view-stock.html",
-  styleUrls: [""]
+  styleUrls: ["./view-stock.scss"]
 })
 export class ViewStockPage implements OnInit {
   symbol: string;
@@ -158,12 +157,16 @@ export class ViewStockPage implements OnInit {
       });
   }
   addToWatchlist() {
-    this.route.navigateByUrl(AddWatchlistPage, { symbol: this.symbol });
+    this.route.navigate(["AddWatchlistPage"], {
+      queryParams: { symbol: this.symbol }
+    });
   }
   buyStock() {
-    this.route.navigateByUrl(SellAndBuyStocksPage, {
-      action: "buy",
-      symbol: this.symbol
+    this.route.navigate(["SellAndBuyStocksPage"], {
+      queryParams: {
+        action: "buy",
+        symbol: this.symbol
+      }
     });
   }
 }

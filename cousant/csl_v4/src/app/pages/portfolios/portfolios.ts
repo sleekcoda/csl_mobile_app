@@ -15,7 +15,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 @Component({
   selector: "page-portfolios",
   templateUrl: "./portfolios.html",
-  styleUrls: [""]
+  styleUrls: ["./portfolios.scss"]
 })
 export class PortfoliosPage implements OnInit {
   portfolios: any | null;
@@ -32,7 +32,7 @@ export class PortfoliosPage implements OnInit {
       );
       this.route.navigateByUrl("/login");
     } else {
-      this.portfolios = Object["values"](localStorage.getItem("portfolio"));
+      this.portfolios = Object.values(localStorage.getItem("portfolio"));
       this.customerIdList = Object.keys(localStorage.getItem("portfolio"));
     }
   }
@@ -40,7 +40,7 @@ export class PortfoliosPage implements OnInit {
   ionViewDidLoad() {}
 
   getPortfolio(portfolio: any) {
-    let prevToNextPage = this.navParams.snapshot.params.action;
+    const prevToNextPage = this.navParams.snapshot.params.action;
     if (prevToNextPage == "executed" || prevToNextPage == "open") {
       this.route.navigate(["OpenOrdersPage"], {
         queryParams: {

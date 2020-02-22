@@ -1,20 +1,21 @@
 page-card-otp {
-    table{
-        width: 100%;
-        border: 1px solid;
-        th{
-            text-align: left;
-            font-weight: 500;
-            color: map-get($colors,primary);
-        }
-        td{
-            text-align: right;
-        }
-        td,th{
-            padding: 5px;
-        }
-        tr{
-            border-bottom: 1px solid;
-        }
+  table {
+    width: 100%;
+    border: 1px solid;
+    th {
+      text-align: left;
+      font-weight: 500;
+      color: #5c2684;
     }
+    td {
+      text-align: right;
+    }
+    td,
+    th {
+      padding: 5px;
+    }
+    tr {
+      border-bottom: 1px solid;
+    }
+  }
 }

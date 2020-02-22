@@ -1,11 +1,5 @@
-import {
-  RequestResponseError,
-  RequestResponseOfItems
-} from "./../../services/authentication/auth.model";
 import { NoticeHandlerProvider } from "./../../services/notice-handler/notice-handler";
 import { DashboardProvider } from "./../../services/dashboard/dashboard";
-import { SellAndBuyStocksPage } from "./../sell-and-buy-stocks/sell-and-buy-stocks";
-import { PortfolioInvestmentDetailsPage } from "./../portfolio-investment-details/portfolio-investment-details";
 import { Component } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 
@@ -19,7 +13,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 @Component({
   selector: "page-my-portfolio",
   templateUrl: "./my-portfolio.html",
-  styleUrls: [""]
+  styleUrls: ["./my-portfolio.scss"]
 })
 export class MyPortfolioPage {
   portolioId: string;

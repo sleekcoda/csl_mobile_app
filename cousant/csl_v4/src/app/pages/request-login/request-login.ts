@@ -18,7 +18,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 @Component({
   selector: "page-request-login",
   templateUrl: "./request-login.html",
-  styleUrls: [""],
+  styleUrls: ["./request-login.scss"],
   providers: [DashboardProvider]
 })
 export class RequestLoginPage {

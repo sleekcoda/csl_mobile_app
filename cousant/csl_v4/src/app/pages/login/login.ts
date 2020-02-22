@@ -18,7 +18,7 @@ import { Router } from "@angular/router";
 @Component({
   selector: "page-login",
   templateUrl: "./login.html",
-  styleUrls: [""]
+  styleUrls: ["./login.scss"]
 })
 export class LoginPage {
   emailOrCscs: string;

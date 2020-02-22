@@ -40,9 +40,18 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.background-color: $colors(primary);
 
+$colors: (
+  primary: #5c2684,
+  secondary: #c78d19,
+  danger: #f53d3d,
+  light: #f4f4f4,
+  dark: #222,
+  success: #00a31b,
+  transparent: transparent
+);
 ion-menu {
   ion-content {
-    background-color: map-get($colors, primary) !important;
+    background-color: #5c2684 !important;
     font-weight: 500 !important;
   }
 }
@@ -57,7 +66,7 @@ ng-component {
   .loading-gif {
     display: block;
     height: 200px;
-    background-image: url(../assets/imgs/csl-loader.gif);
+    background-image: url(assets/imgs/csl-loader.gif);
     background-size: 20%;
     background-position: center;
     background-repeat: no-repeat;
@@ -77,7 +86,7 @@ ng-component {
   }
   ion-navbar {
     button ion-icon {
-      color: map-get($colors, secondary);
+      color: #c78d19;
     }
   }
   ion-content {
@@ -94,13 +103,13 @@ ng-component {
     transform: translateX(-10px);
   }
   .sidemenu .scroll-content {
-    background-image: url(../assets/imgs/csl-menu-expand.png);
+    background-image: url(assets/imgs/csl-menu-expand.png);
     background-size: 110% 110%;
     background-repeat: no-repeat;
     background-attachment: fixed;
   }
   .sidemenu > div {
-    color: map-get($colors, light);
+    color: #f4f4f4;
     margin: 1em auto 0.5em;
     font-size: 1em !important;
   }
@@ -122,7 +131,7 @@ ng-component {
       transform: translateX(20px);
     }
     .formErrorMessage {
-      color: map-get($colors, danger);
+      color: #f53d3d;
       font-size: 0.9em;
     }
 
@@ -142,25 +151,25 @@ ng-component {
       text-align: right;
     }
     .primary-color {
-      color: map-get($colors, primary);
+      color: #5c2684;
     }
     .primary-bg {
-      background-color: map-get($colors, primary) !important;
+      background-color: #5c2684 !important;
     }
     .seconday-color {
-      color: map-get($colors, secondary) !important;
+      color: #c78d19 !important;
     }
     .secondary-bg {
-      background-color: map-get($colors, secondary) !important;
+      background-color: #c78d19 !important;
     }
     .danger-color {
-      color: map-get($colors, danger);
+      color: #f53d3d;
     }
     .white-color {
       color: #fff;
     }
     .success-color {
-      color: map-get($colors, success);
+      color: #00a31b;
     }
     .border-left {
       border-left: 1px solid #dedede;
@@ -174,12 +183,12 @@ ng-component {
   }
   ion-footer {
     min-height: 44px;
-    background-color: map-get($colors, primary);
+    background-color: #5c2684;
   }
   ion-nav {
     ion-navbar {
       .toolbar-background {
-        background-color: map-get($colors, primary);
+        background-color: #5c2684;
         color: #ffffff;
       }
     }
@@ -189,12 +198,12 @@ ng-component {
       ion-icon {
         text-align: center;
         font-size: 6em;
-        color: map-get($colors, success);
+        color: #00a31b;
       }
     }
   }
   ion-navbar {
-    background-color: map-get($colors, primary);
+    background-color: #5c2684;
   }
   ion-list > ion-item:active ion-icon.to-right {
     translate: 0.2s linear;
@@ -214,7 +223,7 @@ ng-component {
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
-    background-image: url(../../assets/imgs/csl-icon-chevron-down.png);
+    background-image: url(assets/imgs/csl-icon-chevron-down.png);
     background-position: 100%;
     background-size: 15px 15px;
     background-repeat: no-repeat;

@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 @Component({
   selector: "page-portfolio-investment-details",
   templateUrl: "./portfolio-investment-details.html",
-  styleUrls: [""]
+  styleUrls: ["./portfolio-investment-details.scss"]
 })
 export class PortfolioInvestmentDetailsPage {
   order: any;

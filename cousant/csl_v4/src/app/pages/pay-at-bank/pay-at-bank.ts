@@ -12,7 +12,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 @Component({
   selector: "page-pay-at-bank",
   templateUrl: "./pay-at-bank.html",
-  styleUrls: [""]
+  styleUrls: ["./pay-at-bank.scss"]
 })
 export class PayAtBankPage {
   public portfolios: any | undefined | null;

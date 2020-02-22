@@ -18,7 +18,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 @Component({
   selector: "page-cash-statement",
   templateUrl: "./cash-statement.html",
-  styleUrls: [""],
+  styleUrls: ["./cash-statement.scss"],
   providers: [DateFormatPipe]
 })
 export class CashStatementPage {

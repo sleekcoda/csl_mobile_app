@@ -1,18 +1,17 @@
 page-confirmation {
-    
-    p {
-        color: map-get($colors, primary);
-        width: 80%;
-        text-align: center;
-        margin: 0 auto;
-        font-size: 1.2em;
-    }
-    ion-content ion-img{
-        width:90px !important;
-        height: 80px !important;
-        transition: .01s linear;
-        border-radius: 5px;
-        box-shadow: inset 0 0 2px 2px rgb(21, 9, 31);
-        margin: 1em 0 10px;
-    }
+  p {
+    color: #5c2684;
+    width: 80%;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 1.2em;
+  }
+  ion-content ion-img {
+    width: 90px !important;
+    height: 80px !important;
+    transition: 0.01s linear;
+    border-radius: 5px;
+    box-shadow: inset 0 0 2px 2px rgb(21, 9, 31);
+    margin: 1em 0 10px;
+  }
 }

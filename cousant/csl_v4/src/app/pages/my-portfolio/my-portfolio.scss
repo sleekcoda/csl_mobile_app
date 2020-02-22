@@ -1,24 +1,25 @@
 page-my-portfolio {
-    .scroll-content{
-        margin-top: 50px !important;
-        background-color: transparent;
-    } 
-    ion-navbar{
-        background-color: map-get($colors, transparent);
-    }
-    ion-content{
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-        background-image: url(../../assets/imgs/csl-watchlist-header.png);
-        background-position: 100% -40px;
-
-    }
-    .header-md::after, .tabs-md[tabsPlacement="top"] > .tabbar::after, .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before{
-        background-image: none;
-    }
-    .grid>h5{
-        border-bottom: 2px solid map-get($colors, secondary);
-        padding-bottom: 5px;
-    }
-
+  .scroll-content {
+    margin-top: 50px !important;
+    background-color: transparent;
+  }
+  ion-navbar {
+    background-color: transparent;
+  }
+  ion-content {
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-image: url(../../../assets/imgs/csl-watchlist-header.png);
+    background-position: 100% -40px;
+  }
+  .header-md::after,
+  .tabs-md[tabsPlacement="top"] > .tabbar::after,
+  .footer-md::before,
+  .tabs-md[tabsPlacement="bottom"] > .tabbar::before {
+    background-image: none;
+  }
+  .grid > h5 {
+    border-bottom: 2px solid #c78d19;
+    padding-bottom: 5px;
+  }
 }

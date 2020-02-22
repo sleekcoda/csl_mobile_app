@@ -1,6 +1,11 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable, OnDestroy } from "@angular/core";
-import { Events } from "@ionic/angular";
+import {
+  Injectable,
+  OnDestroy,
+  EventEmitter,
+  Output,
+  OnInit
+} from "@angular/core";
 
 import {
   RequestResponse,
@@ -8,22 +13,29 @@ import {
 } from "./../authentication/auth.model";
 
 @Injectable({ providedIn: "root" })
-export class DashboardProvider implements OnDestroy {
-  private apiBaseUrl: string = "https://41.223.147.111/api";
+export class DashboardProvider implements OnDestroy, OnInit {
+  private apiBaseUrl = "https://41.223.147.111/api";
   private token: string;
   private customerId: string;
   private headers: any;
-  constructor(public _event: Events, private _httpClient: HttpClient) {
+  @Output() _event = new EventEmitter<{ type: string; value: any }>();
+  constructor(private _httpClient: HttpClient) {
     this.headers = { "Content-Type": "application/json" };
-    this._event.subscribe("app:userAuthenticateToken", (customerId, token) => {
+    this._event.subscribe("", (customerId, token) => {
       this.customerId = customerId;
       this.token = token;
       this.headers.Authorization = "Bearer " + this.token;
     });
   }
+  ngOnInit() {
+    this._event.emit({
+      type: "app:userAuthenticateToken",
+      value: { customerId: null, token: null }
+    });
+  }
   ngOnDestroy() {
-    this._event.unsubscribe("app:userAuthenticateToken");
-    this._event.unsubscribe("app:userAuthenticateToken");
+    this._event.unsubscribe();
+    this._event.unsubscribe();
   }
   /**
    * All GET request

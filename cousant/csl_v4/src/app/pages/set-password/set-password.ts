@@ -19,7 +19,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 @Component({
   selector: "page-set-password",
   templateUrl: "./set-password.html",
-  styleUrls: [""]
+  styleUrls: ["./set-password.scss"]
 })
 export class SetPasswordPage {
   password: string;

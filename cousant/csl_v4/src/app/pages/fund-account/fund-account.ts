@@ -11,7 +11,7 @@ import { Router } from "@angular/router";
 @Component({
   selector: "page-fund-account",
   templateUrl: "./fund-account.html",
-  styleUrls: [""]
+  styleUrls: ["./fund-account.scss"]
 })
 export class FundAccountPage {
   constructor(public route: Router) {}

@@ -18,7 +18,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 @Component({
   selector: "page-confirm-buy-order",
   templateUrl: "./confirm-buy-order.html",
-  styleUrls: [""],
+  styleUrls: ["./confirm-buy-order.scss"],
   providers: [DateFormatPipe]
 })
 export class ConfirmBuyOrderPage implements OnInit {

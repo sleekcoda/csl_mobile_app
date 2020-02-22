@@ -3,6 +3,7 @@ import { TopLosersPage } from "./../top-losers/top-losers";
 import { TopGainersPage } from "./../top-gainers/top-gainers";
 import { Component } from "@angular/core";
 import { NavController } from "@ionic/angular";
+import { Router } from "@angular/router";
 
 /**
  * Generated class for the StockQuotesPage page.
@@ -14,20 +15,20 @@ import { NavController } from "@ionic/angular";
 @Component({
   selector: "page-stock-quotes",
   templateUrl: "./stock-quotes.html",
-  styleUrls: [""]
+  styleUrls: ["./stock-quotes.scss"]
 })
 export class StockQuotesPage {
-  constructor(public navCtrl: NavController) {}
+  constructor(public route: Router) {}
 
   ionViewDidLoad() {}
 
   openMarketList() {
-    this.route.navigateByUrl(PriceListPage);
+    this.route.navigateByUrl("PriceListPage");
   }
   openTopGainers() {
-    this.route.navigateByUrl(TopGainersPage);
+    this.route.navigateByUrl("TopGainersPage");
   }
   openTopLosers() {
-    this.route.navigateByUrl(TopLosersPage);
+    this.route.navigateByUrl("TopLosersPage");
   }
 }

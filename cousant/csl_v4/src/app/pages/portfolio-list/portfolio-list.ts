@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 @Component({
   selector: "page-portfolio-list",
   templateUrl: "./portfolio-list.html",
-  styleUrls: [""]
+  styleUrls: ["./portfolio-list.scss"]
 })
 export class PortfolioListPage {
   portfolioList: any | null;

@@ -9,7 +9,7 @@ import { Component } from "@angular/core";
 @Component({
   selector: "page-confirm-card-details",
   templateUrl: "./confirm-card-details.html",
-  styleUrls: [""]
+  styleUrls: ["./confirm-card-details.scss"]
 })
 export class ConfirmCardDetailsPage {
   chargeDataGlobal: any = {

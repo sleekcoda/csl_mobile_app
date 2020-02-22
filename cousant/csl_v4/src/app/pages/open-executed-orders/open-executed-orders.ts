@@ -11,7 +11,7 @@ import { Router } from "@angular/router";
 @Component({
   selector: "page-open-executed-orders",
   templateUrl: "./open-executed-orders.html",
-  styleUrls: [""]
+  styleUrls: ["./open-executed-orders.scss"]
 })
 export class OpenExecutedOrdersPage {
   constructor(private route: Router) {}

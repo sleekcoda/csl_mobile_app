@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router } from "@angular/router";
 
 /**
  * Generated class for the SelectCashAccountPage page.
@@ -11,18 +11,18 @@ import { Router, ActivatedRoute } from "@angular/router";
 @Component({
   selector: "page-select-cash-account",
   templateUrl: "./select-cash-account.html",
-  styleUrls: [""]
+  styleUrls: ["./select-cash-account.scss"]
 })
 export class SelectCashAccountPage {
   portfolios = new Array();
   actions: string | null;
-  constructor(private route: Router, private navParams: ActivatedRoute) {
-    const portfolios = Object.values(localStorage.getItem("portfolio"));
-    portfolios.forEach(portfolioarr => {
-      portfolioarr.map(e => {
-        this.portfolios.push(e);
-      }); // #map function
-    }); // #foreach
+  constructor(private route: Router) {
+    // const portfolios = Object.values(localStorage.getItem("portfolio"));
+    // portfolios.forEach(portfolioarr => {
+    //   portfolioarr.map(e => {
+    //     this.portfolios.push(e);
+    //   }); // #map function
+    // }); // #foreach
   }
 
   openCardPage(accountNumber: string) {

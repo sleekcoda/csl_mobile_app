@@ -15,7 +15,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 @Component({
   selector: "page-open-orders",
   templateUrl: "./open-orders.html",
-  styleUrls: [""]
+  styleUrls: ["./open-orders.scss"]
 })
 export class OpenOrdersPage {
   orderType: string;

@@ -12,7 +12,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 @Component({
   selector: "page-confirmation",
   templateUrl: "./confirmation.html",
-  styleUrls: [""]
+  styleUrls: ["./confirmation.scss"]
 })
 export class ConfirmationPage {
   action: string;
