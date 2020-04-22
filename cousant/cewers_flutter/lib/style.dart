@@ -40,9 +40,9 @@ const BGCloudCircleDecoration = BoxDecoration(
 
 InputDecoration formDecoration(String placeholder, String icon) =>
     InputDecoration(
-      // border: InputBorder.none,
-      // focusedBorder: InputBorder.none,
-      // enabledBorder: InputBorder.none,
+      border: InputBorder.none,
+      focusedBorder: InputBorder.none,
+      enabledBorder: InputBorder.none,
       prefixIcon: ImageIcon(AssetImage(icon ?? "assets/icons/person.png")),
       hintText: placeholder,
     );

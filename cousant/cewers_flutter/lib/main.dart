@@ -1,4 +1,5 @@
 import 'package:cewers_flutter/pages/login.dart';
+import 'package:cewers_flutter/pages/welcome.dart';
 import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,10 @@ class MyApp extends StatelessWidget {
                   button: ButtonStyle)),
           textTheme: TextTheme(title: TitleStyle)),
       initialRoute: "/",
-      routes: {"/": (context) => LoginPage()},
+      routes: {
+        "/": (context) => WelcomePage(),
+        "/login": (context) => LoginPage(),
+      },
       debugShowCheckedModeBanner: false,
     );
   }
