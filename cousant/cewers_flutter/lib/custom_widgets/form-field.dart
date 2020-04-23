@@ -3,15 +3,22 @@ import 'package:flutter/material.dart';
 class FormTextField extends StatelessWidget {
   final double topMargin;
   final double bottomMargin;
+  final double width;
+  final double height;
   final TextFormField textFormField;
   FormTextField(
-      {Key key, this.bottomMargin, this.topMargin, this.textFormField});
-  Widget build(BuildContext buildContext) {
+      {Key key,
+      this.bottomMargin,
+      this.topMargin,
+      this.textFormField,
+      this.width,
+      this.height});
+  Widget build(BuildContext context) {
     return Container(
-        margin:
-            EdgeInsets.only(top: topMargin ?? 10, bottom: bottomMargin ?? 10),
-        width: MediaQuery.of(buildContext).size.width - 80,
-        height: 53,
+        padding: EdgeInsets.only(top: 5),
+        margin: EdgeInsets.only(top: topMargin ?? 5, bottom: bottomMargin ?? 5),
+        height: height ?? 53,
+        width: width ?? MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             color: Colors.white,
             boxShadow: [

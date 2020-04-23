@@ -1,4 +1,7 @@
+import 'package:cewers_flutter/pages/home.dart';
 import 'package:cewers_flutter/pages/login.dart';
+import 'package:cewers_flutter/pages/sign_up.dart';
+import 'package:cewers_flutter/pages/success.dart';
 import 'package:cewers_flutter/pages/welcome.dart';
 import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +27,9 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": (context) => WelcomePage(),
         "/login": (context) => LoginPage(),
+        "/sign-up": (context) => SignUpPage(),
+        "/success": (context) => SuccessPage(),
+        "/home": (context) => HomePage(),
       },
       debugShowCheckedModeBanner: false,
     );

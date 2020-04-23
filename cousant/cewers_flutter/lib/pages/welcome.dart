@@ -10,33 +10,43 @@ class WelcomePage extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return MainContainer(
-      decoration: BGCloudCircleDecoration,
+      decoration: bgDecoration(),
       displayAppBar: true,
+      bottomNavigationBar: SafeArea(
+        minimum: EdgeInsets.only(left: 24, right: 24),
+        child: ActionButtonBar(
+          text: "REPORT EVENT",
+          action: () {
+            Navigator.pushNamed(context, "/login");
+          },
+        ),
+      ),
       child: SafeArea(
         minimum: EdgeInsets.only(top: 24),
         child: ListView(
           children: <Widget>[
             SafeArea(
-                minimum: EdgeInsets.only(top: 100, bottom: 100, left: 24),
+                minimum: EdgeInsets.only(
+                  bottom: 20,
+                ),
                 child: Text(
                   "Conflict Early Warning Early Response System",
                   style: TitleStyle,
                 )),
             SafeArea(
-              minimum: EdgeInsets.only(top: 100, bottom: 150, left: 24),
-              child: Text(
-                "BENUE STATE",
-                style: TitleStyle,
+              minimum: EdgeInsets.only(
+                top: 100,
+                bottom: 120,
+              ),
+              child: Align(
+                alignment: Alignment.center,
+                child: Text(
+                  "BENUE STATE",
+                  style: TitleStyle,
+                ),
               ),
             ),
-            SafeArea(
-                minimum: EdgeInsets.only(left: 24, right: 24),
-                child: ActionButtonBar(
-                  text: "REPORT EVENT",
-                  action: () {
-                    Navigator.pushNamed(context, "/login");
-                  },
-                ))
+            Align(alignment: Alignment.bottomCenter, child: null)
           ],
         ),
       ),

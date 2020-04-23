@@ -1,0 +1,24 @@
+
+## BASE URL
+GET http://6203ee65.ngrok.io
+
+###
+
+GET http://6203ee65.ngrok.io/api/user
+
+###
+
+POST http://6203ee65.ngrok.io/api/user
+Content-Type: application/json
+
+{
+    "user" : {
+		"firstName": "Tester",
+		"lastName":"Testing", 
+		"phoneNumber": "09010001001",
+		"email": "tester@ymail.com",
+		"password": "password",
+		"gender": "male",
+        "userType": "citizen"
+	}
+}

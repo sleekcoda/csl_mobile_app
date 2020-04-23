@@ -33,10 +33,12 @@ const ButtonStyle = TextStyle(
     color: Colors.white,
     fontSize: mediumTextSize);
 
-const BGCloudCircleDecoration = BoxDecoration(
-    image: DecorationImage(
-        image: AssetImage("assets/backgrounds/bg-cloud-circle.png"),
-        fit: BoxFit.cover));
+BoxDecoration bgDecoration([String uri]) {
+  return BoxDecoration(
+      image: DecorationImage(
+          image: AssetImage(uri ?? "assets/backgrounds/bg-cloud-circle.png"),
+          fit: BoxFit.cover));
+}
 
 InputDecoration formDecoration(String placeholder, String icon) =>
     InputDecoration(
