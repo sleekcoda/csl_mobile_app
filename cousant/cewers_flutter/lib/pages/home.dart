@@ -1,6 +1,7 @@
 import 'package:cewers_flutter/custom_widgets/main-container.dart';
 import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
+import 'package:cewers_flutter/model/tab.dart';
 
 class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -35,6 +36,14 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+      bottomNavigationBar: SafeArea(
+        minimum: EdgeInsets.only(bottom: 2, left: 5, right: 5),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          // crossAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[]..addAll(MainTab.fetchAllTabs(context)),
         ),
       ),
     );

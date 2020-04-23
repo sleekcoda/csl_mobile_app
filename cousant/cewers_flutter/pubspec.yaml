@@ -39,6 +39,7 @@ flutter:
   assets:
     - assets/backgrounds/
     - assets/icons/
+    - assets/icons/tabs/
 
   fonts:
     - family: Playfair
