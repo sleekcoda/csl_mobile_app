@@ -5,16 +5,14 @@ class MainContainer extends StatelessWidget {
   final Widget child;
   final Widget bottomNavigationBar;
   final BoxDecoration decoration;
-  final bool displayAppBar;
-  final TabBar tabBar;
-  MainContainer(
-      {Key key,
-      @required this.decoration,
-      @required this.child,
-      this.tabBar,
-      this.bottomNavigationBar,
-      this.displayAppBar})
-      : super(key: key);
+  final CewerAppBar displayAppBar;
+  MainContainer({
+    Key key,
+    @required this.decoration,
+    @required this.child,
+    this.displayAppBar,
+    this.bottomNavigationBar,
+  }) : super(key: key);
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +21,7 @@ class MainContainer extends StatelessWidget {
           iconTheme: IconThemeData(
             color: Theme.of(context).primaryColor, //change your color here
           ),
-          title: displayAppBar ? CewerAppBar() : null,
+          title: displayAppBar ?? CewerAppBar(),
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),

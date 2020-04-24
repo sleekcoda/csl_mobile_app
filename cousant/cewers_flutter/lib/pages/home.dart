@@ -1,13 +1,12 @@
 import 'package:cewers_flutter/custom_widgets/main-container.dart';
+import 'package:cewers_flutter/custom_widgets/tabs.dart';
 import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
-import 'package:cewers_flutter/model/tab.dart';
 
 class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MainContainer(
       decoration: bgDecoration("assets/backgrounds/bg-cloud.png"),
-      displayAppBar: true,
       child: Container(
         width: MediaQuery.of(context).size.width,
         child: Column(
@@ -15,7 +14,7 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, "/sign-up");
+                Navigator.pushNamed(context, "/select-crime");
               },
               child: Container(
                 width: 256,
@@ -38,14 +37,7 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: SafeArea(
-        minimum: EdgeInsets.only(bottom: 2, left: 5, right: 5),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          // crossAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[]..addAll(MainTab.fetchAllTabs(context)),
-        ),
-      ),
+      bottomNavigationBar: BottomTab(),
     );
   }
 }

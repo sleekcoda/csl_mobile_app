@@ -8,10 +8,12 @@ const double smallTextSize = 12;
 const String fontPlayFair = "Playfair";
 const String fontRoboto = "Roboto";
 
+const Color primaryColor = Color.fromRGBO(252, 37, 86, 1);
+const Color secondaryColor = Color.fromRGBO(29, 42, 56, 1);
 const AppBarStyle = TextStyle(
     fontFamily: fontPlayFair,
     fontWeight: FontWeight.w500,
-    color: Color.fromRGBO(29, 42, 56, 1),
+    color: secondaryColor,
     fontSize: mediumTextSize,
     fontStyle: FontStyle.italic);
 
@@ -20,10 +22,13 @@ const TitleStyle = TextStyle(
     fontWeight: FontWeight.w700,
     fontSize: largeTextSize);
 
+const SubHeadStyle =
+    TextStyle(color: primaryColor, fontWeight: FontWeight.w700, fontSize: 20);
+
 const PeriodStyle = TextStyle(
     fontFamily: fontPlayFair,
     fontWeight: FontWeight.w700,
-    color: Color.fromRGBO(252, 37, 86, 1),
+    color: primaryColor,
     fontSize: mediumTextSize,
     fontStyle: FontStyle.italic);
 

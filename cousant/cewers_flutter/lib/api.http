@@ -5,6 +5,8 @@ GET http://6203ee65.ngrok.io
 ###
 
 GET http://6203ee65.ngrok.io/api/user
+Content-Type: application/json
+
 
 ###
 
@@ -21,4 +23,15 @@ Content-Type: application/json
 		"gender": "male",
         "userType": "citizen"
 	}
+}
+
+
+###
+
+POST http://6203ee65.ngrok.io/api/user/login
+Content-Type: application/json
+
+{
+    "phoneNumber" : "09010001001",
+    "password" : "password"
 }

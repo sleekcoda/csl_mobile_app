@@ -9,9 +9,9 @@ class MainTab {
   static fetchAllTabs(BuildContext context) {
     return [
       MainTab("home", "home.png", "/login"),
-      MainTab("Alerts", "alert.png", "/home"),
-      MainTab("Map", "pin.png", "/home"),
-      MainTab("Feedback", "info.png", "/home"),
+      MainTab("Alerts", "alert.png", "/alert"),
+      MainTab("Map", "pin.png", "/map"),
+      MainTab("Feedback", "info.png", "/feedback"),
     ]
         .map(
           (tab) => GestureDetector(

@@ -2,7 +2,7 @@ import 'package:cewers_flutter/custom_widgets/button.dart';
 import 'package:cewers_flutter/custom_widgets/form-field.dart';
 import 'package:cewers_flutter/custom_widgets/main-container.dart';
 import 'package:cewers_flutter/custom_widgets/title.dart';
-import 'package:cewers_flutter/model/user_auth.dart';
+import 'package:cewers_flutter/controller/login.dart';
 import 'package:flutter/material.dart';
 import 'package:cewers_flutter/style.dart';
 
@@ -13,16 +13,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPage extends State<LoginPage> {
-  TextEditingController username;
-  TextEditingController password;
-  UserAuthentication auth;
+  TextEditingController username = new TextEditingController();
+  TextEditingController password = new TextEditingController();
+  LoginController loginController = new LoginController();
 
   final loginFormKey = GlobalKey<FormState>();
 
   Widget build(BuildContext context) {
     return MainContainer(
       decoration: bgDecoration(),
-      displayAppBar: true,
       child: ListView(
         children: <Widget>[
           SafeArea(
@@ -39,20 +38,14 @@ class _LoginPage extends State<LoginPage> {
                     decoration:
                         formDecoration("Phone", "assets/icons/envelope.png"),
                     validator: (value) {
-                      // print(value);
                       if (value.isEmpty) {
                         return 'Enter your phone number or email';
                       }
                       return null;
                     },
-                    onSaved: (value) {
-                      auth.setUsername = value;
-                      print(auth.username);
-                    },
                   ),
                 ),
                 FormTextField(
-                  topMargin: 10,
                   bottomMargin: 30,
                   textFormField: TextFormField(
                     controller: password,
@@ -65,10 +58,6 @@ class _LoginPage extends State<LoginPage> {
                         return 'Enter a valid password';
                       }
                       return null;
-                    },
-                    onSaved: (value) {
-                      auth.setPassword = value;
-                      print(auth.password);
                     },
                   ),
                 )
@@ -102,21 +91,47 @@ class _LoginPage extends State<LoginPage> {
               ],
             ),
           ),
-          SafeArea(
-            minimum: EdgeInsets.only(top: 50),
-            child: ActionButtonBar(
-              text: "Login",
-              action: () {
-                // loginFormKey.currentState.save();
-
-                Navigator.pushNamed(context, "/home");
-              },
+          Builder(
+            builder: (context) => SafeArea(
+              minimum: EdgeInsets.only(top: 50),
+              child: ActionButtonBar(
+                text: "Login",
+                action: () {
+                  loginFormKey.currentState.save();
+                  if (loginFormKey.currentState.validate()) {
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text("Please wait...."),
+                      backgroundColor: Colors.black,
+                    ));
+                    loginController.login({
+                      "phoneNumber": username.text,
+                      "password": password.text
+                    }).then((success) {
+                      if (success) {
+                        Navigator.of(context).pushNamed("/home");
+                      } else {
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                          content: Text("Invalid user or password"),
+                          backgroundColor: Colors.red,
+                        ));
+                      }
+                    }).catchError((onError) {
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                        content: Text("Unexpected error occured"),
+                        backgroundColor: Colors.red,
+                      ));
+                    });
+                  }
+                },
+              ),
             ),
           ),
         ],
       ),
     );
   }
+
+  navigate(bool loginStatus) {}
 
   @override
   void dispose() {

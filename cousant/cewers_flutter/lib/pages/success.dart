@@ -7,7 +7,6 @@ class SuccessPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MainContainer(
       decoration: bgDecoration("assets/backgrounds/bg-cloud.png"),
-      displayAppBar: true,
       bottomNavigationBar: SafeArea(
         minimum: EdgeInsets.only(bottom: 30, left: 24, right: 24),
         child: ActionButtonBar(

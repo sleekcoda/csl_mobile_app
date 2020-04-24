@@ -11,9 +11,8 @@ class WelcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MainContainer(
       decoration: bgDecoration(),
-      displayAppBar: true,
       bottomNavigationBar: SafeArea(
-        minimum: EdgeInsets.only(left: 24, right: 24),
+        minimum: EdgeInsets.only(left: 24, right: 24, bottom: 10),
         child: ActionButtonBar(
           text: "REPORT EVENT",
           action: () {
