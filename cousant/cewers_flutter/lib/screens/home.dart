@@ -3,7 +3,7 @@ import 'package:cewers_flutter/custom_widgets/tabs.dart';
 import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MainContainer(
       decoration: bgDecoration("assets/backgrounds/bg-cloud.png"),

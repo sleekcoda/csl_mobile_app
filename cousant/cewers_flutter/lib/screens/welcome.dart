@@ -3,10 +3,10 @@ import 'package:cewers_flutter/custom_widgets/main-container.dart';
 import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
 
-class WelcomePage extends StatelessWidget {
+class WelcomeScreen extends StatelessWidget {
   final Widget child;
 
-  WelcomePage({Key key, this.child}) : super(key: key);
+  WelcomeScreen({Key key, this.child}) : super(key: key);
 
   Widget build(BuildContext context) {
     return MainContainer(

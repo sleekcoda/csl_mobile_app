@@ -1,11 +1,11 @@
-import 'package:cewers_flutter/pages/alert.dart';
-import 'package:cewers_flutter/pages/enter-details.dart';
-import 'package:cewers_flutter/pages/home.dart';
-import 'package:cewers_flutter/pages/login.dart';
-import 'package:cewers_flutter/pages/select-crime.dart';
-import 'package:cewers_flutter/pages/sign_up.dart';
-import 'package:cewers_flutter/pages/success.dart';
-import 'package:cewers_flutter/pages/welcome.dart';
+import 'package:cewers_flutter/screens/alert.dart';
+import 'package:cewers_flutter/screens/enter-details.dart';
+import 'package:cewers_flutter/screens/home.dart';
+import 'package:cewers_flutter/screens/login.dart';
+import 'package:cewers_flutter/screens/select-crime.dart';
+import 'package:cewers_flutter/screens/sign_up.dart';
+import 'package:cewers_flutter/screens/success.dart';
+import 'package:cewers_flutter/screens/welcome.dart';
 import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
 
@@ -30,16 +30,16 @@ class MyApp extends StatelessWidget {
           textTheme: TextTheme(title: TitleStyle)),
       initialRoute: "/",
       routes: {
-        "/": (context) => WelcomePage(),
-        "/login": (context) => LoginPage(),
-        "/sign-up": (context) => SignUpPage(),
-        "/success": (context) => SuccessPage(),
-        "/home": (context) => HomePage(),
-        "/select-crime": (context) => SelectCrimePage(),
-        "/enter-details": (context) => EnterDetailPage(),
-        "/alert": (context) => AlertsPage(),
-        "/map": (context) => AlertsPage(),
-        "/feedback": (context) => AlertsPage(),
+        "/": (context) => WelcomeScreen(),
+        "/login": (context) => LoginScreen(),
+        "/sign-up": (context) => SignUpScreen(),
+        "/success": (context) => SuccessScreen(),
+        "/home": (context) => HomeScreen(),
+        "/select-crime": (context) => SelectCrimeScreen(),
+        "/enter-details": (context) => EnterDetailScreen(),
+        "/alert": (context) => AlertsScreen(),
+        "/map": (context) => AlertsScreen(),
+        "/feedback": (context) => AlertsScreen(),
       },
       debugShowCheckedModeBanner: false,
     );

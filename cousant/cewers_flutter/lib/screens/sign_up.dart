@@ -6,11 +6,11 @@ import 'package:cewers_flutter/custom_widgets/title.dart';
 import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
 
-class SignUpPage extends StatefulWidget {
-  _SignUpPage createState() => _SignUpPage();
+class SignUpScreen extends StatefulWidget {
+  _SignUpScreen createState() => _SignUpScreen();
 }
 
-class _SignUpPage extends State<SignUpPage> {
+class _SignUpScreen extends State<SignUpScreen> {
   final signUpKey = GlobalKey<FormState>();
   TextEditingController firstname = new TextEditingController();
   TextEditingController surname = new TextEditingController();
@@ -83,7 +83,6 @@ class _SignUpPage extends State<SignUpPage> {
                               //Api response
                             }).catchError((onError) {
                               print("Unexpected error");
-                              print(onError);
                             });
                           } else {
                             Scaffold.of(context).showSnackBar(

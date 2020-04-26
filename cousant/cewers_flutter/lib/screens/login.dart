@@ -6,13 +6,13 @@ import 'package:cewers_flutter/controller/login.dart';
 import 'package:flutter/material.dart';
 import 'package:cewers_flutter/style.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
   final String title;
-  LoginPage({Key key, this.title}) : super(key: key);
-  _LoginPage createState() => _LoginPage();
+  LoginScreen({Key key, this.title}) : super(key: key);
+  _LoginScreen createState() => _LoginScreen();
 }
 
-class _LoginPage extends State<LoginPage> {
+class _LoginScreen extends State<LoginScreen> {
   TextEditingController username = new TextEditingController();
   TextEditingController password = new TextEditingController();
   LoginController loginController = new LoginController();

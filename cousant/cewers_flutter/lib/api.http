@@ -4,9 +4,12 @@ GET http://6203ee65.ngrok.io
 
 ###
 
+GET https://penaidapi.appspot.com
+
+###
+
 GET http://6203ee65.ngrok.io/api/user
 Content-Type: application/json
-
 
 ###
 
@@ -17,14 +20,13 @@ Content-Type: application/json
     "user" : {
 		"firstName": "Tester",
 		"lastName":"Testing", 
-		"phoneNumber": "09010001001",
-		"email": "tester@ymail.com",
+		"phoneNumber": "09010001005",
+		"email": "tester5@ymail.com",
 		"password": "password",
 		"gender": "male",
         "userType": "citizen"
 	}
 }
-
 
 ###
 
