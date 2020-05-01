@@ -5,6 +5,7 @@ import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
 
 class EnterDetailScreen extends StatelessWidget {
+  static String route = "/enterDetails";
   Widget build(BuildContext context) {
     return MainContainer(
       decoration: bgDecoration("assets/backgrounds/bg-cloud.png"),

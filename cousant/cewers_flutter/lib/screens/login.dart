@@ -8,6 +8,7 @@ import 'package:cewers_flutter/style.dart';
 
 class LoginScreen extends StatefulWidget {
   final String title;
+  static String route = "/login";
   LoginScreen({Key key, this.title}) : super(key: key);
   _LoginScreen createState() => _LoginScreen();
 }

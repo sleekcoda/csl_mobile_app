@@ -7,6 +7,7 @@ import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatefulWidget {
+  static String route = "/signUp";
   _SignUpScreen createState() => _SignUpScreen();
 }
 

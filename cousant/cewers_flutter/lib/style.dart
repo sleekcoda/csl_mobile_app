@@ -20,29 +20,33 @@ const AppBarStyle = TextStyle(
 const TitleStyle = TextStyle(
     fontFamily: fontPlayFair,
     fontWeight: FontWeight.w700,
-    fontSize: largeTextSize);
+    fontSize: largeTextSize,
+    fontStyle: FontStyle.normal);
 
 const SubHeadStyle =
     TextStyle(color: primaryColor, fontWeight: FontWeight.w700, fontSize: 20);
 
 const PeriodStyle = TextStyle(
-    fontFamily: fontPlayFair,
-    fontWeight: FontWeight.w700,
-    color: primaryColor,
-    fontSize: mediumTextSize,
-    fontStyle: FontStyle.italic);
+  fontFamily: fontPlayFair,
+  fontWeight: FontWeight.w700,
+  color: primaryColor,
+  fontSize: mediumTextSize,
+  fontStyle: FontStyle.italic,
+);
 
 const ButtonStyle = TextStyle(
-    fontFamily: fontRoboto,
-    fontWeight: FontWeight.w500,
-    color: Colors.white,
-    fontSize: mediumTextSize);
+  fontFamily: fontRoboto,
+  fontWeight: FontWeight.w500,
+  color: Colors.white,
+  fontSize: mediumTextSize,
+);
 
 BoxDecoration bgDecoration([String uri]) {
   return BoxDecoration(
-      image: DecorationImage(
-          image: AssetImage(uri ?? "assets/backgrounds/bg-cloud-circle.png"),
-          fit: BoxFit.cover));
+    image: DecorationImage(
+        image: AssetImage(uri ?? "assets/backgrounds/bg-cloud-circle.png"),
+        fit: BoxFit.cover),
+  );
 }
 
 InputDecoration formDecoration(String placeholder, String icon) =>

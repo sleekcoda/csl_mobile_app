@@ -4,6 +4,7 @@ import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
 
 class SuccessScreen extends StatelessWidget {
+  static String route = "/success";
   Widget build(BuildContext context) {
     return MainContainer(
       decoration: bgDecoration("assets/backgrounds/bg-cloud.png"),
