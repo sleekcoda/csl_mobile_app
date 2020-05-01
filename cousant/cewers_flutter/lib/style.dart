@@ -25,20 +25,24 @@ const TitleStyle = TextStyle(
 
 const SubHeadStyle =
     TextStyle(color: primaryColor, fontWeight: FontWeight.w700, fontSize: 20);
-
+const ColoredHeaderStyle = TextStyle(
+  color: primaryColor,
+  fontSize: 18,
+  fontFamily: fontPlayFair,
+  fontWeight: FontWeight.w700,
+);
 const PeriodStyle = TextStyle(
   fontFamily: fontPlayFair,
   fontWeight: FontWeight.w700,
   color: primaryColor,
   fontSize: mediumTextSize,
-  fontStyle: FontStyle.italic,
 );
 
 const ButtonStyle = TextStyle(
   fontFamily: fontRoboto,
   fontWeight: FontWeight.w500,
   color: Colors.white,
-  fontSize: mediumTextSize,
+  fontSize: normalTextSize,
 );
 
 BoxDecoration bgDecoration([String uri]) {

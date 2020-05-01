@@ -5,10 +5,14 @@ import 'package:flutter/material.dart';
 class SelectStateScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
+        iconTheme: IconThemeData(
+          color: Theme.of(context).primaryColor, //change your color here
+        ),
         title: Container(
           child: Row(
             children: <Widget>[

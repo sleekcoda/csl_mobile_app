@@ -39,6 +39,7 @@ class _MyApp extends State<MyApp> {
                 title: AppBarStyle,
                 subhead: SubHeadStyle,
                 display1: PeriodStyle,
+                display2: ColoredHeaderStyle,
                 button: ButtonStyle),
           ),
           textTheme: TextTheme(title: TitleStyle)),
@@ -49,8 +50,9 @@ class _MyApp extends State<MyApp> {
               this._preferredLanguage == null) {
             return SelectStateScreen();
           }
-          return WelcomeSreen(this._preferredLanguage);
+          return WelcomeScreen();
         },
+        WelcomeScreen.route: (context) => WelcomeScreen(),
         LoginScreen.route: (context) => LoginScreen(),
         SignUpScreen.route: (context) => SignUpScreen(),
         SuccessScreen.route: (context) => SuccessScreen(),

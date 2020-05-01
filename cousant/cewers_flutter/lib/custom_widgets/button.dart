@@ -9,22 +9,23 @@ class ActionButtonBar extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return SizedBox(
-        width: (MediaQuery.of(context).size.width - 80),
-        child: RaisedButton(
-          textColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18.0),
-            side: BorderSide(
-              color: Color.fromRGBO(252, 37, 86, 1),
-            ),
+      width: 253,
+      child: RaisedButton(
+        textColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18.0),
+          side: BorderSide(
+            color: Color.fromRGBO(252, 37, 86, 1),
           ),
-          color: Colors.red,
-          onPressed: action,
-          padding: EdgeInsets.only(top: 12, bottom: 10),
-          child: Text(
-            text,
-            style: ButtonStyle,
-          ),
-        ));
+        ),
+        color: Colors.red,
+        onPressed: action,
+        padding: EdgeInsets.only(top: 12, bottom: 10),
+        child: Text(
+          text,
+          style: ButtonStyle,
+        ),
+      ),
+    );
   }
 }
