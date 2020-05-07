@@ -15,10 +15,10 @@ class ActionButtonBar extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18.0),
           side: BorderSide(
-            color: Color.fromRGBO(252, 37, 86, 1),
+            color: Theme.of(context).primaryColor,
           ),
         ),
-        color: Colors.red,
+        color: Theme.of(context).primaryColor,
         onPressed: action,
         padding: EdgeInsets.only(top: 12, bottom: 10),
         child: Text(

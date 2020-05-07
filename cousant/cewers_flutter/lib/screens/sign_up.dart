@@ -12,7 +12,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreen extends State<SignUpScreen> {
-  final signUpKey = GlobalKey<FormState>();
+  final _signUpKey = GlobalKey<FormState>();
   TextEditingController firstname = new TextEditingController();
   TextEditingController surname = new TextEditingController();
   TextEditingController email = new TextEditingController();
@@ -30,7 +30,7 @@ class _SignUpScreen extends State<SignUpScreen> {
             text: "Sign Up",
           ),
           Form(
-            key: signUpKey,
+            key: _signUpKey,
             child: SafeArea(
               minimum: EdgeInsets.only(left: 30, right: 30),
               child: Column(
@@ -44,14 +44,14 @@ class _SignUpScreen extends State<SignUpScreen> {
                     child: ActionButtonBar(
                       text: "SIGN UP",
                       action: () {
-                        signUpKey.currentState.validate();
-                        if (signUpKey.currentState.validate()) {
+                        // _signUpKey.currentState.validate();
+                        if (_signUpKey.currentState.validate()) {
                           Scaffold.of(context).showSnackBar(
                             SnackBar(
                               content: Text("Please wait..."),
                             ),
                           );
-                          signUpKey.currentState.save();
+                          _signUpKey.currentState.save();
                           var payload = {
                             "user": {
                               "firstName": firstname.text,
@@ -135,7 +135,7 @@ class _SignUpScreen extends State<SignUpScreen> {
   }
 
   void dispose() {
-    signUpKey.currentState.dispose();
+    _signUpKey.currentState.dispose();
     firstname.dispose();
     surname.dispose();
     email.dispose();

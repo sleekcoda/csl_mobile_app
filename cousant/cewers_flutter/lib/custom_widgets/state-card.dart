@@ -1,20 +1,19 @@
-import 'package:cewers_flutter/controller/language.dart';
-import 'package:cewers_flutter/screens/welcome.dart';
 import 'package:flutter/material.dart';
 
 class StateCard extends StatelessWidget {
   final String stateName;
   final String stateMapUri;
-  LanguageController _languageController = new LanguageController();
-  StateCard({Key key, @required this.stateName, @required this.stateMapUri})
+  final Function action;
+  StateCard(
+      {Key key,
+      @required this.stateName,
+      @required this.stateMapUri,
+      @required this.action})
       : super(key: key);
 
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async {
-        await _languageController.setLanguage(stateName);
-        Navigator.of(context).pushNamed(WelcomeScreen.route);
-      },
+      onTap: action,
       child: Center(
         child: Card(
           elevation: 3,

@@ -3,6 +3,8 @@ import 'package:cewers_flutter/custom_widgets/form-field.dart';
 import 'package:cewers_flutter/custom_widgets/main-container.dart';
 import 'package:cewers_flutter/custom_widgets/title.dart';
 import 'package:cewers_flutter/controller/login.dart';
+import 'package:cewers_flutter/screens/home.dart';
+import 'package:cewers_flutter/screens/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:cewers_flutter/style.dart';
 
@@ -73,7 +75,7 @@ class _LoginScreen extends State<LoginScreen> {
                 Text("New User?"),
                 GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, "/sign-up");
+                      Navigator.pushNamed(context, SignUpScreen.route);
                     },
                     child: SafeArea(
                         minimum: EdgeInsets.only(left: 5),
@@ -109,7 +111,7 @@ class _LoginScreen extends State<LoginScreen> {
                       "password": password.text
                     }).then((success) {
                       if (success) {
-                        Navigator.of(context).pushNamed("/home");
+                        Navigator.of(context).pushNamed(HomeScreen.route);
                       } else {
                         Scaffold.of(context).showSnackBar(SnackBar(
                           content: Text("Invalid user or password"),
