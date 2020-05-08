@@ -2,7 +2,6 @@ import 'package:cewers_flutter/controller/signup.dart';
 import 'package:cewers_flutter/custom_widgets/button.dart';
 import 'package:cewers_flutter/custom_widgets/form-field.dart';
 import 'package:cewers_flutter/custom_widgets/main-container.dart';
-import 'package:cewers_flutter/custom_widgets/title.dart';
 import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
 
@@ -26,8 +25,9 @@ class _SignUpScreen extends State<SignUpScreen> {
       decoration: bgDecoration(),
       child: ListView(
         children: <Widget>[
-          FormTitleText(
-            text: "Sign Up",
+          Text(
+            "Sign Up",
+            style: Theme.of(context).textTheme.title,
           ),
           Form(
             key: _signUpKey,
@@ -110,9 +110,9 @@ class _SignUpScreen extends State<SignUpScreen> {
       SignUpFormField(
           this.surname, "Surname", "person.png", "Enter a valid surnme"),
       SignUpFormField(this.email, "Email Address", "envelope.png",
-          "Enter a valid email address"),
+          "Enter a valid email address", false, TextInputType.emailAddress),
       SignUpFormField(this.phone, "Phone number", "phone.png",
-          "Enter a valid phone number"),
+          "Enter a valid phone number", false, TextInputType.phone),
       SignUpFormField(
           this.password, "Password", "lock.png", "Enter a password", true),
       SignUpFormField(this.confirmPassword, "Confirm password", "lock.png",
@@ -151,8 +151,9 @@ class SignUpFormField {
   final String errorMessage;
   final String placeholder;
   final bool isPassword;
+  final TextInputType inputType;
   final TextEditingController controller;
   SignUpFormField(
       this.controller, this.placeholder, this.icon, this.errorMessage,
-      [this.isPassword]);
+      [this.isPassword, this.inputType]);
 }

@@ -1,24 +1,21 @@
 import 'package:cewers_flutter/custom_widgets/button.dart';
 import 'package:cewers_flutter/custom_widgets/form-field.dart';
 import 'package:cewers_flutter/custom_widgets/main-container.dart';
-import 'package:cewers_flutter/custom_widgets/title.dart';
-import 'package:cewers_flutter/controller/login.dart';
+import 'package:cewers_flutter/controller/api.dart';
 import 'package:cewers_flutter/screens/home.dart';
 import 'package:cewers_flutter/screens/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:cewers_flutter/style.dart';
 
 class LoginScreen extends StatefulWidget {
-  final String title;
   static String route = "/login";
-  LoginScreen({Key key, this.title}) : super(key: key);
   _LoginScreen createState() => _LoginScreen();
 }
 
 class _LoginScreen extends State<LoginScreen> {
   TextEditingController username = new TextEditingController();
   TextEditingController password = new TextEditingController();
-  LoginController loginController = new LoginController();
+  APIController loginController = new APIController();
 
   final loginFormKey = GlobalKey<FormState>();
 
@@ -32,8 +29,17 @@ class _LoginScreen extends State<LoginScreen> {
             child: Form(
               key: loginFormKey,
               child: Column(children: <Widget>[
-                FormTitleText(
-                  text: "Login",
+                SafeArea(
+                  minimum: EdgeInsets.only(top: 20, bottom: 20),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "Login",
+                      style: titleStyle().apply(
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                  ),
                 ),
                 FormTextField(
                   textFormField: TextFormField(

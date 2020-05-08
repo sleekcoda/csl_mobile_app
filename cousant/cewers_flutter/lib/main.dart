@@ -12,10 +12,10 @@ import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
-GetIt getIt = GetIt.instance;
+GetIt _getIt = GetIt.instance;
 
 void main() {
-  getIt.registerSingleton<LanguageController>(LanguageController(),
+  _getIt.registerSingleton<LanguageController>(LanguageController(),
       signalsReady: true);
   runApp(MyApp());
 }
@@ -26,7 +26,7 @@ class MyApp extends StatefulWidget {
 
 class _MyApp extends State<MyApp> {
   // This widget is the root of your application.
-  Future _future;
+  Future future;
   final Map<String, Color> _primaryColors = {
     "taraba": primaryColor,
     "benue": benueColor,
@@ -51,22 +51,18 @@ class _MyApp extends State<MyApp> {
 
   @override
   void initState() {
-    getIt
-        .isReady<LanguageController>()
-        .then((_) => getIt<LanguageController>().getLanguage());
-    _future = getIt<LanguageController>().getLanguage();
+    future = _getIt<LanguageController>().getLanguage();
     super.initState();
   }
 
   void dispose() {
-    getIt<LanguageController>().closeStream();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: _future,
+        future: future,
         builder: (context, snapshot) {
           return MaterialApp(
             title: 'Flutter Demo',
@@ -75,9 +71,11 @@ class _MyApp extends State<MyApp> {
                 accentColor: _getSecondaryColor(snapshot.data),
                 appBarTheme: AppBarTheme(
                   textTheme: TextTheme(
-                    title: appBarStyle(context),
+                    title: appBarStyle()
+                        .apply(color: Theme.of(context).primaryColor),
                     subhead: subHeadStyle(context),
-                    display2: coloredHeaderStyle(context),
+                    display2: coloredHeaderStyle()
+                        .apply(color: Theme.of(context).primaryColor),
                     button: TextStyle(
                       fontFamily: fontRoboto,
                       fontWeight: FontWeight.w500,
@@ -86,7 +84,9 @@ class _MyApp extends State<MyApp> {
                     ),
                   ),
                 ),
-                textTheme: TextTheme(title: TitleStyle)),
+                textTheme: TextTheme(
+                    title: titleStyle()
+                        .apply(color: Theme.of(context).primaryColor))),
             initialRoute: "/",
             routes: {
               "/": (context) {
@@ -96,13 +96,13 @@ class _MyApp extends State<MyApp> {
                 }
                 return WelcomeScreen();
               },
-              // WelcomeScreen.route: (context) => WelcomeScreen(),
+              WelcomeScreen.route: (context) => WelcomeScreen(),
               LoginScreen.route: (context) => LoginScreen(),
               SignUpScreen.route: (context) => SignUpScreen(),
               SuccessScreen.route: (context) => SuccessScreen(),
               HomeScreen.route: (context) => HomeScreen(),
               SelectCrimeScreen.route: (context) => SelectCrimeScreen(),
-              EnterDetailScreen.route: (context) => EnterDetailScreen(),
+              EnterDetailScreen.route: (context) => EnterDetailScreen(null),
               AlertsScreen.route: (context) => AlertsScreen(),
               AlertsScreen.route: (context) => AlertsScreen(),
               AlertsScreen.route: (context) => AlertsScreen(),

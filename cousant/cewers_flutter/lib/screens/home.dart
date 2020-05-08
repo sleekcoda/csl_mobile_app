@@ -1,5 +1,6 @@
 import 'package:cewers_flutter/custom_widgets/main-container.dart';
 import 'package:cewers_flutter/custom_widgets/tabs.dart';
+import 'package:cewers_flutter/screens/select-crime.dart';
 import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class HomeScreen extends StatelessWidget {
           children: <Widget>[
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, "/select-crime");
+                Navigator.pushNamed(context, SelectCrimeScreen.route);
               },
               child: Container(
                 width: 256,

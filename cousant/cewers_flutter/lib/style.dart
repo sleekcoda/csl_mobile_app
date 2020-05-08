@@ -13,20 +13,21 @@ const Color secondaryColor = Color.fromRGBO(29, 42, 56, 1);
 const Color benueColor = Color.fromRGBO(29, 43, 57, 1);
 const Color nasarawaColor = Color.fromRGBO(9, 80, 156, 1);
 
-TextStyle appBarStyle(BuildContext context) {
+TextStyle appBarStyle() {
   return TextStyle(
       fontFamily: fontPlayFair,
       fontWeight: FontWeight.w500,
-      color: secondaryColor,
       fontSize: mediumTextSize,
       fontStyle: FontStyle.italic);
 }
 
-const TitleStyle = TextStyle(
-    fontFamily: fontPlayFair,
-    fontWeight: FontWeight.w700,
-    fontSize: largeTextSize,
-    fontStyle: FontStyle.normal);
+TextStyle titleStyle() {
+  return TextStyle(
+      fontFamily: fontPlayFair,
+      fontWeight: FontWeight.w700,
+      fontSize: largeTextSize,
+      fontStyle: FontStyle.normal);
+}
 
 TextStyle subHeadStyle(BuildContext context) {
   return TextStyle(
@@ -35,9 +36,8 @@ TextStyle subHeadStyle(BuildContext context) {
       fontSize: 20);
 }
 
-TextStyle coloredHeaderStyle(BuildContext context) {
+TextStyle coloredHeaderStyle() {
   return TextStyle(
-    color: Theme.of(context).primaryColor,
     fontSize: 18,
     fontFamily: fontPlayFair,
     fontWeight: FontWeight.w700,

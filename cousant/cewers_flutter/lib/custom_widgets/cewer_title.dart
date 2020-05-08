@@ -4,17 +4,25 @@ class CewerAppBar extends StatelessWidget {
   final String italicsTitle;
   final String boldTitle;
   CewerAppBar([
-    this.italicsTitle,
     this.boldTitle,
+    this.italicsTitle,
   ]);
-  Widget build(BuildContext buildContext) {
+  Widget build(BuildContext context) {
     return Container(
       color: Colors.transparent,
       child: Row(
         children: <Widget>[
-          Text(boldTitle ?? "", style: Theme.of(buildContext).textTheme.title),
+          Text(boldTitle ?? "",
+              style: Theme.of(context)
+                  .textTheme
+                  .title
+                  .apply(color: Theme.of(context).primaryColor)),
           Text(italicsTitle ?? "CEWER",
-              style: Theme.of(buildContext).appBarTheme.textTheme.title),
+              style: Theme.of(context)
+                  .appBarTheme
+                  .textTheme
+                  .title
+                  .apply(color: Theme.of(context).primaryColor)),
         ],
       ),
     );

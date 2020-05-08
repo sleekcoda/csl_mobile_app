@@ -2,21 +2,23 @@ import 'package:cewers_flutter/controller/language.dart';
 import 'package:cewers_flutter/custom_widgets/state-card.dart';
 import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class SelectStateScreen extends StatefulWidget {
   _SelectStateScreen createState() => _SelectStateScreen();
 }
 
 class _SelectStateScreen extends State<SelectStateScreen> {
-  LanguageController _languageController;
+  GetIt _getIt = GetIt.instance;
+  Future future;
   void initState() {
     super.initState();
-    _languageController = new LanguageController();
+    future = _getIt<LanguageController>().getLanguage();
   }
 
   void dispose() {
     super.dispose();
-    _languageController.closeStream();
+    // _getIt<LanguageController>().closeStream();
   }
 
   Widget build(BuildContext context) {
@@ -32,32 +34,39 @@ class _SelectStateScreen extends State<SelectStateScreen> {
         title: Container(
           child: Row(
             children: <Widget>[
-              Text("Select ", style: TitleStyle),
+              Text("Select ",
+                  style: titleStyle()
+                      .apply(color: Theme.of(context).primaryColor)),
               Text(
                 "State ",
                 style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontStyle: FontStyle.italic,
-                    fontSize: largeTextSize),
+                  fontWeight: FontWeight.w400,
+                  fontStyle: FontStyle.italic,
+                  color: Theme.of(context).primaryColor,
+                  fontSize: largeTextSize,
+                ),
               ),
             ],
           ),
         ),
       ),
-      body: StreamBuilder(
-        stream: _languageController.stream,
+      body: FutureBuilder(
+        future: future,
         builder: (context, snapshot) => Container(
           height: MediaQuery.of(context).size.height,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[]
-              ..addAll(["benue", "taraba", "nasarawa"].map((state) => StateCard(
-                  stateName: state.toUpperCase(),
-                  stateMapUri: "assets/images/$state-map.png",
-                  action: () async {
-                    await _languageController.setLanguage(state);
-                    Navigator.of(context).pushNamed("/");
-                  }))),
+            children: <Widget>[]..addAll(
+                ["benue", "taraba", "nasarawa"].map(
+                  (state) => StateCard(
+                      stateName: state.toUpperCase(),
+                      stateMapUri: "assets/images/$state-map.png",
+                      action: () async {
+                        await _getIt<LanguageController>().setLanguage(state);
+                        Navigator.of(context).pushNamed("/");
+                      }),
+                ),
+              ),
           ),
         ),
       ),

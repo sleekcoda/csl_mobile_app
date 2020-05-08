@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class API {
-  Uri baseUrl = Uri(scheme: "http", host: "6203ee65.ngrok.io");
+  Uri baseUrl = Uri(scheme: "http", host: "165.22.80.212", port: 8000);
   Map<String, String> headers = {"Content-Type": "application/json"};
 
   Future<dynamic> postRequest(String path, Map<String, dynamic> data) async {

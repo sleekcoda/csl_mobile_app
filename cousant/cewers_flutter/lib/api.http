@@ -1,27 +1,23 @@
 
 ## BASE URL
-GET http://e55655a3.ngrok.io
+GET http://165.22.80.212:8000
 
 ###
 
-GET https://penaidapi.appspot.com
-
-###
-
-GET http://e55655a3.ngrok.io/api/user
+GET http://165.22.80.212:8000/api/user
 Content-Type: application/json
 
 ###
 
-POST http://e55655a3.ngrok.io/api/user
+POST http://165.22.80.212:8000/api/user
 Content-Type: application/json
 
 {
     "user" : {
 		"firstName": "Tester",
 		"lastName":"Testing", 
-		"phoneNumber": "09010001005",
-		"email": "tester5@ymail.com",
+		"phoneNumber": "09010001001",
+		"email": "tester1@ymail.com",
 		"password": "password",
 		"gender": "male",
         "userType": "citizen"
@@ -30,10 +26,32 @@ Content-Type: application/json
 
 ###
 
-POST http://e55655a3.ngrok.io/api/user/login
+POST http://165.22.80.212:8000/api/user/login
 Content-Type: application/json
 
 {
     "phoneNumber" : "09010001001",
-    "password" : "password"
 }
+
+
+###
+
+POST  http://165.22.80.212:8000/api/alert
+Content-Type: application/json
+
+{
+	"alert":{
+		"userId":"5eb3db3223a42d001d02b2c9",
+		"alertType":"crime",
+		"location":"6.4623144,3.4778092",
+		"priority": "medium",
+		"comment": "testing2",
+		"pictures": ["picture1.png", "picture2.png"],
+		"videos": ["video1.png", "video2.png"]
+	}
+}
+
+###
+
+GET http://165.22.80.212:8000/api/alert/5eb3db3223a42d001d02b2c9
+Content-Type: application/json
