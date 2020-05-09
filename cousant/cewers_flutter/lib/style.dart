@@ -53,10 +53,12 @@ const ButtonStyle = TextStyle(
 
 BoxDecoration bgDecoration([String uri]) {
   return BoxDecoration(
-    image: DecorationImage(
-      image: AssetImage(uri ?? ""),
-      fit: BoxFit.cover,
-    ),
+    image: uri == null
+        ? null
+        : DecorationImage(
+            image: AssetImage(uri),
+            fit: BoxFit.cover,
+          ),
   );
 }
 
@@ -65,6 +67,8 @@ InputDecoration formDecoration(String placeholder, String icon) =>
       border: InputBorder.none,
       focusedBorder: InputBorder.none,
       enabledBorder: InputBorder.none,
-      prefixIcon: ImageIcon(AssetImage(icon ?? "assets/icons/person.png")),
+      prefixIcon: icon == null
+          ? ImageIcon(AssetImage("assets/icons/person.png"))
+          : ImageIcon(AssetImage(icon)),
       hintText: placeholder,
     );

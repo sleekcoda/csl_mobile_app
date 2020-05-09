@@ -1,4 +1,5 @@
 import 'package:cewers_flutter/custom_widgets/cewer_title.dart';
+import 'package:cewers_flutter/custom_widgets/crime-select-indicator.dart';
 import 'package:cewers_flutter/custom_widgets/main-container.dart';
 import 'package:cewers_flutter/custom_widgets/tabs.dart';
 import 'package:cewers_flutter/screens/enter-details.dart';
@@ -34,58 +35,76 @@ class _SelectCrimeScreen extends State<SelectCrimeScreen> {
                       children: <Widget>[
                         CarouselSlider(
                           options: CarouselOptions(
-                            onPageChanged: (index, reason) {},
+                            onPageChanged: (index, reason) {
+                              setState(() {
+                                for (var i = 0; i < iconList.length; i++) {
+                                  iconList[i].active = false;
+                                  iconList[index].active = true;
+                                }
+                              });
+                            },
                             autoPlay: false,
                             aspectRatio: 1.0,
                             enlargeCenterPage: true,
                           ),
-                          items: []..addAll(iconList.map(
-                              (image) => GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => EnterDetailScreen(
-                                        image['name'],
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: Container(
-                                  height: 600,
-                                  margin: EdgeInsets.all(5.0),
-                                  child: ClipRRect(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.0)),
-                                    child: Stack(
-                                      overflow: Overflow.visible,
-                                      fit: StackFit.expand,
-                                      children: <Widget>[
-                                        SafeArea(
-                                          minimum: EdgeInsets.only(bottom: 50),
-                                          child: Image.asset(
-                                            "assets/icons/${image['icon']}",
-                                            fit: BoxFit.contain,
-                                            height: 400,
-                                          ),
+                          items: []..addAll(
+                              iconList.map(
+                                (image) => GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => EnterDetailScreen(
+                                          image.name,
                                         ),
-                                        Positioned(
-                                          top: 120,
-                                          left: 28,
-                                          child: Text(image["name"],
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle
-                                                  .apply(
-                                                      color: Theme.of(context)
-                                                          .primaryColor)),
-                                        )
-                                      ],
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 600,
+                                    margin: EdgeInsets.all(5.0),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                      child: Stack(
+                                        overflow: Overflow.visible,
+                                        fit: StackFit.expand,
+                                        children: <Widget>[
+                                          SafeArea(
+                                            minimum:
+                                                EdgeInsets.only(bottom: 50),
+                                            child: Image.asset(
+                                              "assets/icons/${image.icon}",
+                                              fit: BoxFit.contain,
+                                              height: 400,
+                                            ),
+                                          ),
+                                          Positioned(
+                                            top: 120,
+                                            left: 28,
+                                            child: Text(image.name,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .subtitle
+                                                    .apply(
+                                                        color: Theme.of(context)
+                                                            .primaryColor)),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            )),
+                            ),
+                        ),
+                        Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[]..addAll(iconList
+                                .map((icon) => SelectIndicator(icon.active))),
+                          ),
                         ),
                         Align(
                           heightFactor: 2,
@@ -108,12 +127,19 @@ class _SelectCrimeScreen extends State<SelectCrimeScreen> {
     );
   }
 
-  static List<Map<String, String>> iconList = [
-    {"icon": "herdsmen.png", "name": "Herdsmen"},
-    {"icon": "health.png", "name": "Health"},
-    {"icon": "violence.png", "name": "Violence"},
-    {"icon": "crime.png", "name": "Crime"},
-    {"icon": "fire.png", "name": "Fire"},
+  List<IconList> iconList = [
+    IconList("herdsmen.png", "Herdsmen", true),
+    IconList("health.png", "Health", false),
+    IconList("violence.png", "Violence", false),
+    IconList("crime.png", "Crime", false),
+    IconList("fire.png", "Fire   ", false),
   ];
   // final List<Widget> imageSliders = ;
+}
+
+class IconList {
+  final String icon;
+  final String name;
+  bool active;
+  IconList(this.icon, this.name, this.active);
 }

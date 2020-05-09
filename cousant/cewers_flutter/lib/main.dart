@@ -1,12 +1,10 @@
 import 'package:cewers_flutter/controller/language.dart';
-import 'package:cewers_flutter/screens/alert.dart';
 import 'package:cewers_flutter/screens/enter-details.dart';
 import 'package:cewers_flutter/screens/home.dart';
 import 'package:cewers_flutter/screens/login.dart';
 import 'package:cewers_flutter/screens/select-crime.dart';
 import 'package:cewers_flutter/screens/select-state.dart';
 import 'package:cewers_flutter/screens/sign_up.dart';
-import 'package:cewers_flutter/screens/success.dart';
 import 'package:cewers_flutter/screens/welcome.dart';
 import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
@@ -62,53 +60,70 @@ class _MyApp extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: future,
-        builder: (context, snapshot) {
-          return MaterialApp(
-            title: 'Flutter Demo',
-            theme: ThemeData(
-                primaryColor: _getPrimaryColor(snapshot.data),
-                accentColor: _getSecondaryColor(snapshot.data),
-                appBarTheme: AppBarTheme(
-                  textTheme: TextTheme(
-                    title: appBarStyle()
-                        .apply(color: Theme.of(context).primaryColor),
-                    subhead: subHeadStyle(context),
-                    display2: coloredHeaderStyle()
-                        .apply(color: Theme.of(context).primaryColor),
-                    button: TextStyle(
-                      fontFamily: fontRoboto,
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).primaryColor,
-                      fontSize: 28,
+      future: future,
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.done:
+            return MaterialApp(
+              title: 'Flutter Demo',
+              theme: ThemeData(
+                  primaryColor: _getPrimaryColor(snapshot.data),
+                  accentColor: _getSecondaryColor(snapshot.data),
+                  appBarTheme: AppBarTheme(
+                    textTheme: TextTheme(
+                      title: appBarStyle()
+                          .apply(color: Theme.of(context).primaryColor),
+                      subhead: subHeadStyle(context),
+                      display2: coloredHeaderStyle()
+                          .apply(color: Theme.of(context).primaryColor),
+                      button: TextStyle(
+                        fontFamily: fontRoboto,
+                        fontWeight: FontWeight.w500,
+                        color: Theme.of(context).primaryColor,
+                        fontSize: 28,
+                      ),
                     ),
                   ),
-                ),
-                textTheme: TextTheme(
-                    title: titleStyle()
-                        .apply(color: Theme.of(context).primaryColor))),
-            initialRoute: "/",
-            routes: {
-              "/": (context) {
-                print("${snapshot.data} + ");
-                if (snapshot.data == "" || snapshot.data == null) {
-                  return SelectStateScreen();
-                }
-                return WelcomeScreen();
+                  textTheme: TextTheme(
+                      title: titleStyle()
+                          .apply(color: Theme.of(context).primaryColor))),
+              initialRoute: "/",
+              routes: {
+                "/": (context) {
+                  print("${snapshot.data} + ");
+                  if (snapshot.data == "" || snapshot.data == null) {
+                    return SelectStateScreen();
+                  }
+                  return WelcomeScreen();
+                },
+                WelcomeScreen.route: (context) => WelcomeScreen(),
+                LoginScreen.route: (context) => LoginScreen(),
+                SignUpScreen.route: (context) => SignUpScreen(),
+                HomeScreen.route: (context) => HomeScreen(),
+                SelectCrimeScreen.route: (context) => SelectCrimeScreen(),
+                EnterDetailScreen.route: (context) => EnterDetailScreen(null),
               },
-              WelcomeScreen.route: (context) => WelcomeScreen(),
-              LoginScreen.route: (context) => LoginScreen(),
-              SignUpScreen.route: (context) => SignUpScreen(),
-              SuccessScreen.route: (context) => SuccessScreen(),
-              HomeScreen.route: (context) => HomeScreen(),
-              SelectCrimeScreen.route: (context) => SelectCrimeScreen(),
-              EnterDetailScreen.route: (context) => EnterDetailScreen(null),
-              AlertsScreen.route: (context) => AlertsScreen(),
-              AlertsScreen.route: (context) => AlertsScreen(),
-              AlertsScreen.route: (context) => AlertsScreen(),
-            },
-            debugShowCheckedModeBanner: false,
-          );
-        });
+              debugShowCheckedModeBanner: false,
+            );
+            break;
+          case ConnectionState.waiting:
+            return Container(
+              child: Text("Loading..."),
+            );
+            break;
+          case ConnectionState.none:
+            return Container(
+              child: Text("Loading..."),
+            );
+            break;
+          case ConnectionState.active:
+            return Container(
+              child: Text("Loading..."),
+            );
+            break;
+          default:
+        }
+      },
+    );
   }
 }

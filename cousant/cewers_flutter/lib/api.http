@@ -1,24 +1,21 @@
 
-## BASE URL
-GET http://165.22.80.212:8000
+## BASE URL http://bb7fee11.ngrok.io
+GET 
 
 ###
 
-GET http://165.22.80.212:8000/api/user
+GET http://bb7fee11.ngrok.io/api/user
 Content-Type: application/json
 
 ###
 
-POST http://165.22.80.212:8000/api/user
+POST http://bb7fee11.ngrok.io/api/user
 Content-Type: application/json
 
 {
     "user" : {
-		"firstName": "Tester",
-		"lastName":"Testing", 
-		"phoneNumber": "09010001001",
-		"email": "tester1@ymail.com",
-		"password": "password",
+		"fullName": "Tester",
+		"phoneNumber": "08010000002",
 		"gender": "male",
         "userType": "citizen"
 	}
@@ -26,17 +23,17 @@ Content-Type: application/json
 
 ###
 
-POST http://165.22.80.212:8000/api/user/login
+POST http://bb7fee11.ngrok.io/api/user/login
 Content-Type: application/json
 
 {
-    "phoneNumber" : "09010001001",
+    "phoneNumber" : "09010001001"
 }
 
 
 ###
 
-POST  http://165.22.80.212:8000/api/alert
+POST  http://bb7fee11.ngrok.io/api/alert
 Content-Type: application/json
 
 {
@@ -53,5 +50,5 @@ Content-Type: application/json
 
 ###
 
-GET http://165.22.80.212:8000/api/alert/5eb3db3223a42d001d02b2c9
+GET http://bb7fee11.ngrok.io/api/alerts/5eb3db3223a42d001d02b2c9
 Content-Type: application/json

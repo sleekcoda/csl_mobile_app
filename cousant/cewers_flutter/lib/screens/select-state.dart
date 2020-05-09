@@ -1,5 +1,6 @@
 import 'package:cewers_flutter/controller/language.dart';
 import 'package:cewers_flutter/custom_widgets/state-card.dart';
+import 'package:cewers_flutter/main.dart';
 import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -63,7 +64,8 @@ class _SelectStateScreen extends State<SelectStateScreen> {
                       stateMapUri: "assets/images/$state-map.png",
                       action: () async {
                         await _getIt<LanguageController>().setLanguage(state);
-                        Navigator.of(context).pushNamed("/");
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => MyApp()));
                       }),
                 ),
               ),

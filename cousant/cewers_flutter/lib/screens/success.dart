@@ -1,10 +1,13 @@
 import 'package:cewers_flutter/custom_widgets/button.dart';
 import 'package:cewers_flutter/custom_widgets/main-container.dart';
+import 'package:cewers_flutter/screens/login.dart';
 import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
 
 class SuccessScreen extends StatelessWidget {
   static String route = "/success";
+  final String username;
+  SuccessScreen([this.username]);
   Widget build(BuildContext context) {
     return MainContainer(
       decoration: bgDecoration("assets/backgrounds/bg-cloud.png"),
@@ -13,7 +16,8 @@ class SuccessScreen extends StatelessWidget {
         child: ActionButtonBar(
           text: "GOTO LOGIN",
           action: () {
-            Navigator.pushNamed(context, "/login");
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => LoginScreen(username)));
           },
         ),
       ),
