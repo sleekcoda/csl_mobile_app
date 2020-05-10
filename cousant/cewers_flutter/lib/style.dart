@@ -62,13 +62,14 @@ BoxDecoration bgDecoration([String uri]) {
   );
 }
 
-InputDecoration formDecoration(String placeholder, String icon) =>
+InputDecoration formDecoration(String placeholder, String icon,
+        [String errorMessage]) =>
     InputDecoration(
-      border: InputBorder.none,
-      focusedBorder: InputBorder.none,
-      enabledBorder: InputBorder.none,
-      prefixIcon: icon == null
-          ? ImageIcon(AssetImage("assets/icons/person.png"))
-          : ImageIcon(AssetImage(icon)),
-      hintText: placeholder,
-    );
+        border: InputBorder.none,
+        focusedBorder: InputBorder.none,
+        enabledBorder: InputBorder.none,
+        prefixIcon: icon == null
+            ? ImageIcon(AssetImage("assets/icons/person.png"))
+            : ImageIcon(AssetImage(icon)),
+        hintText: placeholder,
+        errorText: errorMessage ?? null);

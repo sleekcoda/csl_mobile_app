@@ -1,7 +1,7 @@
+import 'package:cewers_flutter/bloc/login.dart';
 import 'package:cewers_flutter/custom_widgets/button.dart';
 import 'package:cewers_flutter/custom_widgets/form-field.dart';
 import 'package:cewers_flutter/custom_widgets/main-container.dart';
-import 'package:cewers_flutter/controller/api.dart';
 import 'package:cewers_flutter/screens/home.dart';
 import 'package:cewers_flutter/screens/sign_up.dart';
 import 'package:flutter/material.dart';
@@ -9,62 +9,20 @@ import 'package:cewers_flutter/style.dart';
 
 class LoginScreen extends StatefulWidget {
   static String route = "/login";
-  final String username;
-  LoginScreen([this.username]);
+  final String phoneNumber;
+  LoginScreen([this.phoneNumber]);
   _LoginScreen createState() => _LoginScreen();
 }
 
 class _LoginScreen extends State<LoginScreen> {
-  TextEditingController username = new TextEditingController();
-  APIController loginController = new APIController();
+  TextEditingController phoneNumber = new TextEditingController();
+  LoginBloc _loginBloc = new LoginBloc();
 
   final loginFormKey = GlobalKey<FormState>();
 
   void initState() {
     super.initState();
-    username.text = widget.username;
-  }
-
-  login(BuildContext context) {
-    loginFormKey.currentState.save();
-    if (loginFormKey.currentState.validate()) {
-      Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text("Please wait...."),
-        backgroundColor: Colors.black,
-      ));
-      var payload = isEmail(username.text)
-          ? {"email": username.text}
-          : {"phoneNumber": username.text};
-      loginController.login(payload).then((success) {
-        if (success) {
-          Navigator.of(context).pushNamed(HomeScreen.route);
-        } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => SignUpScreen(
-                username.text,
-              ),
-            ),
-          );
-        }
-      }).catchError((onError) {
-        print(onError);
-        Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text("Unexpected error occured"),
-          backgroundColor: Colors.red,
-        ));
-      });
-    }
-  }
-
-  bool isEmail(String em) {
-    String p =
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-
-    RegExp regExp = new RegExp(p);
-
-    return regExp.hasMatch(em);
+    phoneNumber.text = widget.phoneNumber;
   }
 
   Widget build(BuildContext context) {
@@ -103,19 +61,23 @@ class _LoginScreen extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                FormTextField(
-                  textFormField: TextFormField(
-                    controller: username,
-                    decoration:
-                        formDecoration("Phone", "assets/icons/envelope.png"),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Enter your phone number or email';
-                      }
-                      return null;
-                    },
-                  ),
-                )
+                StreamBuilder(
+                    stream: _loginBloc.phoneNumber,
+                    builder: (context, snapshot) => FormTextField(
+                          textFormField: TextFormField(
+                            controller: phoneNumber,
+                            keyboardType: TextInputType.phone,
+                            decoration: formDecoration(
+                                "Phone number",
+                                "assets/icons/envelope.png",
+                                snapshot.hasError ? snapshot.error : null),
+                            onChanged: _loginBloc.validate,
+                            validator: (value) {
+                              _loginBloc.validate(value);
+                              return snapshot.hasError ? snapshot.error : null;
+                            },
+                          ),
+                        ))
               ]),
             ),
           ),
@@ -151,12 +113,45 @@ class _LoginScreen extends State<LoginScreen> {
     );
   }
 
-  navigate(bool loginStatus) {}
+  login(BuildContext context) {
+    loginFormKey.currentState.save();
+    if (loginFormKey.currentState.validate()) {
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text("Please wait...."),
+        backgroundColor: Colors.black,
+      ));
+      var payload = {"phoneNumber": phoneNumber.text};
+      _loginBloc.login(payload).then((success) {
+        if (success is bool) {
+          success
+              ? Navigator.of(context).pushNamed(HomeScreen.route)
+              : Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SignUpScreen(
+                      phoneNumber.text,
+                    ),
+                  ),
+                );
+        } else {
+          Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text(success.message),
+            backgroundColor: Colors.red,
+          ));
+        }
+      }).catchError((onError) {
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text("Unexpected error occured"),
+          backgroundColor: Colors.red,
+        ));
+      });
+    }
+  }
 
   @override
   void dispose() {
-    loginFormKey.currentState.dispose();
-    username.dispose();
+    loginFormKey.currentState?.dispose();
+    phoneNumber?.dispose();
     super.dispose();
   }
 }

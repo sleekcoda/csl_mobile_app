@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cewers_flutter/model/error.dart';
 import 'package:http/http.dart' as http;
 
 class API {
@@ -10,22 +11,27 @@ class API {
     var body = json.encode(data);
     http.Response response =
         await http.post("$baseUrl/$path", headers: headers, body: body);
-    return response;
+    if (response.statusCode == 200)
+      return response.body;
+    else
+      return APIError("Server error");
   }
 
   Future<dynamic> getRequest(String path) async {
-    var response = await http.post("$baseUrl/$path", headers: headers);
-    print("${response.statusCode}");
-    print("${response.body}");
-    return response;
+    final response = await http.post("$baseUrl/$path", headers: headers);
+    if (response.statusCode == 200)
+      return response.body;
+    else
+      return APIError("Location not found");
   }
 
   Future<dynamic> putRequest(String path, Map<String, String> data) async {
-    var body = json.encode(data);
+    final body = json.encode(data);
     var response =
         await http.put("$baseUrl/$path", headers: headers, body: body);
-    print("${response.statusCode}");
-    print("${response.body}");
-    return response;
+    if (response.statusCode == 200)
+      return response.body;
+    else
+      return APIError("Location not found");
   }
 }

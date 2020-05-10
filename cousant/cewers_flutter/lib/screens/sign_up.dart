@@ -84,7 +84,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                                     "Phone number*", "assets/icons/phone.png"),
                                 validator: (value) {
                                   return value.isEmpty
-                                      ? "Email/phone is required"
+                                      ? "Phone number is required"
                                       : null;
                                 },
                               ),
@@ -94,11 +94,6 @@ class _SignUpScreen extends State<SignUpScreen> {
                                 controller: email,
                                 decoration: formDecoration("Email address",
                                     "assets/icons/envelope.png"),
-                                validator: (value) {
-                                  return value.isEmpty
-                                      ? "Email/phone is required"
-                                      : null;
-                                },
                               ),
                             ),
                             FormTextField(
@@ -112,11 +107,6 @@ class _SignUpScreen extends State<SignUpScreen> {
                                   hintText: "Address",
                                   // border: InputBorder(borderSide: BorderSide.none),
                                 ),
-                                validator: (value) {
-                                  return value.isEmpty
-                                      ? "Email/phone is required"
-                                      : null;
-                                },
                               ),
                             ),
                             Row(children: [
@@ -171,10 +161,11 @@ class _SignUpScreen extends State<SignUpScreen> {
           "email": email.text,
           "phoneNumber": phoneNumber.text,
           "gender": gender,
+          "address": address.text,
           "userType": "citizen",
         }
       };
-
+      print(payload);
       /**
        * Confirm password combination
        */
@@ -202,20 +193,11 @@ class _SignUpScreen extends State<SignUpScreen> {
     }
   }
 
-  bool isEmail(String em) {
-    String p =
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-
-    RegExp regExp = new RegExp(p);
-
-    return regExp.hasMatch(em);
-  }
-
   void dispose() {
-    _signUpKey.currentState.dispose();
-    fullname.dispose();
-    email.dispose();
-    phoneNumber.dispose();
+    _signUpKey.currentState?.dispose();
+    fullname?.dispose();
+    email?.dispose();
+    phoneNumber?.dispose();
 
     super.dispose();
   }

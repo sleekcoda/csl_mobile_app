@@ -30,7 +30,7 @@ class _EnterDetailScreen extends State<EnterDetailScreen> {
   }
 
   void dispose() {
-    details.dispose();
+    details?.dispose();
     super.dispose();
   }
 
@@ -57,8 +57,12 @@ class _EnterDetailScreen extends State<EnterDetailScreen> {
                   "videos": ["video1.png", "video2.png"]
                 }
               };
-              var response = await _reportController.sendReport(payload);
-              print(response);
+              _reportController.sendReport(payload).then((value) {
+                print(value);
+              }).catchError((onError) {
+                print(onError);
+              });
+              // print(response);
               // Navigator.push(
               //   context,
               //   MaterialPageRoute(

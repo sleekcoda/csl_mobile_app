@@ -110,9 +110,9 @@ class _SelectCrimeScreen extends State<SelectCrimeScreen> {
                           heightFactor: 2,
                           alignment: Alignment.center,
                           child: Text(
-                            "Scroll left or right",
+                            "< Swipe left or right >",
                             style: TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 15),
+                                fontWeight: FontWeight.w700, fontSize: 14),
                           ),
                         )
                       ],

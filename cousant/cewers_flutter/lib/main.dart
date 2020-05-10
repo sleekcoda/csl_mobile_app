@@ -65,7 +65,7 @@ class _MyApp extends State<MyApp> {
         switch (snapshot.connectionState) {
           case ConnectionState.done:
             return MaterialApp(
-              title: 'Flutter Demo',
+              title: 'CEWERS.',
               theme: ThemeData(
                   primaryColor: _getPrimaryColor(snapshot.data),
                   accentColor: _getSecondaryColor(snapshot.data),
@@ -91,7 +91,7 @@ class _MyApp extends State<MyApp> {
               routes: {
                 "/": (context) {
                   print("${snapshot.data} + ");
-                  if (snapshot.data == "" || snapshot.data == null) {
+                  if (snapshot.data == null) {
                     return SelectStateScreen();
                   }
                   return WelcomeScreen();
@@ -122,6 +122,10 @@ class _MyApp extends State<MyApp> {
             );
             break;
           default:
+            return Container(
+              child:
+                  Text("You're not suppose to see this. Something went wrong."),
+            );
         }
       },
     );

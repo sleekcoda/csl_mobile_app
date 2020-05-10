@@ -1,28 +1,31 @@
 
 ## BASE URL http://bb7fee11.ngrok.io
-GET 
+
+# Get me the list a valid alert types
+GET http://bb7fee11.ngrok.io/api/enums
 
 ###
-
+# Get list of registered users
 GET http://bb7fee11.ngrok.io/api/user
 Content-Type: application/json
 
 ###
-
+# Create user
 POST http://bb7fee11.ngrok.io/api/user
 Content-Type: application/json
 
 {
     "user" : {
 		"fullName": "Tester",
-		"phoneNumber": "08010000002",
+		"phoneNumber": "08010000004",
 		"gender": "male",
+		"address": "Some address",
         "userType": "citizen"
 	}
 }
 
 ###
-
+# Login user
 POST http://bb7fee11.ngrok.io/api/user/login
 Content-Type: application/json
 
@@ -49,6 +52,6 @@ Content-Type: application/json
 }
 
 ###
-
+# Get lsit of alerts via user ID
 GET http://bb7fee11.ngrok.io/api/alerts/5eb3db3223a42d001d02b2c9
 Content-Type: application/json
