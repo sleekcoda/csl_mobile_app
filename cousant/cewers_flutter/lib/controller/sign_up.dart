@@ -7,7 +7,7 @@ class SignUpController {
   API api = new API();
   Future<APIResponseModel> register(
       Map<String, Map<String, String>> data) async {
-    http.Response response = await api.postRequest("api/user", data);
+    http.Response response = await api.postRequest("user", data);
     return APIResponseModel.fromJson(json.decode(response.body));
   }
 }

@@ -1,10 +1,5 @@
-import 'package:cewers_flutter/controller/language.dart';
-import 'package:cewers_flutter/screens/enter-details.dart';
-import 'package:cewers_flutter/screens/home.dart';
-import 'package:cewers_flutter/screens/login.dart';
-import 'package:cewers_flutter/screens/select-crime.dart';
+import 'package:cewers_flutter/controller/state.dart';
 import 'package:cewers_flutter/screens/select-state.dart';
-import 'package:cewers_flutter/screens/sign_up.dart';
 import 'package:cewers_flutter/screens/welcome.dart';
 import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +8,7 @@ import 'package:get_it/get_it.dart';
 GetIt _getIt = GetIt.instance;
 
 void main() {
-  _getIt.registerSingleton<LanguageController>(LanguageController(),
+  _getIt.registerSingleton<StateController>(StateController(),
       signalsReady: true);
   runApp(MyApp());
 }
@@ -49,7 +44,7 @@ class _MyApp extends State<MyApp> {
 
   @override
   void initState() {
-    future = _getIt<LanguageController>().getLanguage();
+    future = _getIt<StateController>().getState();
     super.initState();
   }
 
@@ -87,47 +82,37 @@ class _MyApp extends State<MyApp> {
                   textTheme: TextTheme(
                       title: titleStyle()
                           .apply(color: Theme.of(context).primaryColor))),
-              initialRoute: "/",
-              routes: {
-                "/": (context) {
-                  print("${snapshot.data} + ");
-                  if (snapshot.data == null) {
-                    return SelectStateScreen();
-                  }
-                  return WelcomeScreen();
-                },
-                WelcomeScreen.route: (context) => WelcomeScreen(),
-                LoginScreen.route: (context) => LoginScreen(),
-                SignUpScreen.route: (context) => SignUpScreen(),
-                HomeScreen.route: (context) => HomeScreen(),
-                SelectCrimeScreen.route: (context) => SelectCrimeScreen(),
-                EnterDetailScreen.route: (context) => EnterDetailScreen(null),
-              },
+              home: (snapshot.data == null)
+                  ? SelectStateScreen()
+                  : WelcomeScreen(),
               debugShowCheckedModeBanner: false,
             );
             break;
           case ConnectionState.waiting:
-            return Container(
-              child: Text("Loading..."),
-            );
+            return _loading;
             break;
           case ConnectionState.none:
-            return Container(
-              child: Text("Loading..."),
-            );
+            return _loading;
             break;
           case ConnectionState.active:
-            return Container(
-              child: Text("Loading..."),
-            );
+            return _loading;
             break;
           default:
-            return Container(
-              child:
-                  Text("You're not suppose to see this. Something went wrong."),
-            );
+            return _loading;
         }
       },
     );
   }
+
+  Widget _loading = MaterialApp(
+    title: 'CEWERS.',
+    home: Container(
+      child: Center(
+        child: Row(children: [
+          CircularProgressIndicator(),
+          Text("Loading..."),
+        ]),
+      ),
+    ),
+  );
 }

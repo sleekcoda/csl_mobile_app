@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:cewers_flutter/style.dart';
 
 class LoginScreen extends StatefulWidget {
-  static String route = "/login";
   final String phoneNumber;
   LoginScreen([this.phoneNumber]);
   _LoginScreen createState() => _LoginScreen();
@@ -62,22 +61,23 @@ class _LoginScreen extends State<LoginScreen> {
                   ),
                 ),
                 StreamBuilder(
-                    stream: _loginBloc.phoneNumber,
-                    builder: (context, snapshot) => FormTextField(
-                          textFormField: TextFormField(
-                            controller: phoneNumber,
-                            keyboardType: TextInputType.phone,
-                            decoration: formDecoration(
-                                "Phone number",
-                                "assets/icons/envelope.png",
-                                snapshot.hasError ? snapshot.error : null),
-                            onChanged: _loginBloc.validate,
-                            validator: (value) {
-                              _loginBloc.validate(value);
-                              return snapshot.hasError ? snapshot.error : null;
-                            },
-                          ),
-                        ))
+                  stream: _loginBloc.phoneNumber,
+                  builder: (context, snapshot) => FormTextField(
+                    textFormField: TextFormField(
+                      controller: phoneNumber,
+                      keyboardType: TextInputType.phone,
+                      decoration: formDecoration(
+                          "Phone number",
+                          "assets/icons/envelope.png",
+                          snapshot.hasError ? snapshot.error : null),
+                      onChanged: _loginBloc.validate,
+                      validator: (value) {
+                        _loginBloc.validate(value);
+                        return snapshot.hasError ? snapshot.error : null;
+                      },
+                    ),
+                  ),
+                )
               ]),
             ),
           ),
@@ -89,7 +89,10 @@ class _LoginScreen extends State<LoginScreen> {
                 Text("New User?"),
                 GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, SignUpScreen.route);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SignUpScreen()));
                     },
                     child: SafeArea(
                         minimum: EdgeInsets.only(left: 5),
@@ -124,7 +127,8 @@ class _LoginScreen extends State<LoginScreen> {
       _loginBloc.login(payload).then((success) {
         if (success is bool) {
           success
-              ? Navigator.of(context).pushNamed(HomeScreen.route)
+              ? Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()))
               : Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -140,6 +144,7 @@ class _LoginScreen extends State<LoginScreen> {
           ));
         }
       }).catchError((onError) {
+        print(onError);
         Scaffold.of(context).showSnackBar(SnackBar(
           content: Text("Unexpected error occured"),
           backgroundColor: Colors.red,

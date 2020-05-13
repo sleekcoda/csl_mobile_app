@@ -1,22 +1,25 @@
+import 'package:cewers_flutter/screens/alerts.dart';
+import 'package:cewers_flutter/screens/home.dart';
 import 'package:flutter/material.dart';
 
 class MainTab {
   final String icon;
   final String name;
-  final String route;
-  MainTab(this.name, this.icon, this.route);
+  final Widget screen;
+  MainTab(this.name, this.icon, this.screen);
 
   static fetchAllTabs(BuildContext context) {
     return [
-      MainTab("home", "home.png", "/login"),
-      MainTab("Alerts", "alert.png", "/alert"),
-      MainTab("Map", "pin.png", "/map"),
-      MainTab("Feedback", "info.png", "/feedback"),
+      MainTab("home", "home.png", HomeScreen()),
+      MainTab("Alerts", "alert.png", AlertListScreen()),
+      MainTab("Map", "pin.png", null),
+      MainTab("Feedback", "info.png", null),
     ]
         .map(
           (tab) => GestureDetector(
             onTap: () {
-              Navigator.of(context).pushNamed(tab.route);
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => tab.screen));
             },
             child: Container(
               height: 75,

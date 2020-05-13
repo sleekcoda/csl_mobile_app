@@ -23,7 +23,7 @@ class LoginBloc with Validator implements Bloc {
   }
 
   Future<dynamic> login(Map<String, String> data) async {
-    final response = await api.postRequest("api/user/login", data);
+    final response = await api.postRequest("user/login", data);
     if (response is APIError) {
       return response;
     } else {

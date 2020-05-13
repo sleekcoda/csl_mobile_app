@@ -1,4 +1,4 @@
-import 'package:cewers_flutter/controller/signup.dart';
+import 'package:cewers_flutter/controller/sign_up.dart';
 import 'package:cewers_flutter/custom_widgets/button.dart';
 import 'package:cewers_flutter/custom_widgets/form-field.dart';
 import 'package:cewers_flutter/custom_widgets/main-container.dart';
@@ -18,13 +18,42 @@ class _SignUpScreen extends State<SignUpScreen> {
   TextEditingController fullname = new TextEditingController();
   TextEditingController email = new TextEditingController();
   TextEditingController phoneNumber = new TextEditingController();
-  String gender;
   TextEditingController address = new TextEditingController();
   SignUpController signUpController = new SignUpController();
+  List<Map<String, List<Map<String, List<String>>>>> allLocalGovernment = [
+    {
+      "benue": [
+        {
+          "Agatu": ["Aila", "Usha"]
+        },
+        {
+          "Buruku": ["Binev", "Mbaya"]
+        },
+        {
+          "Guma": ["Daudu", "Gbajimba"]
+        },
+        {
+          "Kwande": ["Moon", "Yaav"]
+        },
+        {
+          "Logo": ["Tombo-oAyilamo", "Tswarev-Ukemberagya"]
+        }
+      ]
+    }
+  ];
+
+  String gender;
+  String localGovernment;
+  String community;
 
   void initState() {
     super.initState();
     phoneNumber.text = widget.username;
+    setState(() {
+      gender = "male";
+      localGovernment = "-";
+      community = "-";
+    });
   }
 
   Widget build(BuildContext context) {
@@ -109,27 +138,53 @@ class _SignUpScreen extends State<SignUpScreen> {
                                 ),
                               ),
                             ),
+                            Row(
+                              children: [
+                                Radio(
+                                  value: "male",
+                                  groupValue: gender,
+                                  onChanged: _genderHandler,
+                                ),
+                                GestureDetector(
+                                    onTap: () {
+                                      _genderHandler("male");
+                                    },
+                                    child: Text("Male")),
+                                Radio(
+                                  value: "female",
+                                  groupValue: gender,
+                                  onChanged: _genderHandler,
+                                ),
+                                GestureDetector(
+                                    onTap: () {
+                                      _genderHandler("female");
+                                    },
+                                    child: Text("Female")),
+                              ],
+                            ),
                             Row(children: [
-                              Radio(
-                                value: "male",
-                                groupValue: gender,
-                                onChanged: _genderHandler,
-                              ),
-                              GestureDetector(
-                                  onTap: () {
-                                    _genderHandler("male");
-                                  },
-                                  child: Text("Male")),
-                              Radio(
-                                value: "female",
-                                groupValue: gender,
-                                onChanged: _genderHandler,
-                              ),
-                              GestureDetector(
-                                  onTap: () {
-                                    _genderHandler("female");
-                                  },
-                                  child: Text("Female")),
+                              Text("Local government"),
+                              DropdownButton(
+                                  hint: Text("Select"),
+                                  items: allLocalGovernment[0]["benue"]
+                                      .map((l) => DropdownMenuItem<String>(
+                                            value: l.keys.toList()[0],
+                                            child: new Text(localGovernment),
+                                          )),
+                                  onChanged: setLocalGovernment)
+                            ]),
+                            Row(children: [
+                              Text("Select"),
+                              DropdownButton(
+                                hint: Text("Community"),
+                                items: allLocalGovernment[0]["benue"]
+                                    .map((local) => DropdownMenuItem<String>(
+                                          value: local.keys.toList()[0],
+                                          child: new Text(community),
+                                        ))
+                                    .toList(),
+                                onChanged: setCommunity,
+                              )
                             ]),
                           ],
                         ),
@@ -144,6 +199,18 @@ class _SignUpScreen extends State<SignUpScreen> {
   void _genderHandler(String value) {
     setState(() {
       gender = value;
+    });
+  }
+
+  setLocalGovernment(String lga) {
+    setState(() {
+      localGovernment = lga;
+    });
+  }
+
+  setCommunity(String comm) {
+    setState(() {
+      community = comm;
     });
   }
 

@@ -21,7 +21,7 @@ class _AlertListScreen extends State<AlertListScreen> {
         child: FutureBuilder(
           future: future,
           builder: (context, snapshot) => ListView(
-            children: <Widget>[]..addAll(snapshot.data.map(() => Card(
+            children: <Widget>[]..addAll(snapshot?.data?.map(() => Card(
                   child: Container(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

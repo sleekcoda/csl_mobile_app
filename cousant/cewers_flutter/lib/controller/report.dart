@@ -4,7 +4,7 @@ import 'package:cewers_flutter/service/api.dart';
 import 'dart:convert';
 
 class ReportController {
-  API api = new API();
+  API _api = new API();
 
   Future<String> getUserId() async {
     var storage = new StorageController();
@@ -13,7 +13,7 @@ class ReportController {
   }
 
   Future<APIResponseModel> sendReport(Map<String, dynamic> data) async {
-    var response = await api.postRequest("api/alert", data);
+    var response = await _api.postRequest("alert", data);
     var responseBody = json.decode(response.body);
     print(responseBody);
 
@@ -22,7 +22,7 @@ class ReportController {
 
   Future<APIResponseModel> getReport() async {
     String userId = await getUserId();
-    var response = await api.getRequest("api/alerts/$userId");
+    var response = await _api.getRequest("alerts/$userId");
     APIResponseModel responseBody =
         APIResponseModel.fromJson(json.decode(response.body));
     print(response.message);

@@ -1,17 +1,20 @@
 // import 'package:cewers_flutter/controller/location.dart';
+
+import 'dart:io';
+
+import 'package:cewers_flutter/bloc/send-report.dart';
 import 'package:cewers_flutter/controller/location.dart';
 import 'package:cewers_flutter/controller/report.dart';
 import 'package:cewers_flutter/controller/storage.dart';
 import 'package:cewers_flutter/custom_widgets/button.dart';
 import 'package:cewers_flutter/custom_widgets/cewer_title.dart';
 import 'package:cewers_flutter/custom_widgets/main-container.dart';
-// import 'package:cewers_flutter/screens/report-notification.dart';
 import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:location/location.dart';
 
 class EnterDetailScreen extends StatefulWidget {
-  static String route = "/enterDetails";
   final String crime;
   EnterDetailScreen(this.crime);
   _EnterDetailScreen createState() => _EnterDetailScreen();
@@ -21,12 +24,13 @@ class _EnterDetailScreen extends State<EnterDetailScreen> {
   TextEditingController details = new TextEditingController();
   bool useLocation = true;
   StorageController _storage = new StorageController();
+  SendReportBloc myBloc = new SendReportBloc();
   final formKey = GlobalKey<FormState>();
-  Position position;
-
-  GeoLocation location = new GeoLocation();
+  Future<LocationData> _future;
+  File _file;
   void initState() {
     super.initState();
+    _future = GeoLocation().getLocation();
   }
 
   void dispose() {
@@ -34,51 +38,49 @@ class _EnterDetailScreen extends State<EnterDetailScreen> {
     super.dispose();
   }
 
-  getImage() {}
-
   Widget build(BuildContext context) {
     return MainContainer(
       decoration: bgDecoration(),
       displayAppBar: CewerAppBar("Enter ", "Details"),
       bottomNavigationBar: SafeArea(
-          minimum: EdgeInsets.only(bottom: 20, left: 20, right: 20),
-          child: ActionButtonBar(
-            action: () async {
-              ReportController _reportController = new ReportController();
-              Map<String, dynamic> payload = {
-                "alert": {
-                  "userId": await _storage.getUserId(),
-                  "alertType": widget.crime,
-                  "location":
-                      "${position?.latitude ?? 0},${position?.longitude ?? 0}",
-                  "priority": "medium",
-                  "comment": details.text,
-                  "pictures": ["picture1.png", "picture2.png"],
-                  "videos": ["video1.png", "video2.png"]
-                }
-              };
-              _reportController.sendReport(payload).then((value) {
-                print(value);
-              }).catchError((onError) {
-                print(onError);
-              });
-              // print(response);
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) =>
-              //         ReportNotification(details.text, "Lagos "),
-              //   ),
-              // );
-            },
-            text: "SUBMIT",
-          )),
+        minimum: EdgeInsets.only(bottom: 20, left: 20, right: 20),
+        child: ActionButtonBar(
+          action: () async {
+            ReportController _reportController = new ReportController();
+            Map<String, dynamic> payload = {
+              "alert": {
+                "userId": await _storage.getUserId(),
+                "alertType": widget.crime,
+                "location": "${null ?? 0},${null ?? 0}",
+                "priority": "medium",
+                "comment": details.text,
+                "pictures": ["picture1.png", "picture2.png"],
+                "videos": ["video1.png", "video2.png"]
+              }
+            };
+            _reportController.sendReport(payload).then((value) {
+              print(value);
+            }).catchError((onError) {
+              print(onError);
+            });
+            // print(response);
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (context) =>
+            //         ReportNotification(details.text, "Lagos "),
+            //   ),
+            // );
+          },
+          text: "SUBMIT",
+        ),
+      ),
       child: Container(
         width: MediaQuery.of(context).size.width,
         child: Column(children: [
           Text(widget.crime),
           FutureBuilder(
-            future: location.getLocation(),
+            future: _future,
             builder: (context, location) => Container(
               child: Column(
                 children: <Widget>[
@@ -115,7 +117,7 @@ class _EnterDetailScreen extends State<EnterDetailScreen> {
                             color: Colors.grey,
                           ),
                           onPressed: () {
-                            getImage();
+                            pickFile(_file);
                             // do something
                           },
                         ),
@@ -145,5 +147,10 @@ class _EnterDetailScreen extends State<EnterDetailScreen> {
         ]),
       ),
     );
+  }
+
+  Future pickFile(File file) async {
+    file = await ImagePicker.pickImage(source: ImageSource.camera);
+    print(file);
   }
 }

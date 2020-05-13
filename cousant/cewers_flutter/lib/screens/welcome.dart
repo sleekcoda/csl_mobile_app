@@ -1,4 +1,4 @@
-import 'package:cewers_flutter/controller/language.dart';
+import 'package:cewers_flutter/controller/state.dart';
 import 'package:cewers_flutter/custom_widgets/button.dart';
 import 'package:cewers_flutter/custom_widgets/cewer_title.dart';
 import 'package:cewers_flutter/custom_widgets/main-container.dart';
@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  static String route = "/welcome";
   _WelcomeScreen createState() => _WelcomeScreen();
 }
 
@@ -17,13 +16,13 @@ class _WelcomeScreen extends State<WelcomeScreen> {
   GetIt _getIt = GetIt.instance;
   Future future;
   void initState() {
-    future = _getIt<LanguageController>().getLanguage();
+    future = _getIt<StateController>().getState();
     super.initState();
   }
 
   void dispose() {
     super.dispose();
-    _getIt<LanguageController>().closeStream();
+    _getIt<StateController>().closeStream();
   }
 
   Widget build(BuildContext context) {
@@ -74,8 +73,11 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                                 minimum: EdgeInsets.only(top: 25, bottom: 23),
                                 child: ActionButtonBar(
                                   action: () {
-                                    Navigator.of(context)
-                                        .pushNamed(HomeScreen.route);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                HomeScreen()));
                                   },
                                   text: "REPORT EVENT",
                                 ),
@@ -86,8 +88,11 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                                   width: 253,
                                   child: OutlineButton(
                                     onPressed: () {
-                                      Navigator.of(context)
-                                          .pushNamed(LoginScreen.route);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LoginScreen()));
                                     },
                                     child: Text(
                                       "LOGIN",
@@ -111,7 +116,7 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                               SafeArea(
                                 minimum: EdgeInsets.only(bottom: 33),
                                 child: Text(
-                                  "Select Language",
+                                  "Select State",
                                   style: TextStyle(
                                       color: Theme.of(context).primaryColor),
                                 ),

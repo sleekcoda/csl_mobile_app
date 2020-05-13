@@ -5,7 +5,6 @@ import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
-  static String route = "/home";
   Widget build(BuildContext context) {
     return MainContainer(
       decoration: bgDecoration("assets/backgrounds/bg-cloud.png"),
@@ -13,10 +12,13 @@ class HomeScreen extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, SelectCrimeScreen.route);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SelectCrimeScreen()));
               },
               child: Container(
                 width: 256,
