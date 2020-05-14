@@ -13,4 +13,9 @@ class StorageController {
     _pref = await SharedPreferences.getInstance();
     return _pref.getString("userId");
   }
+
+  Future<String> getState() async {
+    _pref = await SharedPreferences.getInstance();
+    return _pref.getString("prefferedState");
+  }
 }

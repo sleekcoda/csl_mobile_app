@@ -3,10 +3,18 @@ import 'package:cewers_flutter/custom_widgets/cewer_title.dart';
 import 'package:cewers_flutter/custom_widgets/main-container.dart';
 import 'package:flutter/material.dart';
 
-class ReportNotification extends StatelessWidget {
+class ReportNotification extends StatefulWidget {
   final String report;
-  final String location;
-  ReportNotification(this.report, this.location, {Key key}) : super(key: key);
+  final double latitude;
+  final double longitude;
+  ReportNotification(this.report, this.latitude, this.longitude, {Key key})
+      : super(key: key);
+  _ReportNotification createState() => _ReportNotification();
+}
+
+class _ReportNotification extends State<ReportNotification> {
+  Future _future;
+
   Widget build(BuildContext context) {
     return MainContainer(
         decoration: null,
@@ -42,13 +50,16 @@ class ReportNotification extends StatelessWidget {
                           Text(
                             "Location: ",
                           ),
-                          Text(location),
+                          FutureBuilder(
+                            future: _future,
+                            builder: (context, snapshot) => Text(snapshot.data),
+                          ),
                         ],
                       ),
                     ),
                     Align(
                       alignment: Alignment.centerLeft,
-                      child: Text(report),
+                      child: Text(widget.report),
                     ),
                     Align(
                       heightFactor: 2,

@@ -9,22 +9,27 @@ class GeoLocation {
 
   Future<LocationData> getLocation() async {
     _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
+    try {
       if (!_serviceEnabled) {
-        return null;
+        _serviceEnabled = await location.requestService();
+        if (!_serviceEnabled) {
+          return null;
+        }
       }
-    }
 
-    _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
-        return null;
+      _permissionGranted = await location.hasPermission();
+      if (_permissionGranted == PermissionStatus.denied) {
+        _permissionGranted = await location.requestPermission();
+        if (_permissionGranted != PermissionStatus.granted) {
+          return null;
+        }
       }
-    }
 
-    _locationData = await location.getLocation();
-    return _locationData;
+      _locationData = await location.getLocation();
+
+      return _locationData;
+    } catch (e) {
+      return e;
+    }
   }
 }

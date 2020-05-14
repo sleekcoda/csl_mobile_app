@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class SelectCrimeScreen extends StatefulWidget {
-  static String route = "/selectCrime";
   _SelectCrimeScreen createState() => _SelectCrimeScreen();
 }
 
@@ -58,7 +57,7 @@ class _SelectCrimeScreen extends State<SelectCrimeScreen> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              EnterDetailScreen(
+                                              SendReportScreen(
                                             image.name,
                                           ),
                                         ),

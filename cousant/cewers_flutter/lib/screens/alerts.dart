@@ -1,4 +1,4 @@
-import 'package:cewers_flutter/controller/report.dart';
+import 'package:cewers_flutter/bloc/send-report.dart';
 import 'package:cewers_flutter/custom_widgets/main-container.dart';
 import 'package:flutter/material.dart';
 
@@ -8,10 +8,10 @@ class AlertListScreen extends StatefulWidget {
 
 class _AlertListScreen extends State<AlertListScreen> {
   Future future;
-  ReportController reportController;
+  SendReportBloc _reportBloc;
   void initState() {
     super.initState();
-    future = reportController.getReport();
+    future = _reportBloc.getReport();
   }
 
   Widget build(BuildContext context) {

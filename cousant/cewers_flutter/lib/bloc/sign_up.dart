@@ -1,11 +1,18 @@
+import 'dart:convert';
 import 'package:cewers_flutter/bloc/bloc.dart';
-// import 'package:cewers_flutter/model/error.dart';
-// import 'package:cewers_flutter/service/api.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
+import 'package:cewers_flutter/model/error.dart';
+import 'package:cewers_flutter/model/response.dart';
+import 'package:cewers_flutter/service/api.dart';
 
-class SignupBloc implements Bloc {
-  // SharedPreferences _pref;
-  // API _api = new API();
+class SignUpBloc extends Bloc {
+  API api = new API();
+  Future<dynamic> register(Map<String, Map<String, String>> data) async {
+    var response = await api.postRequest("user", data);
+    if (response is APIError) return response;
+
+    return APIResponseModel.fromJson(json.decode(response));
+  }
+// SharedPreferences _pref;
 
   Future<List<String>> getLocalGovernment() async {
     return ["LCDA One", "LCDA two"];
@@ -23,5 +30,6 @@ class SignupBloc implements Bloc {
     // return response;
   }
 
+  @override
   void dispose() {}
 }

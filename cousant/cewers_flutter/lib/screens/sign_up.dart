@@ -1,7 +1,8 @@
-import 'package:cewers_flutter/controller/sign_up.dart';
+import 'package:cewers_flutter/bloc/sign_up.dart';
 import 'package:cewers_flutter/custom_widgets/button.dart';
 import 'package:cewers_flutter/custom_widgets/form-field.dart';
 import 'package:cewers_flutter/custom_widgets/main-container.dart';
+import 'package:cewers_flutter/model/response.dart';
 import 'package:cewers_flutter/screens/success.dart';
 import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class _SignUpScreen extends State<SignUpScreen> {
   TextEditingController email = new TextEditingController();
   TextEditingController phoneNumber = new TextEditingController();
   TextEditingController address = new TextEditingController();
-  SignUpController signUpController = new SignUpController();
+  SignUpBloc _signupBloc = new SignUpBloc();
   List<Map<String, List<Map<String, List<String>>>>> allLocalGovernment = [
     {
       "benue": [
@@ -58,34 +59,35 @@ class _SignUpScreen extends State<SignUpScreen> {
 
   Widget build(BuildContext context) {
     return MainContainer(
-      decoration: bgDecoration(),
-      bottomNavigationBar: Builder(
-        builder: (context) => SafeArea(
-          minimum: EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 20,
-          ),
-          child: ActionButtonBar(
-            text: "SIGN UP",
-            action: () {
-              // _signUpKey.currentState.validate();
-              registerUser(context);
-            },
+        decoration: bgDecoration(),
+        bottomNavigationBar: Builder(
+          builder: (context) => SafeArea(
+            minimum: EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 20,
+            ),
+            child: ActionButtonBar(
+              text: "SIGN UP",
+              action: () {
+                // _signUpKey.currentState.validate();
+                registerUser(context);
+              },
+            ),
           ),
         ),
-      ),
-      child: ListView(
-        children: <Widget>[
-          Text(
-            "Sign Up",
-            style: Theme.of(context)
-                .textTheme
-                .title
-                .apply(color: Theme.of(context).primaryColor),
-          ),
-          Container(
-              height: MediaQuery.of(context).size.height / 1.5,
-              child: Column(
+        child: Container(
+          child: ListView(
+            children: <Widget>[
+              Text(
+                "Sign Up",
+                style: Theme.of(context)
+                    .textTheme
+                    .title
+                    .apply(color: Theme.of(context).primaryColor),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 30),
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Form(
@@ -106,16 +108,19 @@ class _SignUpScreen extends State<SignUpScreen> {
                                 },
                               ),
                             ),
-                            FormTextField(
-                              textFormField: TextFormField(
-                                controller: phoneNumber,
-                                decoration: formDecoration(
-                                    "Phone number*", "assets/icons/phone.png"),
-                                validator: (value) {
-                                  return value.isEmpty
-                                      ? "Phone number is required"
-                                      : null;
-                                },
+                            StreamBuilder(
+                              stream: null,
+                              builder: (context, snapshot) => FormTextField(
+                                textFormField: TextFormField(
+                                  controller: phoneNumber,
+                                  decoration: formDecoration("Phone number*",
+                                      "assets/icons/phone.png"),
+                                  validator: (value) {
+                                    return value.isEmpty
+                                        ? "Phone number is required"
+                                        : null;
+                                  },
+                                ),
                               ),
                             ),
                             FormTextField(
@@ -163,37 +168,101 @@ class _SignUpScreen extends State<SignUpScreen> {
                               ],
                             ),
                             Row(children: [
-                              Text("Local government"),
+                              Container(
+                                width: MediaQuery.of(context).size.width / 3,
+                                child: Text("Local government"),
+                              ),
                               DropdownButton(
-                                  hint: Text("Select"),
-                                  items: allLocalGovernment[0]["benue"]
-                                      .map((l) => DropdownMenuItem<String>(
-                                            value: l.keys.toList()[0],
-                                            child: new Text(localGovernment),
-                                          )),
-                                  onChanged: setLocalGovernment)
+                                hint: Text("Select"),
+                                items: [
+                                  DropdownMenuItem<String>(
+                                    value: "none",
+                                    child: new Text("-"),
+                                  ),
+                                ],
+                                onChanged: setLocalGovernment,
+                              ),
                             ]),
                             Row(children: [
-                              Text("Select"),
+                              Container(
+                                  width: MediaQuery.of(context).size.width / 3,
+                                  child: Text("Select")),
                               DropdownButton(
                                 hint: Text("Community"),
-                                items: allLocalGovernment[0]["benue"]
-                                    .map((local) => DropdownMenuItem<String>(
-                                          value: local.keys.toList()[0],
-                                          child: new Text(community),
-                                        ))
-                                    .toList(),
                                 onChanged: setCommunity,
+                                items: [
+                                  DropdownMenuItem<String>(
+                                    value: 'none',
+                                    child: new Text("-"),
+                                  ),
+                                ],
                               )
                             ]),
                           ],
                         ),
                       ),
                     ),
-                  ]))
-        ],
-      ),
-    );
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ));
+  }
+
+  void registerUser(BuildContext context) {
+    if (_signUpKey.currentState.validate()) {
+      _signUpKey.currentState.save();
+      Scaffold.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Please wait..."),
+        ),
+      );
+      var payload = {
+        "user": {
+          "fullName": fullname.text,
+          "email": email.text,
+          "phoneNumber": phoneNumber.text,
+          "gender": gender,
+          "address": address.text,
+          "localGovernment": localGovernment,
+          "community": community,
+          "userType": "citizen",
+        }
+      };
+      /**
+       * Confirm password combination
+       */
+      _signupBloc.register(payload).then((response) {
+        if (response is APIResponseModel) {
+          if (response.status) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SuccessScreen(phoneNumber.text)));
+          } else {
+            Scaffold.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: Colors.red,
+                content: Text(response.message),
+              ),
+            );
+          }
+        } else {
+          Scaffold.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.red,
+              content: Text(response.message),
+            ),
+          );
+        }
+
+        //Api response
+      }).catchError((onError) {
+        print(onError);
+        print("Unexpected error");
+      });
+    }
   }
 
   void _genderHandler(String value) {
@@ -212,52 +281,6 @@ class _SignUpScreen extends State<SignUpScreen> {
     setState(() {
       community = comm;
     });
-  }
-
-  void registerUser(BuildContext context) {
-    if (_signUpKey.currentState.validate()) {
-      Scaffold.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Please wait..."),
-        ),
-      );
-      _signUpKey.currentState.save();
-      var payload = {
-        "user": {
-          "fullName": fullname.text,
-          "email": email.text,
-          "phoneNumber": phoneNumber.text,
-          "gender": gender,
-          "address": address.text,
-          "userType": "citizen",
-        }
-      };
-      print(payload);
-      /**
-       * Confirm password combination
-       */
-      signUpController.register(payload).then((response) {
-        /**
-         * VAlidate API Response
-         */
-        if (response.status) {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => SuccessScreen(phoneNumber.text)));
-        } else {
-          Scaffold.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor: Colors.red,
-              content: Text(response.message),
-            ),
-          );
-        }
-        //Api response
-      }).catchError((onError) {
-        print("Unexpected error");
-      });
-    }
   }
 
   void dispose() {
