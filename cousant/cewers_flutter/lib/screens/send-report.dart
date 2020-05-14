@@ -4,32 +4,38 @@ import 'dart:io';
 
 import 'package:cewers_flutter/bloc/send-report.dart';
 import 'package:cewers_flutter/controller/location.dart';
-import 'package:cewers_flutter/controller/storage.dart';
 import 'package:cewers_flutter/custom_widgets/button.dart';
 import 'package:cewers_flutter/custom_widgets/cewer_title.dart';
 import 'package:cewers_flutter/custom_widgets/main-container.dart';
 import 'package:cewers_flutter/model/response.dart';
+import 'package:cewers_flutter/screens/report-notification.dart';
 import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 
 class SendReportScreen extends StatefulWidget {
   final String crime;
-  SendReportScreen(this.crime);
+  final SendReportBloc myBloc;
+  SendReportScreen(this.crime, this.myBloc);
   _SendReportScreen createState() => _SendReportScreen();
 }
 
 class _SendReportScreen extends State<SendReportScreen> {
   TextEditingController details = new TextEditingController();
   bool useLocation = true;
-  StorageController _storage = new StorageController();
-  SendReportBloc _myBloc = new SendReportBloc();
   final formKey = GlobalKey<FormState>();
   Future<LocationData> _future;
+  String _userId;
   File _mediaFile;
+
   void initState() {
     super.initState();
-    _future = GeoLocation().getLocation();
+    _future = GeoLocation().getCoordinates();
+    widget.myBloc.getUserId().then((userId) {
+      _userId = userId;
+    }).catchError((e) {
+      print(e);
+    });
   }
 
   void dispose() {
@@ -46,13 +52,12 @@ class _SendReportScreen extends State<SendReportScreen> {
         child: FutureBuilder(
           future: _future,
           builder: (context, snapshot) => ActionButtonBar(
-            action: () async {
-              SendReportBloc _reportBloc = new SendReportBloc();
+            action: () {
               Map<String, dynamic> payload;
               if (snapshot.data is LocationData) {
                 payload = {
                   "alert": {
-                    "userId": await _storage.getUserId(),
+                    "userId": _userId,
                     "alertType": widget.crime.toLowerCase(),
                     "location":
                         "${snapshot.data?.latitude ?? 0},${snapshot.data?.longitude ?? 0}",
@@ -64,19 +69,32 @@ class _SendReportScreen extends State<SendReportScreen> {
                 };
               }
 
-              _reportBloc.sendReport(payload).then((value) {
+              widget.myBloc.sendReport(payload).then((value) {
                 if (value is APIResponseModel) {
                   Scaffold.of(context)
                       .showSnackBar(SnackBar(content: Text(value.message)));
+
+                  if (value.status)
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ReportNotification(
+                              details.text,
+                              snapshot.data?.latitude,
+                              snapshot.data?.longitude)),
+                    );
                 } else {
                   Scaffold.of(context).showSnackBar(
                       SnackBar(content: Text("Invalid response type")));
                 }
                 print(value);
               }).catchError((onError) {
-                print(onError);
+                Scaffold.of(context)
+                    .showSnackBar(SnackBar(content: Text("App error")));
               });
+
               // print(response);
+
               // Navigator.push(
               //   context,
               //   MaterialPageRoute(
@@ -128,7 +146,7 @@ class _SendReportScreen extends State<SendReportScreen> {
                           color: Colors.grey,
                         ),
                         onPressed: () async {
-                          _myBloc.openCamera().then((file) {
+                          widget.myBloc.openCamera().then((file) {
                             setState(() {
                               _mediaFile = file;
                             });
@@ -138,7 +156,11 @@ class _SendReportScreen extends State<SendReportScreen> {
                           // do something
                         },
                       ),
-                      Text("Upload picture or video evidence")
+                      Text("Upload picture or video evidence"),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        child: null,
+                      ),
                     ],
                   ),
                 ),

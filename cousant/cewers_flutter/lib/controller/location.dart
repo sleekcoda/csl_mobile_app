@@ -1,4 +1,5 @@
 import 'package:location/location.dart';
+// import 'package:geolocator/geolocator.dart';
 
 class GeoLocation {
   Location location = new Location();
@@ -7,7 +8,7 @@ class GeoLocation {
   PermissionStatus _permissionGranted;
   LocationData _locationData;
 
-  Future<LocationData> getLocation() async {
+  Future<LocationData> getCoordinates() async {
     _serviceEnabled = await location.serviceEnabled();
     try {
       if (!_serviceEnabled) {
@@ -32,4 +33,9 @@ class GeoLocation {
       return e;
     }
   }
+
+  // Future getLocation(double longitude, double latitude) {
+  //   // return "$latitude $longitude";
+
+  // }
 }

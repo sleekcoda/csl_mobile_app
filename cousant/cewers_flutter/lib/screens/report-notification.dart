@@ -15,13 +15,20 @@ class ReportNotification extends StatefulWidget {
 class _ReportNotification extends State<ReportNotification> {
   Future _future;
 
+  initState() {
+    // _future =
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return MainContainer(
         decoration: null,
         displayAppBar: CewerAppBar("Alert ", "Recieved!"),
         child: Container(
-          child: Column(children: [
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
@@ -43,7 +50,7 @@ class _ReportNotification extends State<ReportNotification> {
                           )),
                     ),
                     Align(
-                      heightFactor: 2,
+                      // heightFactor: 2,
                       alignment: Alignment.centerLeft,
                       child: Row(
                         children: <Widget>[
@@ -52,14 +59,16 @@ class _ReportNotification extends State<ReportNotification> {
                           ),
                           FutureBuilder(
                             future: _future,
-                            builder: (context, snapshot) => Text(snapshot.data),
+                            builder: (context, snapshot) => Text(
+                                snapshot.data ??
+                                    "${widget.latitude}, ${widget.longitude}"),
                           ),
                         ],
                       ),
                     ),
                     Align(
                       alignment: Alignment.centerLeft,
-                      child: Text(widget.report),
+                      child: Text(widget.report ?? "."),
                     ),
                     Align(
                       heightFactor: 2,

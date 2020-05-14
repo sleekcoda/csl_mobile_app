@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:cewers_flutter/bloc/bloc.dart';
 import 'package:cewers_flutter/controller/storage.dart';
 import 'package:cewers_flutter/model/error.dart';
 import 'package:cewers_flutter/model/response.dart';
@@ -8,15 +9,18 @@ import 'package:cloudinary_client/models/CloudinaryResponse.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:cloudinary_client/cloudinary_client.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:cewers_flutter/extensions/string.dart';
 
-class SendReportBloc {
-  StorageController _storageController = new StorageController();
-  API _api = new API();
+class SendReportBloc implements Bloc {
+  final StorageController _storageController;
+  final API _api;
+  SendReportBloc(this._storageController, this._api);
+  String _credentialJsonUri = "assets/cloudinary.json";
 
-  Future _uploadImage(
+  Future uploadImage(
     File file,
   ) async {
-    var credentials = await rootBundle.loadString('assets/cloudinary.json');
+    var credentials = await rootBundle.loadString(_credentialJsonUri);
 
     CloudinaryCredential auth =
         CloudinaryCredential.fromJson(json.decode(credentials));
@@ -35,7 +39,8 @@ class SendReportBloc {
     String fileExtension = paths[paths.length - 1];
 
     List<CloudinaryResponse> response = await client.uploadImages([file.path],
-        filename: "$userId-${DateTime.now()}.$fileExtension", folder: state);
+        filename: "$userId-${DateTime.now()}.$fileExtension",
+        folder: state.capitalize());
     return response;
   }
 
@@ -48,9 +53,7 @@ class SendReportBloc {
   }
 
   Future<String> getUserId() async {
-    var storage = new StorageController();
-    String userId = await storage.getUserId();
-    return userId;
+    return this._storageController.getUserId();
   }
 
   Future<dynamic> sendReport(Map<String, dynamic> data) async {
@@ -68,10 +71,13 @@ class SendReportBloc {
     if (response is APIError) return response;
     APIResponseModel responseBody =
         APIResponseModel.fromJson(json.decode(response));
-    print(response.message);
-    print(response.body);
 
     return responseBody;
+  }
+
+  @override
+  void dispose() {
+    rootBundle.evict(_credentialJsonUri);
   }
 }
 
