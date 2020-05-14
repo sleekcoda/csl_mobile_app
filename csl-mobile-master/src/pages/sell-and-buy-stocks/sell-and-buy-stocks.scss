@@ -1,0 +1,17 @@
+page-sell-and-buy-stocks {
+    select{
+        -moz-appearance:none; /* Firefox */
+        -webkit-appearance:none; /* Safari and Chrome */
+        appearance:none;
+        background-image: url(../../assets/imgs/csl-icon-chevron-down.png);
+        background-position: 100%;
+        background-size: 15px 15px;
+        background-repeat: no-repeat;
+    }
+    .no-padding{
+        padding:0 !important;
+    }
+    table{
+        width: 100%;
+    }
+}

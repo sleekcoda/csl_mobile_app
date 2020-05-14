@@ -1,0 +1,54 @@
+<!--
+  Generated template for the ViewWatchlistDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+   
+    <ion-title>View Details</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="close()">
+        <ion-icon color="danger" name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-content>
+      <table>
+        <tbody>
+          <tr>
+            <th>Stock</th>
+            <td>{{watchlist.symbol}}</td>
+          </tr>
+          <tr>
+            <th>Current Price</th>
+            <td>{{currentPrice}}</td>
+          </tr>
+          <tr>
+            <th>Target Price</th>
+            <td>{{watchlist.targetPrice}}</td>
+          </tr>
+          <tr>
+            <th>Variance </th>
+            <td>{{watchlist.margin}}</td>
+          </tr>
+          <tr>
+            <th>Expiry </th>
+            <td>{{watchlist.expiry | date:'dd MMM, yyyy HH:mm '}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ion-card-content>
+  </ion-card>
+  <button (click)="delete()" ion-button block color="danger"> Delete </button>
+
+</ion-content>

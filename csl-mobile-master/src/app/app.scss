@@ -1,0 +1,238 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.background-color: $colors(primary);
+
+ion-menu{
+    ion-content{
+     background-color: map-get($colors,primary) !important;
+     font-weight: 500 !important;
+    }
+}
+ion-app .scroll-content{
+    background-color:#f9f7f5;
+}
+ion-app page-confirmation .scroll-content{
+    background-color:#fff;
+}
+
+ng-component{
+    .loading-gif{
+        display: block;
+        height: 200px;
+        background-image: url(../assets/imgs/csl-loader.gif);
+        background-size: 20%;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    ion-card-title{
+        font-size: 2rem !important;
+    }
+    .csl-button.button-block {
+        font-size: 1.1em;
+        height: 2.5em;
+        width: 70%;
+        margin: .5em auto;
+        border-radius: 8px;
+    }
+    .no-padding{
+        padding:0 !important;
+    }
+    ion-navbar{
+        button ion-icon{
+            color: map-get($colors, secondary);
+        }
+    }
+    ion-content {
+        background-color: ghostwhite;
+    }
+    ion-title>.toolbar-title {
+        color: #fff;
+    }
+    ion-nav button.back-button {
+        color: #fff;
+        transition: .1s linear;
+    }
+    ion-nav button.back-button {
+        transform: translateX(-10px);
+    }
+    .sidemenu .scroll-content{
+        background-image: url(../assets/imgs/csl-menu-expand.png);
+        background-size: 110% 110%;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    .sidemenu>div{
+        color: map-get($colors, light);
+        margin: 1em auto .5em;
+        font-size: 1em !important;
+    }
+    
+    page-my-cash-accounts .scroll-content,
+    page-dashboard .scroll-content,
+    page-login .scroll-content{
+        background-color: transparent;
+    }
+    ion-content{
+        .text-center{
+            text-align: center !important;
+        }
+        ion-list.active>ion-item:active {
+            box-shadow: inset 0 0 5px 3px rgba(40, 0, 114, 0.2);
+        }
+        ion-list.active > ion-item:active .to-right {
+            transition: .2s linear;
+            transform: translateX(20px);
+        }
+        .formErrorMessage{
+            color: map-get($colors, danger);
+            font-size: .9em;
+        }
+        
+        .dashboard-grid{
+
+            .dashboard-row{
+                box-shadow: 0 0 3px 2px rgba(0,0,0,.2);
+                border-radius: 5px;
+                background-color: rgba(250,250,240,.5);
+                margin-bottom: 1em;
+            }
+
+        }
+
+        ion-content{
+            font-weight: 500 !important;
+        }
+        .to-right{
+            text-align:right;
+        }
+        .primary-color{
+            color: map-get($colors, primary);
+        }
+        .primary-bg{
+            background-color: map-get($colors, primary) !important;
+        }
+        .seconday-color{
+            color: map-get($colors, secondary) !important;
+        }
+        .secondary-bg{
+            background-color: map-get($colors, secondary) !important;
+        }
+        .danger-color{
+            color: map-get($colors, danger);
+        }
+        .white-color{
+            color: #fff;
+        }
+        .success-color{
+            color: map-get($colors, success);
+        }
+        .border-left{
+            border-left: 1px solid #dedede;
+        }
+        .border-bottom{
+            border-bottom: 1px solid #dedede;
+        }
+        .space-left{
+            padding-left: 30px;
+        }
+    }    
+    ion-footer{
+        min-height: 44px;
+        background-color: map-get($colors,primary);
+    }
+    ion-nav{
+        ion-navbar{
+            .toolbar-background{
+                background-color: map-get($colors, primary);
+                color: #ffffff;
+            }
+        }
+    }
+    page-confirmation{
+        ion-list{
+            ion-icon{
+                text-align: center;
+                font-size: 6em;
+                color: map-get($colors,success);
+            } 
+        }
+    }
+    ion-navbar{
+        background-color: map-get($colors, primary);
+    }
+    ion-list>ion-item:active ion-icon.to-right{
+        translate: .2s linear;
+        transform: translateX(10px);
+    }
+    ion-icon.big{
+        font-size: 2.1em;
+    }
+    ion-icon.large{
+        font-size: 2.5em;
+    }
+    .csl-form{
+        border-style: none;
+        width: 100%;
+    }
+    select.csl-form {
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        background-image: url(../../assets/imgs/csl-icon-chevron-down.png);
+        background-position: 100%;
+        background-size: 15px 15px;
+        background-repeat: no-repeat;
+        background-color: transparent;
+    }
+    .card.top{
+        border-radius: 10px 2px 2px 2px;
+    }
+    .card.bottom{
+        border-radius: 2px 2px 2px 10px;
+    }
+    
+        .marquee {
+            margin: 0 auto;
+            overflow: hidden;
+            white-space: nowrap;
+            box-sizing: border-box;
+            animation: marquee 10s linear infinite;
+        }
+        
+        .marquee:hover {
+          animation-play-state: paused;
+        }
+    
+        .stocksMarquee {
+            padding: 10px;
+            margin: 0;
+            position: absolute;
+            top: 1px;
+            z-index: 99;
+            background-color: #fff;
+        }
+        ul.stocksMarquee>li {
+            display: inline-block;
+            margin-right: 10px;
+        } 
+        
+    
+    /* Make it move */
+    @keyframes marquee {
+        0%   { margin-left: -100% }
+        100% { margin-left: 0}
+    }
+}

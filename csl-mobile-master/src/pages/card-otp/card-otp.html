@@ -1,0 +1,45 @@
+<!--
+  Generated template for the CardOtpPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>CardOTP</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div>
+    <table style="width:100%">
+      <tr>
+        <th>Account Number</th>
+        <td>{{accountNumber}}</td>
+      </tr>
+      <tr>
+        <th>Amount</th>
+        <td>{{amount | currency : 'NGN' : 2}}</td>
+      </tr>
+      <tr>
+        <th>Fee</th>
+        <td>{{appFee | currency : 'NGN' : 2}}</td>
+      </tr>
+      <tr>
+        <th>Total Debit</th>
+        <td>{{grossAmount | currency : 'NGN' : 2}}</td>
+      </tr>
+    </table>
+  </div>
+  <p margin text-center>{{OTPMessage}}</p>
+  <p margin text-center><strong>Total deduction: </strong>{{grossAmount | currency : 'NGN' : 2}}</p> 
+  <ion-card>
+    <ion-card-content>
+      <ion-input type="password" min="4" [(ngModel)]="OTPCode" placeholder="Enter OTP"></ion-input>
+    </ion-card-content>
+  </ion-card>
+  <button ion-button color="secondary" block class="csl-form" (click)="confirmOTP()" >Confirm OTP</button>
+</ion-content>

@@ -1,0 +1,30 @@
+<ion-menu id="sidebar" [content]="content" >
+ 
+
+  <ion-content class="sidemenu">
+      <div padding text-center>
+          <img width="40" height="40" src="assets/imgs/csl-icon-user.png">
+          <h6>{{portfolioDescription}}</h6>
+          <p>Last login: {{today | date:'short'}}</p>
+      </div>
+    <ion-list>
+      <button  menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" style="color:#fff; padding-left: 0; background-color: transparent;">
+        <span style="padding-left: 1em;">
+          &nbsp;&nbsp; <img icon-start [src]="p.url" width="20px" height="20px">&nbsp;&nbsp;
+        {{p.title}}
+        </span>
+      </button>
+      <button menuClose ion-item (click)="logout()" style="color:#fff; padding-left: 0; background-color: transparent;">
+        <span style="padding-left: 1em;">
+          &nbsp;&nbsp;<ion-icon icon-start name="md-log-out" color="danger"></ion-icon>&nbsp;&nbsp;
+          Logout
+        </span>
+      </button>
+    
+    </ion-list>
+  </ion-content>
+ 
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content></ion-nav>

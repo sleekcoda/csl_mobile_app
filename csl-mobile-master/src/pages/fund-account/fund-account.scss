@@ -1,0 +1,6 @@
+page-fund-account {
+    ion-list>ion-item:active ion-icon.to-right{
+        translate: .2s linear;
+        transform: translateX(10px);
+    }
+}

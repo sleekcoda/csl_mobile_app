@@ -1,0 +1,88 @@
+<!--
+  Generated template for the OrdersPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Buy Stock</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form>
+    <div>
+   
+      <p padding-left float-left>Portfolio</p> 
+      <p float-right padding-right text-right>{{portfolioDesc}}</p>
+      <p style="clear:both;"></p>
+      <p padding-left float-left>Avalaible Balance</p> 
+      <p float-right padding-right text-right class="success-color">50000</p>
+
+      <div style="clear:both;"></div>
+      <div padding-left>Stocks</div>
+      <ion-card>
+          <ion-card-content>
+            
+            <select [(ngModel)]="buyStock.symbol" class="csl-form" name="stock" (change)="changeSymbol(selectStock.value)" #selectStock>
+              <option *ngFor="let stock of availableStocks" [value]="stock.symbol"> {{stock.symbol}} ({{stock.stockName}})</option>
+            </select>
+          </ion-card-content>
+          <div padding-left float-left class="success-color">Current Price </div><div float-right padding-right>({{currentPrice}})</div>
+    
+        </ion-card>
+      <div padding-left>Quantity</div>
+      <ion-card>
+        <ion-card-content>
+          <input type="number" min="1" class="csl-form" name="quantity" [(ngModel)]="buyStock.quantity" #quantity="ngModel" required>
+        </ion-card-content>
+      </ion-card>  
+    </div>
+    
+    
+    <ion-grid class="no-padding">
+      <ion-row>
+        <ion-col col-6 class="no-padding"><div padding-left>Price Type</div>
+          <ion-card float-left><ion-card-content>
+            <select class="csl-form" name="price_type" [(ngModel)]="buyStock.pricetype" #price_type="ngModel">
+              <option value="00">Market</option>
+              <option value="01">Limit</option>
+            </select>
+          </ion-card-content></ion-card>
+        </ion-col>
+        <ion-col col-6 class="no-padding" class="no-padding"><div padding-left>Limit Price</div>
+          <ion-card float-right><ion-card-content>
+            <input name="limit_price" type="number" min="1" [(ngModel)]="buyStock.price" class="csl-form"  [disabled]="( price_type.value == '00')? true : false" #limit_price="ngModel" value="limit_price.value">
+          </ion-card-content></ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <ion-grid class="no-padding">
+      <ion-row>
+        <ion-col col-6 class="no-padding"><div padding-left >Order Type</div>
+          <ion-card float-left><ion-card-content>
+            <select class="csl-form"  name="order_type" [(ngModel)]="buyStock.ordertype" #order_type="ngModel" required>
+              <option value="00">Day</option>
+              <option value="01">Good till date</option>
+            </select>
+          </ion-card-content></ion-card>
+        </ion-col>
+
+        <ion-col col-6 class="no-padding"><div padding-left>Expiry Date</div> 
+          <ion-card float-right>
+            <ion-item>
+              <ion-datetime (ngModelChange)="validateDate()" [min]="minDate | date : 'yyyy-mm-dd'" [max]="maxYear" [disabled]='order_type.value == 00' [placeholder]="minDate" displayFormat="DD-MMM-YYYY" pickerFormat="DD-MMM-YYYY" class="csl-form" name="expiry_date" [(ngModel)]="buyStock.expires" #date="ngModel" required></ion-datetime>
+            </ion-item>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <p padding-left [hidden]="quantity.value > '0'" class="danger-color"><code>Quantity cannot be less than 1</code></p>
+   <button [disabled]="( (quantity.value < '1')  || !dateValidated || (price_type.value == '01' && buyStock.price <= '0' ))? true : false" ion-button (click)="confirmOrder()"  class="csl-button" block color="secondary">Proceed</button>
+  </form>
+</ion-content>

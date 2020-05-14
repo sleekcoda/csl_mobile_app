@@ -1,0 +1,68 @@
+<!-- <!--
+  Generated template for the WithdrawCashPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+--> 
+  <ion-header>
+
+    <ion-navbar>
+      <ion-title>Withdraw Cash</ion-title>
+    </ion-navbar> 
+  
+  </ion-header>
+  
+  <ion-content padding>
+    <form [formGroup]="withdrawForm" (ngSubmit)="proceed()" >
+      <label padding-left for="cscsNumber">Select Cash Account</label>
+      <ion-card>
+        <ion-card-content>
+          <select id="cscsNumber" class="csl-form" name="cscsNumber" placeholder="Michael" formControlName="accountNumber">
+            <option *ngFor="let account of portfolioArray; let i = index;" [value]="account.cashAccountId"><small>{{account.productDescription}} ({{account.portfolioDescription}})</small>  </option>
+          </select>
+        </ion-card-content>
+      </ion-card>
+       
+      <ion-row>
+        <ion-col col-6 padding-left class="danger-color">Available Balance</ion-col>
+        <ion-col col-6 text-right padding-right>{{availableBalance | currency : "NGN" : 2}}</ion-col>
+      </ion-row>
+    
+      <label padding-left for="amount">Amount (₦)</label>
+      <ion-card>
+        <ion-card-content>
+          <input type="number" [max]="availableBalance" id="amount" class="csl-form" name="amount" formControlName="amount" #userAmount>
+          <div class="danger-color" *ngIf="userAmount.value > availableBalance">Maximum amount you can withdraw is {{availableBalance | currency : "NGN" : 2}}</div>
+
+        </ion-card-content>
+      </ion-card>
+    
+      <label padding-left for="bank">Bank</label>
+      <ion-card>
+        <ion-card-content>
+          <select  id="bank" class="csl-form" name="bank" formControlName="bankId" #bankIndex>
+            <option *ngFor="let bank of banks; let i = index" [value]="bank.bankCode">{{bank.name}}</option>
+          </select>
+        </ion-card-content>
+      </ion-card>
+    
+      <label padding-left for="bankAccountNumber">Account number</label>
+      <ion-card>
+        <ion-card-content>
+          <input type="text" id="bankAccountNumber" minlength="10" class="csl-form" name="bankAccountNumber" formControlName="bankAccountNumber">
+        </ion-card-content>
+
+      </ion-card>
+    
+      <label padding-left for="effectiveDate">Effective Date</label>
+      <ion-card>
+        <ion-card-content>
+          <ion-item>
+            <ion-datetime class="csl-form" name="effectiveDate" [min]="minYear | date : 'yyyy-mm-dd'" [max]="maxYear | date : 'yyyy-mm-dd'" displayFormat="DD-MMM-YYYY HH:mm" pickerFormat="DD-MMM-YYYY:HH:MM"  [placeholder]="minYear" formControlName="effectiveDate"></ion-datetime>  
+          </ion-item>
+        </ion-card-content>  
+      </ion-card>
+  
+    <button color="secondary" type="submit" [disabled]="withdrawForm.invalid || userAmount.value > availableBalance" class="csl-button" ion-button block>Proceed</button>
+  </form>
+  </ion-content>

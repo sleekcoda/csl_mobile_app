@@ -1,0 +1,31 @@
+<ion-header>
+
+    <ion-navbar>    
+      <ion-title>My Orders</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+<ion-content padding>
+<ion-card class="top">
+    <ion-card-content (click)="openOrders()" >
+        <ion-row>
+            <ion-col col-2><ion-card-title><ion-icon class="" name="ios-briefcase-outline" color="secondary"></ion-icon></ion-card-title> </ion-col>
+            <ion-col col-8> <ion-card-title class="smaller">Open Orders</ion-card-title> </ion-col>
+            <ion-col col-2 text-right> <ion-card-title><ion-icon class="" name="ios-arrow-forward" color="secondary"></ion-icon></ion-card-title> </ion-col>
+        </ion-row>
+    </ion-card-content>
+</ion-card>
+
+<ion-card class="bottom">
+    <ion-card-content (click)="executedOrders()"> 
+        <ion-row>
+            <ion-col col-2><ion-card-title><ion-icon class="" name="ios-briefcase-outline" color="secondary"></ion-icon></ion-card-title></ion-col>
+            <ion-col col-8><ion-card-title class="smaller">Executed Orders</ion-card-title></ion-col>
+            <ion-col col-2 text-right><ion-card-title><ion-icon class="" name="ios-arrow-forward" color="secondary"></ion-icon></ion-card-title></ion-col>
+        </ion-row>
+    </ion-card-content>
+</ion-card>
+          
+</ion-content>
+  

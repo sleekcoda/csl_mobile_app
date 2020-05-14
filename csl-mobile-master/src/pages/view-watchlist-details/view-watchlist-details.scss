@@ -1,0 +1,20 @@
+page-view-watchlist-details {
+    table th {
+        text-align: left;
+        color: map-get($colors, primary);
+
+    }
+    table tr:not(:last-of-type) {
+        border-bottom: 1px solid map-get($colors, secondary);
+    }
+    
+    table td {
+        padding-left: 15px;
+        padding: .5em;
+        text-align: right;
+    }
+    table {
+        text-align: left;
+        font-size: 1.2em;
+    }
+}

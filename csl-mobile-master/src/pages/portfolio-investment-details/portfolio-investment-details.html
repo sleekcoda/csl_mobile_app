@@ -1,0 +1,64 @@
+<!--
+  Generated template for the PortfolioInvestmentDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+
+  <ion-buttons left>
+            <button ion-button icon-only (click)="dismiss()">
+              <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-card>
+      <ion-card-content>
+        <table>
+          <tbody>
+            <tr>
+              <th>Portfolio</th>
+              <td>{{order.portfolioDesc}}</td>
+            </tr>
+  
+            <tr>
+              <th>Cscs Number</th>
+              <td>{{order.marketAccId}}</td>
+            </tr>
+  
+            <tr>
+              <th>Stock</th>
+              <td>{{order.symbol}}</td>
+            </tr>
+  
+            <tr>
+              <th>Quantity</th>
+              <td>{{order.quantity}}</td>
+            </tr>
+  
+            <tr>
+              <th>Current price</th>
+              <td>{{order.currentValue / order.quantity | currency: "NGN" : 2}}</td>
+            </tr>
+
+            <tr>
+              <th>Current value</th>
+              <td>{{order.currentValue | currency: "NGN" : 2}} </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </ion-card-content>
+    </ion-card> 
+  
+    <button block ion-button color="success" (click)="sell()" class="csl-button"> Sell </button>
+    
+  </ion-content>

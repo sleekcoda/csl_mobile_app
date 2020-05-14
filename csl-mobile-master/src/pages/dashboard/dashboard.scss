@@ -1,0 +1,24 @@
+page-dashboard {
+    ion-content{
+        background-image: url(../../assets/imgs/csl-dashboard-header.png);
+        background-repeat: no-repeat;
+        background-position: fixed;
+        background-size: 100%;
+    }
+    h4.top{
+        color:#fff;
+        padding-top: 15px;
+        border-top: 2px solid map-get($colors, secondary);
+        margin-bottom: 2.2em;
+    }
+    .scroll-content{
+        margin-top: 41px !important;
+    }
+    .header-md::after, .tabs-md[tabsPlacement="top"] > .tabbar::after, .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before{
+        background-image: none;
+    }
+    ion-navbar{
+        background-color: transparent !important;
+        background-size: 100%;
+    }
+}

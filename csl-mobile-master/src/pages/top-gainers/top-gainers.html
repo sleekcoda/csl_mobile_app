@@ -1,0 +1,42 @@
+<!--
+  Generated template for the TopGainersPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Top Gainers</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div class="loading-gif" [hidden]="topGainers"></div>
+
+  <ion-grid>
+    <ion-card *ngFor="let stock of topGainers | slice:0:10;" (click)="viewStock(stock)">
+      <ion-card-content>
+        <ion-row>
+          <ion-col col-6>
+            <h5>{{stock.symbol}}</h5>
+          </ion-col>
+          <ion-col col-6 class text-right>{{stock.currentPrice | number:'1.0-2' }} <ion-icon name="ios-arrow-forward"></ion-icon>
+          </ion-col>
+          <ion-col col-9 text-wrap><small text-wrap>{{stock.stockName}}</small></ion-col>
+          <ion-col col-3 text-right class="success-color"><small>{{stock.currentPrice | number:'1.0-2' }}<ion-icon name="md-arrow-up"
+                class="success-color"></ion-icon>{{ stock.percentageChange}}%</small></ion-col>
+        </ion-row>
+
+      </ion-card-content>
+    </ion-card>
+  </ion-grid>
+</ion-content>
+<ion-footer color="light">
+  <ul class="stocksMarquee marquee">
+    <li class="stocksItem" *ngFor="let stock of topGainers"> {{stock.symbol}}<small>{{stock.currentPrice |
+        number:'1.0-2' }}<ion-icon name="md-arrow-up" color="success"></ion-icon>{{ stock.percentageChange}}%</small></li>
+  </ul>
+</ion-footer>

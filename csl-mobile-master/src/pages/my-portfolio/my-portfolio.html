@@ -1,0 +1,54 @@
+<!--
+  Generated template for the MyPortfolioPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="transparent">
+    <ion-title>{{portfolioDescription}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <div class="white-color">
+      <ion-grid padding>
+          <h5>Summary</h5>
+          <ion-row>
+            <ion-col col-6> <h5>{{getSum( this.portfolioInvestments ) | currency : "NGN" : 2 }}</h5></ion-col>
+            <ion-col col-6> <h6 text-right>{{0 | currency : "NGN" : 2}} </h6></ion-col>
+          </ion-row>
+    
+          <ion-row>
+            <ion-col col-6>Total value</ion-col>
+            <ion-col col-6 text-right>Loss/Gain</ion-col>
+          </ion-row>
+        </ion-grid>
+  </div>
+  <div [hidden]="portfolioInvestments" class="loading-gif" ></div>
+  <ion-card *ngFor="let investment of portfolioInvestments; let i = index;">
+    <ion-card-content (click)="sellStock(i)" >
+      <ion-row>
+        <ion-col col-10 class="border-bottom color-primary"><h3>{{investment.symbolName}}</h3></ion-col><ion-col col-2 text-right><ion-icon name="ios-arrow-forward"></ion-icon></ion-col>
+        <ion-col col-6 padding-top>Current value</ion-col>
+        <ion-col col-6 padding-top text-right> {{0 | percent }} </ion-col>
+        <ion-col col-9 class="primary-color"><h4>{{investment.currentValue | currency : "NGN" : 2}}</h4></ion-col>
+        <ion-col col-3 class="success-color" text-right>{{0 | currency : "NGN" : 2}} </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+<ion-footer color="primary">
+
+  <ion-row>
+    <ion-col col-6>
+      <button color="success" ion-button class="csl-button" (click)="buyStocks()"> <ion-icon name="add" ></ion-icon>&nbsp; Buy Stocks </button>
+    </ion-col>
+    <ion-col col-6 text-right>
+      <button color="danger"   ion-button class="csl-button" (click)="sellStocks()"> <ion-icon name="remove" ></ion-icon>&nbsp; Sell Stocks </button>
+    </ion-col>
+  </ion-row>
+  
+</ion-footer>

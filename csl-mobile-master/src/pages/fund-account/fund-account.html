@@ -1,0 +1,41 @@
+<!--
+  Generated template for the FundAccountPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Payment Option</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list class="active">
+
+    <ion-item (click)="payWithCard()">
+
+      <ion-row>
+        <ion-col col-2><ion-icon name="ios-card" color="primary"></ion-icon></ion-col>
+        <ion-col col-8>Pay with card</ion-col>
+        <ion-col col-2 class="to-right"><ion-icon name="ios-arrow-forward-outline" color="primary"></ion-icon></ion-col>
+      </ion-row>
+      
+    </ion-item>
+
+    <ion-item (click)="payWithBank()">
+        <ion-row>
+            <ion-col col-2><ion-icon name="swap" color="primary"></ion-icon></ion-col>
+            <ion-col col-8>Bank transfer</ion-col>
+            <ion-col col-2 class="to-right"><ion-icon name="ios-arrow-forward-outline" color="primary"></ion-icon></ion-col>
+        </ion-row>
+      </ion-item>
+ 
+  </ion-list>
+</ion-content>
