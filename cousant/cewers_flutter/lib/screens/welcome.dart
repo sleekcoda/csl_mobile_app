@@ -1,4 +1,4 @@
-import 'package:cewers_flutter/controller/state.dart';
+import 'package:cewers_flutter/controller/storage.dart';
 import 'package:cewers_flutter/custom_widgets/button.dart';
 import 'package:cewers_flutter/custom_widgets/cewer_title.dart';
 import 'package:cewers_flutter/custom_widgets/main-container.dart';
@@ -16,13 +16,12 @@ class _WelcomeScreen extends State<WelcomeScreen> {
   GetIt _getIt = GetIt.instance;
   Future future;
   void initState() {
-    future = _getIt<StateController>().getState();
+    future = _getIt<StorageController>().getState();
     super.initState();
   }
 
   void dispose() {
     super.dispose();
-    _getIt<StateController>().closeStream();
   }
 
   Widget build(BuildContext context) {

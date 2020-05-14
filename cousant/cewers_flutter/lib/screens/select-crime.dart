@@ -1,11 +1,8 @@
-import 'package:cewers_flutter/bloc/send-report.dart';
-import 'package:cewers_flutter/controller/storage.dart';
 import 'package:cewers_flutter/custom_widgets/cewer_title.dart';
 import 'package:cewers_flutter/custom_widgets/crime-select-indicator.dart';
 import 'package:cewers_flutter/custom_widgets/main-container.dart';
 import 'package:cewers_flutter/custom_widgets/tabs.dart';
 import 'package:cewers_flutter/screens/send-report.dart';
-import 'package:cewers_flutter/service/api.dart';
 import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -60,11 +57,7 @@ class _SelectCrimeScreen extends State<SelectCrimeScreen> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              SendReportScreen(
-                                                  image.name,
-                                                  SendReportBloc(
-                                                      StorageController(),
-                                                      API())),
+                                              SendReportScreen(image.name),
                                         ),
                                       );
                                     },

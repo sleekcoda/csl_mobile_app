@@ -1,4 +1,4 @@
-import 'package:cewers_flutter/controller/state.dart';
+import 'package:cewers_flutter/controller/storage.dart';
 import 'package:cewers_flutter/screens/select-state.dart';
 import 'package:cewers_flutter/screens/welcome.dart';
 import 'package:cewers_flutter/style.dart';
@@ -8,7 +8,7 @@ import 'package:get_it/get_it.dart';
 GetIt _getIt = GetIt.instance;
 
 void main() {
-  _getIt.registerSingleton<StateController>(StateController(),
+  _getIt.registerSingleton<StorageController>(StorageController(),
       signalsReady: true);
   runApp(MyApp());
 }
@@ -44,7 +44,7 @@ class _MyApp extends State<MyApp> {
 
   @override
   void initState() {
-    future = _getIt<StateController>().getState();
+    future = _getIt<StorageController>().getState();
     super.initState();
   }
 

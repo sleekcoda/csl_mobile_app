@@ -4,23 +4,30 @@ import 'dart:io';
 
 import 'package:cewers_flutter/bloc/send-report.dart';
 import 'package:cewers_flutter/controller/location.dart';
+import 'package:cewers_flutter/controller/storage.dart';
 import 'package:cewers_flutter/custom_widgets/button.dart';
 import 'package:cewers_flutter/custom_widgets/cewer_title.dart';
 import 'package:cewers_flutter/custom_widgets/main-container.dart';
 import 'package:cewers_flutter/model/response.dart';
 import 'package:cewers_flutter/screens/report-notification.dart';
+import 'package:cewers_flutter/service/api.dart';
 import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:dio/dio.dart';
 
 class SendReportScreen extends StatefulWidget {
   final String crime;
-  final SendReportBloc myBloc;
-  SendReportScreen(this.crime, this.myBloc);
-  _SendReportScreen createState() => _SendReportScreen();
+  SendReportScreen(this.crime);
+  _SendReportScreen createState() =>
+      _SendReportScreen(SendReportBloc(StorageController(), API()));
 }
 
 class _SendReportScreen extends State<SendReportScreen> {
+  final SendReportBloc myBloc;
+
+  _SendReportScreen(this.myBloc);
+
   TextEditingController details = new TextEditingController();
   bool useLocation = true;
   final formKey = GlobalKey<FormState>();
@@ -31,7 +38,7 @@ class _SendReportScreen extends State<SendReportScreen> {
   void initState() {
     super.initState();
     _future = GeoLocation().getCoordinates();
-    widget.myBloc.getUserId().then((userId) {
+    myBloc.getUserId().then((userId) {
       _userId = userId;
     }).catchError((e) {
       print(e);
@@ -69,7 +76,7 @@ class _SendReportScreen extends State<SendReportScreen> {
                 };
               }
 
-              widget.myBloc.sendReport(payload).then((value) {
+              myBloc.sendReport(payload).then((value) {
                 if (value is APIResponseModel) {
                   Scaffold.of(context)
                       .showSnackBar(SnackBar(content: Text(value.message)));
@@ -146,9 +153,31 @@ class _SendReportScreen extends State<SendReportScreen> {
                           color: Colors.grey,
                         ),
                         onPressed: () async {
-                          widget.myBloc.openCamera().then((file) {
+                          myBloc.openCamera().then((file) {
                             setState(() {
                               _mediaFile = file;
+                            });
+                            myBloc.uploadImage(_mediaFile).then((upload) {
+                              print(
+                                  "======================Uploaded=======================");
+
+                              print(upload);
+                            }).catchError((e) {
+                              print(
+                                  "======================Error=======================");
+                              if (e is DioError) {
+                                // Scaffold.of(context).showSnackBar(SnackBar(
+                                //   content: Text(e.message),
+                                //   backgroundColor: Colors.red,
+                                // ));
+                                print(e.message);
+                              } else {
+                                print(e);
+                                Scaffold.of(context).showSnackBar(SnackBar(
+                                  content: Text("App error"),
+                                  backgroundColor: Colors.red,
+                                ));
+                              }
                             });
                           }).catchError((onError) {
                             Scaffold.of(context).openDrawer();

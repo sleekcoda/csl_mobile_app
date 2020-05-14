@@ -1,4 +1,4 @@
-import 'package:cewers_flutter/controller/state.dart';
+import 'package:cewers_flutter/controller/storage.dart';
 import 'package:cewers_flutter/custom_widgets/state-card.dart';
 import 'package:cewers_flutter/main.dart';
 import 'package:cewers_flutter/style.dart';
@@ -14,12 +14,12 @@ class _SelectStateScreen extends State<SelectStateScreen> {
   Future future;
   void initState() {
     super.initState();
-    future = _getIt<StateController>().getState();
+    future = _getIt<StorageController>().getState();
   }
 
   void dispose() {
     super.dispose();
-    // _getIt<StateController>().closeStream();
+    // _getIt<StorageController>().closeStream();
   }
 
   Widget build(BuildContext context) {
@@ -63,7 +63,7 @@ class _SelectStateScreen extends State<SelectStateScreen> {
                       stateName: state.toUpperCase(),
                       stateMapUri: "assets/images/$state-map.png",
                       action: () async {
-                        await _getIt<StateController>().setState(state);
+                        await _getIt<StorageController>().storeState(state);
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => MyApp()));
                       }),

@@ -17,7 +17,7 @@ class SendReportBloc implements Bloc {
   SendReportBloc(this._storageController, this._api);
   String _credentialJsonUri = "assets/cloudinary.json";
 
-  Future uploadImage(
+  Future<List<CloudinaryResponse>> uploadImage(
     File file,
   ) async {
     var credentials = await rootBundle.loadString(_credentialJsonUri);
@@ -37,7 +37,8 @@ class SendReportBloc implements Bloc {
 
     List<String> paths = file.path.split(".");
     String fileExtension = paths[paths.length - 1];
-
+    print(
+        "${state.capitalize()}=====UPLOADING===========$fileExtension========FOR====$userId======");
     List<CloudinaryResponse> response = await client.uploadImages([file.path],
         filename: "$userId-${DateTime.now()}.$fileExtension",
         folder: state.capitalize());

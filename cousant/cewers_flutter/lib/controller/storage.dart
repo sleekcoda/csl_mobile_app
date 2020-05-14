@@ -6,7 +6,6 @@ class StorageController {
   void storeUserId(String userId) async {
     _pref = await SharedPreferences.getInstance();
     _pref.setString("userId", userId);
-    print(userId);
   }
 
   Future<String> getUserId() async {
@@ -17,5 +16,10 @@ class StorageController {
   Future<String> getState() async {
     _pref = await SharedPreferences.getInstance();
     return _pref.getString("prefferedState");
+  }
+
+  Future<bool> storeState(String state) async {
+    _pref = await SharedPreferences.getInstance();
+    return _pref.setString("prefferedState", state);
   }
 }
