@@ -157,6 +157,7 @@ class _LoginScreen extends State<LoginScreen> {
   void dispose() {
     loginFormKey.currentState?.dispose();
     phoneNumber?.dispose();
+    Scaffold.of(context).hideCurrentSnackBar();
     super.dispose();
   }
 }

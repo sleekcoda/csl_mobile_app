@@ -66,10 +66,10 @@ class _MyApp extends State<MyApp> {
                   accentColor: _getSecondaryColor(snapshot.data),
                   appBarTheme: AppBarTheme(
                     textTheme: TextTheme(
-                      title: appBarStyle()
+                      headline1: appBarStyle()
                           .apply(color: Theme.of(context).primaryColor),
-                      subhead: subHeadStyle(context),
-                      display2: coloredHeaderStyle()
+                      subtitle1: subHeadStyle(context),
+                      subtitle2: coloredHeaderStyle()
                           .apply(color: Theme.of(context).primaryColor),
                       button: TextStyle(
                         fontFamily: fontRoboto,
@@ -80,7 +80,7 @@ class _MyApp extends State<MyApp> {
                     ),
                   ),
                   textTheme: TextTheme(
-                      title: titleStyle()
+                      headline1: titleStyle()
                           .apply(color: Theme.of(context).primaryColor))),
               home: (snapshot.data == null)
                   ? SelectStateScreen()

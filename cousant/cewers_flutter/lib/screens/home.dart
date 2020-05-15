@@ -1,10 +1,28 @@
+import 'package:cewers_flutter/controller/location.dart';
 import 'package:cewers_flutter/custom_widgets/main-container.dart';
-import 'package:cewers_flutter/custom_widgets/tabs.dart';
+import 'package:cewers_flutter/custom_widgets/tab.dart';
 import 'package:cewers_flutter/screens/select-crime.dart';
 import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  _HomeScreen createState() => _HomeScreen(GeoLocationController());
+}
+
+class _HomeScreen extends State<HomeScreen> {
+  final GeoLocationController _locationController;
+  _HomeScreen(this._locationController);
+  // Future _locationPersion;
+  initState() {
+    super.initState();
+    this._locationController.getLocationStatus().then((status) {
+      print(status);
+    }).catchError((e) {
+      print("============ERROR============");
+      print(e);
+    });
+  }
+
   Widget build(BuildContext context) {
     return MainContainer(
       decoration: bgDecoration("assets/backgrounds/bg-cloud.png"),
@@ -43,5 +61,10 @@ class HomeScreen extends StatelessWidget {
       ),
       bottomNavigationBar: BottomTab(),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

@@ -1,6 +1,7 @@
 import 'package:cewers_flutter/custom_widgets/button.dart';
 import 'package:cewers_flutter/custom_widgets/cewer_title.dart';
 import 'package:cewers_flutter/custom_widgets/main-container.dart';
+import 'package:cewers_flutter/screens/alerts.dart';
 import 'package:flutter/material.dart';
 
 class ReportNotification extends StatefulWidget {
@@ -74,17 +75,12 @@ class _ReportNotification extends State<ReportNotification> {
                       heightFactor: 2,
                       alignment: Alignment.bottomRight,
                       child: ActionButtonBar(
-                        text: "VIEW ALERT STATUS",
+                        text: "VIEW ALERTS",
                         action: () {
-                          Scaffold.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                "Viewing Alert Status",
-                                style: Theme.of(context).textTheme.headline,
-                              ),
-                              backgroundColor: Theme.of(context).primaryColor,
-                            ),
-                          );
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AlertListScreen()));
                         },
                       ),
                     )
@@ -94,6 +90,11 @@ class _ReportNotification extends State<ReportNotification> {
             ),
           ]),
         ));
+  }
+
+  void dispose() {
+    super.dispose();
+    Scaffold.of(context).hideCurrentSnackBar();
   }
 }
 

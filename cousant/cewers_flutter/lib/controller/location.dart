@@ -1,7 +1,9 @@
 import 'package:location/location.dart';
+// import 'package:permission_handler/permission_handler.dart'
+// as permissionHandler;
 // import 'package:geolocator/geolocator.dart';
 
-class GeoLocation {
+class GeoLocationController {
   Location location = new Location();
 
   bool _serviceEnabled;
@@ -34,8 +36,7 @@ class GeoLocation {
     }
   }
 
-  // Future getLocation(double longitude, double latitude) {
-  //   // return "$latitude $longitude";
-
-  // }
+  Future<List<dynamic>> getLocationStatus() async {
+    return ["good"];
+  }
 }

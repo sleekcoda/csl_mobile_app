@@ -82,7 +82,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                 "Sign Up",
                 style: Theme.of(context)
                     .textTheme
-                    .title
+                    .headline1
                     .apply(color: Theme.of(context).primaryColor),
               ),
               Container(
@@ -288,7 +288,7 @@ class _SignUpScreen extends State<SignUpScreen> {
     fullname?.dispose();
     email?.dispose();
     phoneNumber?.dispose();
-
+    Scaffold.of(context).hideCurrentSnackBar();
     super.dispose();
   }
 }

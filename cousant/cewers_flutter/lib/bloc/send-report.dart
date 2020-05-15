@@ -8,7 +8,6 @@ import 'package:cewers_flutter/service/api.dart';
 import 'package:cloudinary_client/models/CloudinaryResponse.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:cloudinary_client/cloudinary_client.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:cewers_flutter/extensions/string.dart';
 
 class SendReportBloc implements Bloc {
@@ -32,8 +31,8 @@ class SendReportBloc implements Bloc {
      * So we can set a unique file for the file and equally
      * upload to the right folder on the cloud
      */
-    String userId = await _storageController.getUserId() ?? "unknowUser";
-    String state = await _storageController.getState() ?? "unknownState";
+    String userId = await getUserId() ?? "unknowUser";
+    String state = await getState() ?? "unknownState";
 
     List<String> paths = file.path.split(".");
     String fileExtension = paths[paths.length - 1];
@@ -45,16 +44,12 @@ class SendReportBloc implements Bloc {
     return response;
   }
 
-  Future<File> pickFile() async {
-    return await ImagePicker.pickImage(source: ImageSource.gallery);
-  }
-
-  Future<File> openCamera() async {
-    return await ImagePicker.pickImage(source: ImageSource.camera);
-  }
-
   Future<String> getUserId() async {
     return this._storageController.getUserId();
+  }
+
+  Future<String> getState() async {
+    return this._storageController.getState();
   }
 
   Future<dynamic> sendReport(Map<String, dynamic> data) async {
@@ -68,6 +63,7 @@ class SendReportBloc implements Bloc {
 
   Future<dynamic> getReport() async {
     String userId = await getUserId();
+    Future.delayed(Duration(seconds: 20));
     var response = await _api.getRequest("alerts/$userId");
     if (response is APIError) return response;
     APIResponseModel responseBody =

@@ -1,7 +1,5 @@
 // import 'package:cewers_flutter/controller/location.dart';
 
-import 'dart:io';
-
 import 'package:cewers_flutter/bloc/send-report.dart';
 import 'package:cewers_flutter/controller/location.dart';
 import 'package:cewers_flutter/controller/storage.dart';
@@ -9,95 +7,105 @@ import 'package:cewers_flutter/custom_widgets/button.dart';
 import 'package:cewers_flutter/custom_widgets/cewer_title.dart';
 import 'package:cewers_flutter/custom_widgets/main-container.dart';
 import 'package:cewers_flutter/model/response.dart';
+import 'package:cewers_flutter/notifier/report-image.dart';
 import 'package:cewers_flutter/screens/report-notification.dart';
 import 'package:cewers_flutter/service/api.dart';
 import 'package:cewers_flutter/style.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
-import 'package:dio/dio.dart';
+// import 'package:dio/dio.dart';
+import 'package:provider/provider.dart';
 
 class SendReportScreen extends StatefulWidget {
-  final String crime;
-  SendReportScreen(this.crime);
-  _SendReportScreen createState() =>
-      _SendReportScreen(SendReportBloc(StorageController(), API()));
+  final String _crime;
+
+  SendReportScreen(this._crime);
+  _SendReportScreen createState() => _SendReportScreen();
 }
 
 class _SendReportScreen extends State<SendReportScreen> {
-  final SendReportBloc myBloc;
-
-  _SendReportScreen(this.myBloc);
-
+  SendReportBloc myBloc = new SendReportBloc(StorageController(), API());
+  String errorMessage;
   TextEditingController details = new TextEditingController();
   bool useLocation = true;
   final formKey = GlobalKey<FormState>();
-  Future<LocationData> _future;
   String _userId;
-  File _mediaFile;
-
+  var imageProvider;
+  double longitude;
+  double latitude;
   void initState() {
-    super.initState();
-    _future = GeoLocation().getCoordinates();
     myBloc.getUserId().then((userId) {
       _userId = userId;
     }).catchError((e) {
       print(e);
     });
+
+    GeoLocationController()
+        .getCoordinates()
+        .then((value) => setCoordinates)
+        .catchError((e) {
+      print("==============ERROR===========");
+      print(e);
+    });
+    super.initState();
   }
 
   void dispose() {
-    details?.dispose();
     super.dispose();
+    details?.dispose();
+    formKey?.currentState?.dispose();
+    // Scaffold.of(context).hideCurrentSnackBar();
   }
 
   Widget build(BuildContext context) {
+    imageProvider = Provider.of<ReportImageNotifier>(context);
     return MainContainer(
       decoration: bgDecoration(),
       displayAppBar: CewerAppBar("Enter ", "Details"),
       bottomNavigationBar: SafeArea(
         minimum: EdgeInsets.only(bottom: 20, left: 20, right: 20),
-        child: FutureBuilder(
-          future: _future,
-          builder: (context, snapshot) => ActionButtonBar(
+        child: Consumer<ReportImageNotifier>(
+          builder: (context, data, child) => ActionButtonBar(
             action: () {
               Map<String, dynamic> payload;
-              if (snapshot.data is LocationData) {
-                payload = {
-                  "alert": {
-                    "userId": _userId,
-                    "alertType": widget.crime.toLowerCase(),
-                    "location":
-                        "${snapshot.data?.latitude ?? 0},${snapshot.data?.longitude ?? 0}",
-                    "priority": "medium",
-                    "comment": details.text,
-                    "pictures": [_mediaFile?.path ?? ""],
-                    "videos": []
-                  }
-                };
-              }
+              payload = {
+                "alert": {
+                  "userId": _userId,
+                  "alertType": widget._crime.toLowerCase(),
+                  "location": "${latitude ?? 7.7238},${longitude ?? 8.5679}",
+                  "priority": "medium",
+                  "comment": details.text,
+                  "pictures": ["${data.mediaFile?.path}" ?? ""],
+                  "videos": ["video.mp4"]
+                }
+              };
 
               myBloc.sendReport(payload).then((value) {
                 if (value is APIResponseModel) {
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text(value.message)));
-
-                  if (value.status)
+                  if (value.status) {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ReportNotification(
-                              details.text,
-                              snapshot.data?.latitude,
-                              snapshot.data?.longitude)),
+                          builder: (context) => ReportNotification(details.text,
+                              latitude ?? 7.7238, longitude ?? 8.5679)),
                     );
+                    setState(() {
+                      errorMessage = null;
+                    });
+                  } else {
+                    setState(() {
+                      errorMessage = value.message;
+                    });
+                  }
                 } else {
-                  Scaffold.of(context).showSnackBar(
-                      SnackBar(content: Text("Invalid response type")));
+                  setState(() {
+                    errorMessage = "Invalid response type";
+                  });
                 }
-                print(value);
-              }).catchError((onError) {
-                Scaffold.of(context)
-                    .showSnackBar(SnackBar(content: Text("App error")));
+              }).catchError((e) {
+                setState(() {
+                  errorMessage = "Unexpected error";
+                });
               });
 
               // print(response);
@@ -117,10 +125,19 @@ class _SendReportScreen extends State<SendReportScreen> {
       child: Container(
         width: MediaQuery.of(context).size.width,
         child: ListView(children: [
-          Text(widget.crime),
+          // Text(widget._crime),
           Container(
             child: Column(
               children: <Widget>[
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  child: errorMessage != null
+                      ? Text(
+                          errorMessage,
+                          style: TextStyle(color: Colors.red),
+                        )
+                      : null,
+                ),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -143,47 +160,21 @@ class _SendReportScreen extends State<SendReportScreen> {
                     keyboardType: TextInputType.multiline,
                   ),
                 ),
-                SafeArea(
+                Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      IconButton(
-                        icon: Icon(
-                          Icons.photo_camera,
-                          color: Colors.grey,
+                      Container(
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.photo_camera,
+                            color: Colors.grey,
+                          ),
+                          onPressed: () async {
+                            imageProvider.openCamera();
+                            // do something
+                          },
                         ),
-                        onPressed: () async {
-                          myBloc.openCamera().then((file) {
-                            setState(() {
-                              _mediaFile = file;
-                            });
-                            myBloc.uploadImage(_mediaFile).then((upload) {
-                              print(
-                                  "======================Uploaded=======================");
-
-                              print(upload);
-                            }).catchError((e) {
-                              print(
-                                  "======================Error=======================");
-                              if (e is DioError) {
-                                // Scaffold.of(context).showSnackBar(SnackBar(
-                                //   content: Text(e.message),
-                                //   backgroundColor: Colors.red,
-                                // ));
-                                print(e.message);
-                              } else {
-                                print(e);
-                                Scaffold.of(context).showSnackBar(SnackBar(
-                                  content: Text("App error"),
-                                  backgroundColor: Colors.red,
-                                ));
-                              }
-                            });
-                          }).catchError((onError) {
-                            Scaffold.of(context).openDrawer();
-                          });
-                          // do something
-                        },
                       ),
                       Text("Upload picture or video evidence"),
                       Padding(
@@ -193,9 +184,12 @@ class _SendReportScreen extends State<SendReportScreen> {
                     ],
                   ),
                 ),
-                Container(
-                    child:
-                        (_mediaFile != null) ? Image.file(_mediaFile) : null),
+                Consumer<ReportImageNotifier>(
+                  builder: (context, data, child) => Container(
+                      child: (data.mediaFile != null)
+                          ? Image.file(data.mediaFile)
+                          : null),
+                ),
 
                 // Row(children: [
                 //   Switch(
@@ -218,5 +212,16 @@ class _SendReportScreen extends State<SendReportScreen> {
         ]),
       ),
     );
+  }
+
+  void setCoordinates(dynamic coordinates) {
+    print(coordinates);
+    if (coordinates is LocationData) {
+      latitude = coordinates.latitude;
+      longitude = coordinates.longitude;
+    } else {
+      latitude = 0;
+      longitude = 0;
+    }
   }
 }

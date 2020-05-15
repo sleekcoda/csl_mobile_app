@@ -15,13 +15,13 @@ class CewerAppBar extends StatelessWidget {
           Text(boldTitle ?? "",
               style: Theme.of(context)
                   .textTheme
-                  .title
+                  .headline1
                   .apply(color: Theme.of(context).primaryColor)),
           Text(italicsTitle ?? "CEWER",
               style: Theme.of(context)
                   .appBarTheme
                   .textTheme
-                  .title
+                  .headline1
                   .apply(color: Theme.of(context).primaryColor)),
         ],
       ),
