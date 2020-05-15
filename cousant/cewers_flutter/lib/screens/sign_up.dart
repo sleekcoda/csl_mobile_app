@@ -1,10 +1,10 @@
-import 'package:cewers_flutter/bloc/sign_up.dart';
-import 'package:cewers_flutter/custom_widgets/button.dart';
-import 'package:cewers_flutter/custom_widgets/form-field.dart';
-import 'package:cewers_flutter/custom_widgets/main-container.dart';
-import 'package:cewers_flutter/model/response.dart';
-import 'package:cewers_flutter/screens/success.dart';
-import 'package:cewers_flutter/style.dart';
+import 'package:cewers/bloc/sign_up.dart';
+import 'package:cewers/custom_widgets/button.dart';
+import 'package:cewers/custom_widgets/form-field.dart';
+import 'package:cewers/custom_widgets/main-container.dart';
+import 'package:cewers/model/response.dart';
+import 'package:cewers/screens/success.dart';
+import 'package:cewers/style.dart';
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatefulWidget {

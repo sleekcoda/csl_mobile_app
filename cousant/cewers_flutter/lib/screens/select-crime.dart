@@ -1,10 +1,10 @@
-import 'package:cewers_flutter/custom_widgets/cewer_title.dart';
-import 'package:cewers_flutter/custom_widgets/crime-select-indicator.dart';
-import 'package:cewers_flutter/custom_widgets/main-container.dart';
-import 'package:cewers_flutter/custom_widgets/tab.dart';
-import 'package:cewers_flutter/notifier/report-image.dart';
-import 'package:cewers_flutter/screens/send-report.dart';
-import 'package:cewers_flutter/style.dart';
+import 'package:cewers/custom_widgets/cewer_title.dart';
+import 'package:cewers/custom_widgets/crime-select-indicator.dart';
+import 'package:cewers/custom_widgets/main-container.dart';
+import 'package:cewers/custom_widgets/tab.dart';
+import 'package:cewers/notifier/report-image.dart';
+import 'package:cewers/screens/send-report.dart';
+import 'package:cewers/style.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';

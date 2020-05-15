@@ -1,22 +1,20 @@
-import 'package:cewers_flutter/bloc/send-report.dart';
-import 'package:cewers_flutter/controller/storage.dart';
-import 'package:cewers_flutter/custom_widgets/main-container.dart';
-import 'package:cewers_flutter/model/error.dart';
-import 'package:cewers_flutter/service/api.dart';
+import 'package:cewers/bloc/alert-list.dart';
+import 'package:cewers/custom_widgets/main-container.dart';
+import 'package:cewers/model/error.dart';
+import 'package:cewers/model/response.dart';
 import 'package:flutter/material.dart';
 
 class AlertListScreen extends StatefulWidget {
-  _AlertListScreen createState() =>
-      _AlertListScreen(SendReportBloc(StorageController(), API()));
+  _AlertListScreen createState() => _AlertListScreen(AlertsBloc());
 }
 
 class _AlertListScreen extends State<AlertListScreen> {
   Future future;
-  final SendReportBloc _reportBloc;
-  _AlertListScreen(this._reportBloc);
+  final AlertsBloc _aletsBloc;
+  _AlertListScreen(this._aletsBloc);
   void initState() {
     super.initState();
-    future = _reportBloc.getReport();
+    future = _aletsBloc.getAlerts();
   }
 
   Widget build(BuildContext context) {
@@ -38,26 +36,20 @@ class _AlertListScreen extends State<AlertListScreen> {
               case ConnectionState.done:
                 return Container(
                   child: ListView(
-                    children: <Widget>[]..addAll((snapshot.data is APIError)
-                        ? [
-                            Container(
-                                margin: EdgeInsets.symmetric(
-                                    vertical:
-                                        MediaQuery.of(context).size.height / 3),
-                                child: Center(
-                                    child: Text(
-                                        "ERROR: ${snapshot?.data?.message}")))
-                          ]
-                        : snapshot?.data?.map(() => Card(
-                              child: Container(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text("Welcome to report page")
-                                  ],
-                                ),
-                              ),
-                            ))),
+                    children: <Widget>[]..addAll(
+                        (snapshot.data is APIError)
+                            ? [getErrorContainer(snapshot)]
+                            : [
+                                Container(
+                                    margin: EdgeInsets.symmetric(
+                                        vertical:
+                                            MediaQuery.of(context).size.height /
+                                                3),
+                                    child: Center(
+                                        child: Text(
+                                            "${snapshot.data.data.length} Alerts avaialble"))),
+                              ],
+                      ),
                   ),
                 );
                 break;
@@ -67,6 +59,31 @@ class _AlertListScreen extends State<AlertListScreen> {
             }
           }),
     );
+  }
+
+  Widget getErrorContainer(AsyncSnapshot snapshot) {
+    return Container(
+        margin: EdgeInsets.symmetric(
+            vertical: MediaQuery.of(context).size.height / 3),
+        child: Center(child: Text("ERROR: ${snapshot?.data?.message}")));
+  }
+
+  getSuccessList(AsyncSnapshot snapshot) {
+    print(snapshot.data.data[0]);
+    if (snapshot.data is APIResponseModel && snapshot.data.data is List) {
+      return snapshot.data.data.map((f) {
+        return Card(
+          child: Text("Welcome to report page"),
+        );
+      });
+    } else {
+      return [
+        Container(
+            margin: EdgeInsets.symmetric(
+                vertical: MediaQuery.of(context).size.height / 3),
+            child: Center(child: Text("No resent alerts.")))
+      ];
+    }
   }
 
   Widget loading = Container(

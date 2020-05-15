@@ -1,26 +1,18 @@
-import 'package:cewers_flutter/controller/location.dart';
-import 'package:cewers_flutter/custom_widgets/main-container.dart';
-import 'package:cewers_flutter/custom_widgets/tab.dart';
-import 'package:cewers_flutter/screens/select-crime.dart';
-import 'package:cewers_flutter/style.dart';
+import 'package:cewers/custom_widgets/main-container.dart';
+import 'package:cewers/custom_widgets/tab.dart';
+import 'package:cewers/screens/select-crime.dart';
+import 'package:cewers/style.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
-  _HomeScreen createState() => _HomeScreen(GeoLocationController());
+  _HomeScreen createState() => _HomeScreen();
 }
 
 class _HomeScreen extends State<HomeScreen> {
-  final GeoLocationController _locationController;
-  _HomeScreen(this._locationController);
+  // _HomeScreen(this._locationController);
   // Future _locationPersion;
   initState() {
     super.initState();
-    this._locationController.getLocationStatus().then((status) {
-      print(status);
-    }).catchError((e) {
-      print("============ERROR============");
-      print(e);
-    });
   }
 
   Widget build(BuildContext context) {

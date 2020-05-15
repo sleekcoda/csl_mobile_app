@@ -1,5 +1,5 @@
-import 'package:cewers_flutter/screens/alerts.dart';
-import 'package:cewers_flutter/screens/home.dart';
+import 'package:cewers/screens/alerts.dart';
+import 'package:cewers/screens/home.dart';
 import 'package:flutter/material.dart';
 
 class MainTab {

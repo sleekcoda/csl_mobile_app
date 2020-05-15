@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:cewers_flutter/controller/storage.dart';
-import 'package:cewers_flutter/model/error.dart';
+import 'package:cewers/controller/storage.dart';
+import 'package:cewers/model/error.dart';
 import 'package:http/http.dart' as http;
 
 class API {
@@ -8,7 +8,7 @@ class API {
   Map<String, String> _headers = {"Content-Type": "application/json"};
   Map<String, int> _ports = {"benue": 8000, "taraba": 8001, "nasarawa": 8002};
 
-  StorageController _storageController  = new StorageController();
+  StorageController _storageController = new StorageController();
 
   Future<String> getState() async {
     return await _storageController.getState();
@@ -29,10 +29,12 @@ class API {
   Future<dynamic> getRequest(String path) async {
     var state = await getState();
     int port = _ports[state];
-    final response =
-        await http.post("$_baseUrl:$port/api/$path", headers: _headers);
+    http.Response response =
+        await http.get("$_baseUrl:$port/api/$path", headers: _headers);
+    print("$_baseUrl:$port/api/$path");
+    print(response.toString());
     if (response.statusCode == 200)
-      return response.body;
+      return json.decode(response.body);
     else
       return APIError("Server currently unavailable");
   }

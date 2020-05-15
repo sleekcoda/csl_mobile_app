@@ -1,4 +1,4 @@
-import 'package:cewers_flutter/custom_widgets/cewer_title.dart';
+import 'package:cewers/custom_widgets/cewer_title.dart';
 import 'package:flutter/material.dart';
 
 class MainContainer extends StatelessWidget {

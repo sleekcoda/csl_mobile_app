@@ -1,7 +1,7 @@
-import 'package:cewers_flutter/controller/storage.dart';
-import 'package:cewers_flutter/custom_widgets/state-card.dart';
-import 'package:cewers_flutter/main.dart';
-import 'package:cewers_flutter/style.dart';
+import 'package:cewers/controller/storage.dart';
+import 'package:cewers/custom_widgets/state-card.dart';
+import 'package:cewers/main.dart';
+import 'package:cewers/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 

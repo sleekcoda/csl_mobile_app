@@ -1,7 +1,7 @@
-import 'package:cewers_flutter/custom_widgets/button.dart';
-import 'package:cewers_flutter/custom_widgets/main-container.dart';
-import 'package:cewers_flutter/screens/login.dart';
-import 'package:cewers_flutter/style.dart';
+import 'package:cewers/custom_widgets/button.dart';
+import 'package:cewers/custom_widgets/main-container.dart';
+import 'package:cewers/screens/login.dart';
+import 'package:cewers/style.dart';
 import 'package:flutter/material.dart';
 
 class SuccessScreen extends StatelessWidget {

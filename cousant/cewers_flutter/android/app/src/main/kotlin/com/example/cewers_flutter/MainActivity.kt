@@ -1,4 +1,4 @@
-package com.example.cewers_flutter
+package com.example.cewers
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

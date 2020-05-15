@@ -1,4 +1,4 @@
-import 'package:cewers_flutter/style.dart';
+import 'package:cewers/style.dart';
 import 'package:flutter/material.dart';
 
 class ActionButtonBar extends StatelessWidget {

@@ -53,5 +53,5 @@ Content-Type: application/json
 
 ###
 # Get lsit of alerts via user ID
-GET http://165.22.80.212:8000/api/alerts/5ebac98660d179001c3467f1
+GET http://165.22.80.212:8000/api/alert
 Content-Type: application/json

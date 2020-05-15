@@ -1,11 +1,11 @@
-import 'package:cewers_flutter/bloc/login.dart';
-import 'package:cewers_flutter/custom_widgets/button.dart';
-import 'package:cewers_flutter/custom_widgets/form-field.dart';
-import 'package:cewers_flutter/custom_widgets/main-container.dart';
-import 'package:cewers_flutter/screens/home.dart';
-import 'package:cewers_flutter/screens/sign_up.dart';
+import 'package:cewers/bloc/login.dart';
+import 'package:cewers/custom_widgets/button.dart';
+import 'package:cewers/custom_widgets/form-field.dart';
+import 'package:cewers/custom_widgets/main-container.dart';
+import 'package:cewers/screens/home.dart';
+import 'package:cewers/screens/sign_up.dart';
 import 'package:flutter/material.dart';
-import 'package:cewers_flutter/style.dart';
+import 'package:cewers/style.dart';
 
 class LoginScreen extends StatefulWidget {
   final String phoneNumber;

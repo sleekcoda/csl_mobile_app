@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:cewers_flutter/bloc/bloc.dart';
-import 'package:cewers_flutter/bloc/validator.dart';
-import 'package:cewers_flutter/controller/storage.dart';
-import 'package:cewers_flutter/model/error.dart';
-import 'package:cewers_flutter/model/response.dart';
-import 'package:cewers_flutter/service/api.dart';
+import 'package:cewers/bloc/bloc.dart';
+import 'package:cewers/bloc/validator.dart';
+import 'package:cewers/controller/storage.dart';
+import 'package:cewers/model/error.dart';
+import 'package:cewers/model/response.dart';
+import 'package:cewers/service/api.dart';
 import 'package:rxdart/rxdart.dart';
 import 'dart:async';
 

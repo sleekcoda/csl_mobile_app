@@ -1,7 +1,7 @@
-import 'package:cewers_flutter/controller/storage.dart';
-import 'package:cewers_flutter/screens/select-state.dart';
-import 'package:cewers_flutter/screens/welcome.dart';
-import 'package:cewers_flutter/style.dart';
+import 'package:cewers/controller/storage.dart';
+import 'package:cewers/screens/select-state.dart';
+import 'package:cewers/screens/welcome.dart';
+import 'package:cewers/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -106,12 +106,11 @@ class _MyApp extends State<MyApp> {
 
   Widget _loading = MaterialApp(
     title: 'CEWERS.',
-    home: Container(
-      child: Center(
-        child: Row(children: [
-          CircularProgressIndicator(),
-          Text("Loading..."),
-        ]),
+    home: Scaffold(
+      body: Container(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
       ),
     ),
   );

@@ -1,16 +1,16 @@
-// import 'package:cewers_flutter/controller/location.dart';
+// import 'package:cewers/controller/location.dart';
 
-import 'package:cewers_flutter/bloc/send-report.dart';
-import 'package:cewers_flutter/controller/location.dart';
-import 'package:cewers_flutter/controller/storage.dart';
-import 'package:cewers_flutter/custom_widgets/button.dart';
-import 'package:cewers_flutter/custom_widgets/cewer_title.dart';
-import 'package:cewers_flutter/custom_widgets/main-container.dart';
-import 'package:cewers_flutter/model/response.dart';
-import 'package:cewers_flutter/notifier/report-image.dart';
-import 'package:cewers_flutter/screens/report-notification.dart';
-import 'package:cewers_flutter/service/api.dart';
-import 'package:cewers_flutter/style.dart';
+import 'package:cewers/bloc/send-report.dart';
+import 'package:cewers/controller/location.dart';
+import 'package:cewers/controller/storage.dart';
+import 'package:cewers/custom_widgets/button.dart';
+import 'package:cewers/custom_widgets/cewer_title.dart';
+import 'package:cewers/custom_widgets/main-container.dart';
+import 'package:cewers/model/response.dart';
+import 'package:cewers/notifier/report-image.dart';
+import 'package:cewers/screens/report-notification.dart';
+import 'package:cewers/service/api.dart';
+import 'package:cewers/style.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 // import 'package:dio/dio.dart';
@@ -103,6 +103,7 @@ class _SendReportScreen extends State<SendReportScreen> {
                   });
                 }
               }).catchError((e) {
+                print(e);
                 setState(() {
                   errorMessage = "Unexpected error";
                 });

@@ -1,14 +1,13 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:cewers_flutter/bloc/bloc.dart';
-import 'package:cewers_flutter/controller/storage.dart';
-import 'package:cewers_flutter/model/error.dart';
-import 'package:cewers_flutter/model/response.dart';
-import 'package:cewers_flutter/service/api.dart';
+import 'package:cewers/bloc/bloc.dart';
+import 'package:cewers/controller/storage.dart';
+import 'package:cewers/model/error.dart';
+import 'package:cewers/model/response.dart';
+import 'package:cewers/service/api.dart';
 import 'package:cloudinary_client/models/CloudinaryResponse.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:cloudinary_client/cloudinary_client.dart';
-import 'package:cewers_flutter/extensions/string.dart';
+import 'package:cewers/extensions/string.dart';
 
 class SendReportBloc implements Bloc {
   final StorageController _storageController;
@@ -16,16 +15,14 @@ class SendReportBloc implements Bloc {
   SendReportBloc(this._storageController, this._api);
   String _credentialJsonUri = "assets/cloudinary.json";
 
-  Future<List<CloudinaryResponse>> uploadImage(
-    File file,
-  ) async {
+  Future<List<CloudinaryResponse>> uploadImage(String path) async {
     var credentials = await rootBundle.loadString(_credentialJsonUri);
 
     CloudinaryCredential auth =
         CloudinaryCredential.fromJson(json.decode(credentials));
 
     CloudinaryClient client =
-        CloudinaryClient(auth.secretKey, auth.apiKey.toString(), "cloud_name");
+        CloudinaryClient(auth.secretKey, auth.apiKey.toString(), "sample");
     /**
      * Get the client's userID and State from memory
      * So we can set a unique file for the file and equally
@@ -34,11 +31,11 @@ class SendReportBloc implements Bloc {
     String userId = await getUserId() ?? "unknowUser";
     String state = await getState() ?? "unknownState";
 
-    List<String> paths = file.path.split(".");
+    List<String> paths = path.split(".");
     String fileExtension = paths[paths.length - 1];
     print(
         "${state.capitalize()}=====UPLOADING===========$fileExtension========FOR====$userId======");
-    List<CloudinaryResponse> response = await client.uploadImages([file.path],
+    List<CloudinaryResponse> response = await client.uploadImages([path],
         filename: "$userId-${DateTime.now()}.$fileExtension",
         folder: state.capitalize());
     return response;
@@ -57,17 +54,17 @@ class SendReportBloc implements Bloc {
     if (response is APIError) return response;
     APIResponseModel responseBody =
         APIResponseModel.fromJson(json.decode(response));
-
+    uploadImage(data["alert"]["pictures"][0]).then((value) {
+      print(value);
+    });
     return responseBody;
   }
 
   Future<dynamic> getReport() async {
-    String userId = await getUserId();
     Future.delayed(Duration(seconds: 20));
-    var response = await _api.getRequest("alerts/$userId");
+    var response = await _api.getRequest("alert");
     if (response is APIError) return response;
-    APIResponseModel responseBody =
-        APIResponseModel.fromJson(json.decode(response));
+    APIResponseModel responseBody = APIResponseModel.fromJson(response);
 
     return responseBody;
   }
