@@ -62,7 +62,7 @@
     "@ionic/lab": "1.0.13",
     "typescript": "~2.6.2"
   },
-  "description": "CSL Stock broker app",
+  "description": "CSL Invest mobile app",
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},
