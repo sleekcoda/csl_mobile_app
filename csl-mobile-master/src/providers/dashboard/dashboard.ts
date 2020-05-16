@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, OnDestroy } from "@angular/core";
 import { Events } from "ionic-angular";
-import * as link from "./../../assets/links.json";
+// import * as link from "./../../assets/links.json";
 import {
   RequestResponse,
   RequestResponseOfItems,
@@ -9,7 +9,7 @@ import {
 
 @Injectable()
 export class DashboardProvider implements OnDestroy {
-  private apiBaseUrl: string = `${link.api}/api`;
+  private apiBaseUrl: string = `https://csl-invest.fcmb.com/api`;
   private token: string;
   customerId: string;
   private headers: any;
