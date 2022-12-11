@@ -29,7 +29,7 @@
     "chart.js": "^2.7.3",
     "cordova": "^8.0.0",
     "cordova-android": "7.0.0",
-    "cordova-browser": "5.0.4",
+    "cordova-browser": "6.0.0",
     "cordova-ios": "5.1.0",
     "cordova-plugin-datepicker": "^0.9.3",
     "cordova-plugin-device": "^2.0.3",
